@@ -237,8 +237,8 @@ a{color:inherit}
 }
 .fac:hover{border-color:var(--line-strong)}
 .fac::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blaze);opacity:.6}
-.fac > svg{width:26px;height:26px;color:var(--muted);display:block;margin-bottom:.7rem}
-.fac h3{font-size:1.1rem;letter-spacing:.02em}
+.fac h3{display:flex;align-items:center;gap:.45rem;font-size:1.05rem;letter-spacing:.02em}
+.fac h3 svg{width:17px;height:17px;flex:none;color:var(--blaze)}
 .fac .dist{
   font-family:var(--display);font-weight:800;line-height:.95;
   font-size:clamp(1.6rem,5vw,2.05rem);color:var(--blaze);
