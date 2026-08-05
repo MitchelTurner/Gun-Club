@@ -6,6 +6,8 @@
 <title>Ketchikan Rod &amp; Gun Club — join the range, 500 yards, year round</title>
 <meta name="description" content="Membership at the Ketchikan Rod & Gun Club: rifle and pistol to 500 yards, silhouette lanes and a trap field, eleven miles north of downtown Ketchikan. Apply and pay online.">
 <meta name="theme-color" content="#0E1714">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/img/icons/apple-touch-180.png">
 <link rel="canonical" href="https://ketchikanrodandgun.org/">
 
 <meta property="og:type" content="website">
@@ -61,7 +63,7 @@
     <a href="first-visit.html">First visit</a>
     <a href="#range">The range</a>
     <a href="#events">Matches</a>
-    <a href="visitors.html">Visiting</a>
+    <a href="standings.html">Rimfire Cup</a>
     <a href="members.html">Members</a>
   </nav>
   <a class="btn btn-primary btn-sm head-cta" href="#membership">Join the club</a>
@@ -76,6 +78,11 @@
     <a href="#range">The range</a>
     <a href="#safety">Safety</a>
     <a href="#events">Matches</a>
+    <a href="range-card.html">Come-up card</a>
+    <a href="targets.html">Printable targets</a>
+    <a href="play.html">Train &amp; play</a>
+    <a href="standings.html">Rimfire Cup</a>
+    <a href="recaps.html">Match recaps</a>
     <a href="waiver.html">Waiver</a>
     <a href="visitors.html">Visiting shooters</a>
     <a href="members.html">Members</a>
@@ -142,6 +149,39 @@
           <p>A vote at the annual meeting. The range is whatever the membership decides to build and maintain.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section plain" id="tools">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Works offline</p>
+        <h2>Range tools</h2>
+        <p>No cell service at the gate. Install the site, then these still work.</p>
+      </div>
+      <div class="toolgrid rise">
+        <a class="toolcard" href="range-card.html">
+          <h3>Come-up card</h3>
+          <p>Build a drop chart, save profiles on this device, print a wallet card. Confirm every solution on paper.</p>
+        </a>
+        <a class="toolcard" href="play.html">
+          <h3>Wind calls &amp; steel</h3>
+          <p>Train full-value wind holds against the real solver, then run the silhouette knockdown. Simulations only.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="recap-latest">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">From the line</p>
+        <h2>Latest recap</h2>
+      </div>
+      <div id="homeRecap" class="rise">
+        <p class="muted">Loading recap…</p>
+      </div>
+      <p style="margin-top:1rem"><a href="recaps.html">All match recaps</a> · <a href="standings.html">Rimfire Cup standings</a></p>
     </div>
   </section>
 
@@ -431,15 +471,17 @@
       <li><a href="first-visit.html">Your first visit</a></li>
       <li><a href="index.html#range">The range</a></li>
       <li><a href="index.html#safety">Range rules</a></li>
-      <li><a href="waiver.html">Sign the waiver</a></li>
-      <li><a href="visitors.html">Visiting shooters</a></li>
+      <li><a href="range-card.html">Come-up card</a></li>
+      <li><a href="targets.html">Printable targets</a></li>
+      <li><a href="play.html">Train &amp; play</a></li>
     </ul>
   </div>
   <div>
     <h4>Club</h4>
     <ul>
       <li><a href="index.html#membership">Join</a></li>
-      <li><a href="index.html#events">Matches</a></li>
+      <li><a href="standings.html">Rimfire Cup</a></li>
+      <li><a href="recaps.html">Match recaps</a></li>
       <li><a href="members.html">Members area</a></li>
       <li><a href="tel:+19072478400">(907) 247-8400</a></li>
     </ul>
@@ -453,5 +495,30 @@
 
 <script src="assets/js/config.js"></script>
 <script src="assets/js/site.js"></script>
+<script src="assets/js/pwa.js"></script>
+<script>
+(function(){
+  var host = document.getElementById("homeRecap");
+  if(!host){ return; }
+  fetch("data/recaps.json", { cache:"no-store" })
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      var recap = (data.recaps || [])[0];
+      if(!recap){
+        host.innerHTML = '<p class="muted">No recaps posted yet. After a match, add a block to <code>data/recaps.json</code>.</p>';
+        return;
+      }
+      host.innerHTML = '<article class="recap" style="border:0;padding:0">' +
+        '<p class="eyebrow">' + recap.date + '</p>' +
+        '<h3 style="margin:.35rem 0 .75rem">' + recap.title + '</h3>' +
+        '<p class="muted">' + recap.body + '</p>' +
+        (recap.matchId ? '<p><a href="standings.html">See standings</a></p>' : '') +
+        '</article>';
+    })
+    .catch(function(){
+      host.innerHTML = '<p class="muted">Recap unavailable offline until it has been cached once.</p>';
+    });
+})();
+</script>
 </body>
 </html>
