@@ -4,5 +4,9 @@ Disallow: /admin.html
 Disallow: /score.html
 Disallow: /checkin.html
 Disallow: /members.html
+Disallow: /offline.html
+Disallow: /functions/
+Disallow: /schema.sql
+Disallow: /wrangler.toml
 
 Sitemap: https://ketchikanrodandgun.org/sitemap.xml

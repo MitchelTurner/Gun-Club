@@ -4,18 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ketchikan Rod &amp; Gun Club — join the range, 500 yards, year round</title>
-<meta name="description" content="Membership at the Ketchikan Rod & Gun Club: rifle and pistol to 500 yards, silhouette lanes and a trap field, eleven miles north of downtown Ketchikan. Apply and pay online.">
+<meta name="description" content="Ketchikan Rod &amp; Gun Club: rifle and pistol to 500 yards, silhouette and trap, Mile 11 North Tongass Highway. Open to the public during daylight hours. Call (907) 247-8400.">
 <meta name="theme-color" content="#0E1714">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="assets/img/icons/apple-touch-180.png">
 <link rel="canonical" href="https://ketchikanrodandgun.org/">
 
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Ketchikan Rod &amp; Gun Club">
 <meta property="og:title" content="Ketchikan Rod &amp; Gun Club">
-<meta property="og:description" content="Rifle and pistol to 500 yards, silhouette and trap, eleven miles north of downtown Ketchikan. Join the club.">
+<meta property="og:description" content="Rifle and pistol to 500 yards, silhouette and trap, eleven miles north of downtown Ketchikan. Open daylight hours. Join the club.">
 <meta property="og:url" content="https://ketchikanrodandgun.org/">
 <meta property="og:image" content="https://ketchikanrodandgun.org/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ketchikan Rod &amp; Gun Club">
+<meta name="twitter:description" content="Rifle and pistol to 500 yards, silhouette and trap. Daylight hours, open to the public. Mile 11 North Tongass Highway.">
+<meta name="twitter:image" content="https://ketchikanrodandgun.org/assets/img/og.jpg">
+
+<meta name="geo.region" content="US-AK">
+<meta name="geo.placename" content="Ketchikan">
+<meta name="geo.position" content="55.4286257;-131.7834125">
+<meta name="ICBM" content="55.4286257, -131.7834125">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,11 +37,14 @@
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
-  "@type":"SportsActivityLocation",
+  "@type":["SportsActivityLocation","LocalBusiness"],
   "name":"Ketchikan Rod & Gun Club",
-  "description":"Outdoor rifle, pistol, metallic silhouette, muzzleloading and trap ranges in Ketchikan, Alaska. Open to the public; memberships available.",
+  "alternateName":"KRGC",
+  "description":"Outdoor rifle, pistol, metallic silhouette, muzzleloading and trap ranges in Ketchikan, Alaska. Open to the public during daylight hours; memberships available.",
   "url":"https://ketchikanrodandgun.org/",
   "telephone":"+1-907-247-8400",
+  "image":"https://ketchikanrodandgun.org/assets/img/og.jpg",
+  "logo":"https://ketchikanrodandgun.org/assets/img/icons/icon-512.png",
   "address":{
     "@type":"PostalAddress",
     "streetAddress":"North Tongass Highway",
@@ -39,9 +54,19 @@
     "addressCountry":"US"
   },
   "geo":{ "@type":"GeoCoordinates", "latitude":55.4286257, "longitude":-131.7834125 },
+  "hasMap":"https://www.google.com/maps?q=55.4286257,-131.7834125",
+  "openingHoursSpecification":{
+    "@type":"OpeningHoursSpecification",
+    "dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "description":"Daylight hours only. Open to the public. You must be able to see your backstop."
+  },
+  "areaServed":{"@type":"City","name":"Ketchikan","containedInPlace":{"@type":"State","name":"Alaska"}},
   "sport":["Shooting sports","Trap shooting","Metallic silhouette"],
   "publicAccess":true,
-  "isAccessibleForFree":false
+  "isAccessibleForFree":false,
+  "currenciesAccepted":"USD",
+  "paymentAccepted":"Cash, Credit Card",
+  "sameAs":[]
 }
 </script>
 </head>
@@ -429,23 +454,50 @@
     </div>
   </section>
 
-  <section class="section" id="find">
+  <section class="section" id="hours">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Hours &amp; directions</p>
+        <h2>Eleven miles north</h2>
+      </div>
+      <div class="quote-block rise" itemscope itemtype="https://schema.org/SportsActivityLocation">
+        <meta itemprop="name" content="Ketchikan Rod &amp; Gun Club">
+        <p class="quote-lead" data-site="hoursSummary">Daylight hours, seven days a week. Open to the public. No night shooting — you must be able to see your backstop.</p>
+        <p class="nap" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <strong>Ketchikan Rod &amp; Gun Club</strong><br>
+          <span itemprop="streetAddress" data-site="street">North Tongass Highway</span>,
+          <span itemprop="addressLocality" data-site="city">Ketchikan</span>,
+          <span itemprop="addressRegion" data-site="state">AK</span>
+          <span itemprop="postalCode" data-site="zip">99901</span><br>
+          Phone: <a itemprop="telephone" data-site-href="phoneHref" href="tel:+19072478400"><span data-site="phone">(907) 247-8400</span></a>
+        </p>
+        <p class="muted" data-site="directionsSummary">Eleven miles north of downtown Ketchikan on North Tongass Highway — about twenty-five minutes by car. No transit goes past the club. Cell service is unreliable at the range; arrange your ride back before you leave town.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section plain" id="find">
     <div class="wrap find">
       <div>
         <p class="eyebrow">Getting there</p>
-        <h2>Eleven miles north</h2>
-        <p class="muted">Head out North Tongass Highway from downtown and keep going. The turnoff is easy to miss in the rain — watch for the club sign on the right past mile 11.</p>
+        <h2>Find the gate</h2>
+        <p class="muted" data-site="directionsTurnoff">Watch for the club sign near mile 11. The turnoff is easy to miss in the rain.</p>
         <p class="muted">Cell service is unreliable at the range. Tell someone where you're going.</p>
-        <p style="margin-top:1.5rem"><a class="tel" href="tel:+19072478400">(907) 247-8400</a></p>
+        <p style="margin-top:1.5rem"><a class="tel" data-site-href="phoneHref" href="tel:+19072478400"><span data-site="phone">(907) 247-8400</span></a></p>
+        <div class="dir-actions">
+          <a class="btn btn-ghost btn-sm" href="first-visit.html#contact">First-visit directions</a>
+          <a class="btn btn-ghost btn-sm" data-site-href="mapsGoogle" href="https://www.google.com/maps?q=55.4286257,-131.7834125" target="_blank" rel="noopener">Google Maps</a>
+          <a class="btn btn-ghost btn-sm" data-site-href="mapsApple" href="https://maps.apple.com/?ll=55.4286257,-131.7834125&amp;q=Ketchikan%20Rod%20%26%20Gun%20Club" target="_blank" rel="noopener">Apple Maps</a>
+        </div>
       </div>
       <div>
         <ul class="kv">
-          <li><span class="k">Address</span><span>North Tongass Highway<br>Ketchikan, AK 99901</span></li>
-          <li><span class="k">Mail</span><span>PO Box 6391<br>Ketchikan, AK 99901</span></li>
-          <li><span class="k">Phone</span><span><a href="tel:+19072478400">(907) 247-8400</a></span></li>
-          <li><span class="k">Email</span><span class="tk" data-site="email">add address</span></li>
+          <li><span class="k">Address</span><span><span data-site="street">North Tongass Highway</span><br><span data-site="city">Ketchikan</span>, <span data-site="state">AK</span> <span data-site="zip">99901</span></span></li>
+          <li><span class="k">Mail</span><span data-site="mail">PO Box 6391, Ketchikan, AK 99901</span></li>
+          <li><span class="k">Phone</span><span><a data-site-href="phoneHref" href="tel:+19072478400"><span data-site="phone">(907) 247-8400</span></a></span></li>
+          <li><span class="k">Email</span><span class="tk" data-site="email">membership@example.org</span></li>
           <li><span class="k">Meetings</span><span class="tk">add day, time, place</span></li>
-          <li><span class="k">Coords</span><span>55.4286, -131.7834</span></li>
+          <li><span class="k">Coords</span><span><span data-site="lat">55.4286257</span>, <span data-site="lng">-131.7834125</span></span></li>
         </ul>
       </div>
     </div>
@@ -489,28 +541,35 @@
 <footer class="foot">
   <div>
     <h4>Ketchikan Rod &amp; Gun Club</h4>
-    <p class="muted" style="max-width:34ch;font-size:.9rem">North Tongass Highway, Ketchikan, Alaska. Open to the public, run by its members.</p>
+    <p class="muted nap-foot">
+      <span data-site="street">North Tongass Highway</span>,
+      <span data-site="city">Ketchikan</span>,
+      <span data-site="state">AK</span>
+      <span data-site="zip">99901</span><br>
+      <a data-site-href="phoneHref" href="tel:+19072478400"><span data-site="phone">(907) 247-8400</span></a>
+      · Open to the public, run by its members.
+    </p>
     <p class="fine">Flag up means the line is hot</p>
   </div>
   <div>
     <h4>Shooting</h4>
     <ul>
       <li><a href="first-visit.html">Your first visit</a></li>
-      <li><a href="index.html#range">The range</a></li>
-      <li><a href="index.html#safety">Range rules</a></li>
+      <li><a href="#hours">Hours &amp; directions</a></li>
+      <li><a href="#safety">Range rules</a></li>
+      <li><a href="waiver.html">Waiver</a></li>
       <li><a href="range-card.html">Come-up card</a></li>
       <li><a href="targets.html">Printable targets</a></li>
-      <li><a href="play.html">Train &amp; play</a></li>
     </ul>
   </div>
   <div>
     <h4>Club</h4>
     <ul>
-      <li><a href="index.html#membership">Join</a></li>
+      <li><a href="#membership">Join</a></li>
       <li><a href="standings.html">Rimfire Cup</a></li>
       <li><a href="recaps.html">Match recaps</a></li>
       <li><a href="members.html">Members area</a></li>
-      <li><a href="tel:+19072478400">(907) 247-8400</a></li>
+      <li><a href="visitors.html">Visiting shooters</a></li>
     </ul>
   </div>
 </footer>
