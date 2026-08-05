@@ -1,10 +1,18 @@
 /* =============================================================
    KRGC — PWA install prompt + service worker registration
+   Install bar: once, on a second visit, only if beforeinstallprompt.
    ============================================================= */
 (function(){
   "use strict";
 
   var $ = function(s){ return document.querySelector(s); };
+  var VISIT_KEY = "krgc.visits";
+  var DISMISS_KEY = "krgc.install.dismissed";
+
+  try{
+    var visits = parseInt(localStorage.getItem(VISIT_KEY) || "0", 10) || 0;
+    localStorage.setItem(VISIT_KEY, String(visits + 1));
+  } catch(e){}
 
   if("serviceWorker" in navigator){
     window.addEventListener("load", function(){
@@ -15,21 +23,33 @@
   var deferredPrompt = null;
   var installBar = null;
 
+  function visitCount(){
+    try{ return parseInt(localStorage.getItem(VISIT_KEY) || "0", 10) || 0; }
+    catch(e){ return 0; }
+  }
+
+  function wasDismissed(){
+    try{ return localStorage.getItem(DISMISS_KEY) === "1"; }
+    catch(e){ return false; }
+  }
+
   function ensureInstallBar(){
     if(installBar){ return installBar; }
     installBar = document.createElement("div");
     installBar.className = "installbar";
     installBar.id = "installBar";
     installBar.setAttribute("data-show", "false");
-    installBar.innerHTML = '<div class="txt"><b>Add to home screen</b><span>Range rules and tools work offline.</span></div>' +
+    installBar.setAttribute("role", "dialog");
+    installBar.setAttribute("aria-label", "Install for offline use");
+    installBar.innerHTML = '<div class="txt"><b>Install for offline use</b><span>Range rules and tools work with no cell service.</span></div>' +
       '<div class="actions">' +
       '<button type="button" class="btn btn-primary btn-sm" id="installBtn">Install</button>' +
-      '<button type="button" class="btn btn-ghost btn-sm" id="installDismiss" aria-label="Dismiss">Not now</button>' +
+      '<button type="button" class="btn btn-ghost btn-sm" id="installDismiss">Not now</button>' +
       '</div>';
     document.body.appendChild(installBar);
     $("#installDismiss").addEventListener("click", function(){
       installBar.setAttribute("data-show", "false");
-      try{ sessionStorage.setItem("krgc-install-dismissed", "1"); } catch(e){}
+      try{ localStorage.setItem(DISMISS_KEY, "1"); } catch(e){}
     });
     $("#installBtn").addEventListener("click", function(){
       if(!deferredPrompt){ return; }
@@ -37,18 +57,23 @@
       deferredPrompt.userChoice.finally(function(){
         deferredPrompt = null;
         installBar.setAttribute("data-show", "false");
+        try{ localStorage.setItem(DISMISS_KEY, "1"); } catch(e){}
       });
     });
     return installBar;
   }
 
+  function maybeShowInstall(){
+    if(!deferredPrompt){ return; }
+    if(wasDismissed()){ return; }
+    if(visitCount() < 2){ return; } /* second visit only */
+    ensureInstallBar().setAttribute("data-show", "true");
+  }
+
   window.addEventListener("beforeinstallprompt", function(e){
     e.preventDefault();
     deferredPrompt = e;
-    try{
-      if(sessionStorage.getItem("krgc-install-dismissed")){ return; }
-    } catch(err){}
-    ensureInstallBar().setAttribute("data-show", "true");
+    maybeShowInstall();
   });
 
   window.addEventListener("online", function(){
@@ -56,9 +81,6 @@
   });
   window.addEventListener("offline", function(){
     document.documentElement.classList.add("is-offline");
-    if(location.pathname !== "/offline.html" && !location.pathname.endsWith("/offline.html")){
-      /* Let the service worker serve cached pages; only redirect bare navigations */
-    }
   });
 
   if(!navigator.onLine){
