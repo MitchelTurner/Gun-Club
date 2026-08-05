@@ -566,10 +566,41 @@
     if(cta){ cta.addEventListener("click", function(){ track("Sticky CTA tapped"); }); }
   })();
 
-  /* ---------- fill config-driven text ---------- */
-  $$("[data-site]").forEach(function(el){
-    var key = el.getAttribute("data-site");
-    var val = (C.site || {})[key];
-    if(val){ el.textContent = val; }
-  });
+  /* ---------- fill config-driven NAP / contact ---------- */
+  (function(){
+    var site = C.site || {};
+    var lat = site.lat, lng = site.lng;
+    var name = site.name || "Ketchikan Rod & Gun Club";
+    var derived = {
+      emailMailto: site.email ? "mailto:" + site.email : "",
+      phoneHref: site.phoneHref ? "tel:" + site.phoneHref : "",
+      mapsGoogle: (lat != null && lng != null)
+        ? "https://www.google.com/maps?q=" + lat + "," + lng
+        : "",
+      mapsApple: (lat != null && lng != null)
+        ? "https://maps.apple.com/?ll=" + lat + "," + lng + "&q=" + encodeURIComponent(name)
+        : "",
+      geoHref: (lat != null && lng != null) ? "geo:" + lat + "," + lng : ""
+    };
+
+    $$("[data-site]").forEach(function(el){
+      var key = el.getAttribute("data-site");
+      var val = site[key];
+      if(val == null || val === ""){ return; }
+      el.textContent = String(val);
+      if(key === "email" && String(val).indexOf("example.org") === -1){
+        el.classList.remove("tk");
+      }
+    });
+
+    $$("[data-site-href]").forEach(function(el){
+      var key = el.getAttribute("data-site-href");
+      var val = derived[key] || site[key];
+      if(!val){ return; }
+      if(key === "phoneHref" && String(val).indexOf("tel:") !== 0){
+        val = "tel:" + val;
+      }
+      el.setAttribute("href", val);
+    });
+  })();
 })();

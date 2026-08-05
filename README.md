@@ -6,8 +6,10 @@ and closure alerts. No npm, no bundler.
 
 ```
 index.html              home — membership, range, matches, on-range count
-first-visit.html        walkthrough for first-timers
+first-visit.html        visitor funnel: hours → rules → waiver → contact
 visitors.html / waiver.html / members.html
+sitemap.xml / robots.txt  local SEO
+assets/img/og.jpg       Open Graph share image (1200×630)
 range-card.html         ballistic come-up card (offline)
 targets.html / play.html / standings.html / recaps.html
 checkin.html            QR gate check-in (Phase 2)
@@ -40,7 +42,9 @@ data/*.json             Phase 1 static fallbacks
 ## Launch checklist (Phase 1 still applies)
 
 Search `TODO` and `class="tk"`. Fill `config.js`, form endpoint, Stripe,
-waiver legal review, photos.
+waiver legal review, photos. Replace `assets/img/og.jpg` with a real range
+photo when you have one (keep 1200×630). NAP / hours / directions copy lives
+in `config.js` → `site.hoursSummary`, `site.directionsSummary`.
 
 ## Posting a match recap (Phase 1 path)
 

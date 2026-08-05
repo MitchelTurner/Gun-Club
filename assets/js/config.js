@@ -20,7 +20,11 @@ window.KRGC = {
     state: "AK",
     zip: "99901",
     lat: 55.4286257,
-    lng: -131.7834125
+    lng: -131.7834125,
+    /* Quoteable local-SEO / NAP copy — keep in sync across pages */
+    hoursSummary: "Daylight hours, seven days a week. Open to the public. No night shooting — you must be able to see your backstop.",
+    directionsSummary: "Eleven miles north of downtown Ketchikan on North Tongass Highway — about twenty-five minutes by car. No transit goes past the club. Cell service is unreliable at the range; arrange your ride back before you leave town.",
+    directionsTurnoff: "Watch for the club sign near mile 11. The turnoff is easy to miss in the rain."
   },
 
   /* ---------- form handling ----------

@@ -1,5 +1,5 @@
 /* KRGC service worker — offline shell for range tools */
-var CACHE = "krgc-v2";
+var CACHE = "krgc-v3";
 var OFFLINE = "/offline.html";
 
 /* App shell — cache-first */
@@ -32,7 +32,8 @@ var SHELL = [
   "/assets/img/icons/icon-192.png",
   "/assets/img/icons/icon-512.png",
   "/assets/img/icons/icon-maskable-512.png",
-  "/assets/img/icons/apple-touch-180.png"
+  "/assets/img/icons/apple-touch-180.png",
+  "/assets/img/og.jpg"
 ];
 
 /* JSON — network-first with cache fallback; also precached */
