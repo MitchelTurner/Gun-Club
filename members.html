@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Members area — Ketchikan Rod & Gun Club</title>
+<meta name="description" content="Gate code, bylaws, minutes, match results and bay requests for Ketchikan Rod & Gun Club members.">
+<meta name="theme-color" content="#0E1714">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=DM+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="head">
+  <a class="mark" href="index.html">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="4.5" fill="#FF6A2B"/>
+      <path d="M20 2v6M20 32v6M2 20h6M32 20h6" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span><b>Ketchikan Rod &amp; Gun</b><i>Mile 11 &middot; N Tongass Hwy</i></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#events">Matches</a>
+    <a href="visitors.html">Visiting</a>
+    <a href="members.html" aria-current="page">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-sm head-cta" href="index.html#membership">Join the club</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-top"><button class="close" id="drawerClose" aria-label="Close menu">&times;</button></div>
+  <nav>
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#safety">Safety</a>
+    <a href="index.html#events">Matches</a>
+    <a href="waiver.html">Waiver</a>
+    <a href="visitors.html">Visiting shooters</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-block" href="index.html#membership">Join the club</a>
+</div>
+
+<main id="main">
+
+  <section class="pagehead">
+    <div class="wrap narrow">
+      <p class="eyebrow">Members only</p>
+      <h1>Members area</h1>
+      <p class="lede">Gate code, bylaws, minutes, match results and bay requests.</p>
+    </div>
+  </section>
+
+  <section class="section plain">
+    <div class="wrap">
+      <div class="gate" id="gateForm">
+        <p class="muted">Enter the member passcode. Any officer can give it to you, and it changes when the gate code changes.</p>
+        <div class="field"><label for="gateInput">Passcode</label><input id="gateInput" type="password" autocomplete="off"></div>
+        <button class="btn btn-primary btn-block" id="gateBtn" type="button">Unlock</button>
+        <div class="alert" id="gateAlert"></div>
+        <p class="form-note">This is a shared passcode, not an account. Don't post it anywhere public.</p>
+      </div>
+
+      <div class="locked">
+        <div class="panel" style="grid-template-columns:1fr;margin-bottom:2.5rem">
+          <div class="panel-left" style="border:0">
+            <p class="eyebrow">Gate code</p>
+            <p class="gatecode" id="gateCodeValue">____</p>
+            <p class="muted" style="margin-top:1rem;margin-bottom:0">Last one out closes the gate and pulls the flag. Assume you're the last one out.</p>
+          </div>
+        </div>
+
+        <h2 style="margin-bottom:1.25rem">Season standings</h2>
+        <div id="resultsHost">
+          <div class="filters" id="seasonFilters"></div>
+          <div class="tablewrap" id="leaderboard"></div>
+          <h3 style="margin:2.5rem 0 .5rem">Match by match</h3>
+          <div id="matchList"></div>
+        </div>
+
+        <h2 style="margin:3rem 0 1.25rem">Documents</h2>
+        <ul class="kv">
+          <li><span class="k">Bylaws</span><span><a href="#" class="tk">upload bylaws.pdf and link it</a></span></li>
+          <li><span class="k">Minutes</span><span><a href="#" class="tk">latest meeting minutes</a></span></li>
+          <li><span class="k">Budget</span><span><a href="#" class="tk">current year</a></span></li>
+          <li><span class="k">Range plan</span><span><a href="#" class="tk">improvement plan</a></span></li>
+        </ul>
+
+        <h2 style="margin:3rem 0 1.25rem">Request a bay</h2>
+        <p class="muted" style="max-width:60ch">Only needed for training, a private event, or anything that takes a bay out of general use. Ordinary shooting needs no reservation &mdash; turn up.</p>
+        <div class="panel rise" style="margin-top:1.5rem">
+          <div class="panel-left">
+            <h3>House rules for reservations</h3>
+            <ul class="perks">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>A reservation never closes the whole range.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>Post it at least a week out so it can go on the calendar.</span></li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg><span>You are the range officer for your own event.</span></li>
+            </ul>
+          </div>
+          <div class="panel-form">
+            <div class="two">
+              <div class="field"><label for="resName">Name</label><input id="resName" type="text" autocomplete="name"></div>
+              <div class="field"><label for="resEmail">Email</label><input id="resEmail" type="email" inputmode="email" autocomplete="email"></div>
+            </div>
+            <div class="two">
+              <div class="field"><label for="resDate">Date</label><input id="resDate" type="date"></div>
+              <div class="field"><label for="resPeople">People</label><input id="resPeople" type="number" min="1" max="40" value="4"></div>
+            </div>
+            <div class="field">
+              <label for="resBay">Which bay</label>
+              <select id="resBay"><option>Pistol bays</option><option>Rifle line</option><option>Silhouette lanes</option><option>Trap field</option></select>
+            </div>
+            <div class="field">
+              <label for="resWindow">Time</label>
+              <select id="resWindow"><option>Morning</option><option>Afternoon</option><option>All day</option></select>
+            </div>
+            <div class="field"><label for="resNotes">What for</label><textarea id="resNotes"></textarea></div>
+            <button class="btn btn-primary btn-block" id="resBtn" type="button">Send request</button>
+            <div class="alert" id="resAlert"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div>
+    <h4>Ketchikan Rod &amp; Gun Club</h4>
+    <p class="muted" style="max-width:34ch;font-size:.9rem">North Tongass Highway, Ketchikan, Alaska. Open to the public, run by its members.</p>
+    <p class="fine">Flag up means the line is hot</p>
+  </div>
+  <div>
+    <h4>Shooting</h4>
+    <ul>
+      <li><a href="first-visit.html">Your first visit</a></li>
+      <li><a href="index.html#range">The range</a></li>
+      <li><a href="index.html#safety">Range rules</a></li>
+      <li><a href="waiver.html">Sign the waiver</a></li>
+      <li><a href="visitors.html">Visiting shooters</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Club</h4>
+    <ul>
+      <li><a href="index.html#membership">Join</a></li>
+      <li><a href="index.html#events">Matches</a></li>
+      <li><a href="members.html">Members area</a></li>
+      <li><a href="tel:+19072478400">(907) 247-8400</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+</body>
+</html>
