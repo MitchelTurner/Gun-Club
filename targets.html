@@ -207,15 +207,18 @@
 
   function diagnosticSvg(){
     var w = inch(8), h = inch(10);
-  var nums = "";
-    for(var r = 0; r < 10; r++){
-      for(var c = 0; c < 8; c++){
-        var x = inch(0.5) + c * inch(0.9), y = inch(0.8) + r * inch(0.9);
-        nums += '<circle cx="' + x + '" cy="' + y + '" r="14" fill="none" class="target-stroke" stroke="#000"/><text x="' + x + '" y="' + (y+4) + '" text-anchor="middle" font-size="10" font-family="DM Mono, monospace">' + (r*8+c+1) + '</text>';
-      }
+    var cx = w/2, cy = h/2 + 10;
+    /* MOA rings at 100 yd: 1 MOA ≈ 1.047 in */
+    var rings = "";
+    for(var moa = 1; moa <= 8; moa++){
+      var r = moa * inch(1.047);
+      rings += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" class="target-stroke" stroke="#000" stroke-width="' + (moa===1?2:1) + '"/>';
+      rings += '<text x="' + (cx + r + 4) + '" y="' + cy + '" font-size="10" font-family="DM Mono, monospace">' + moa + '</text>';
     }
+    rings += '<circle cx="' + cx + '" cy="' + cy + '" r="3" class="target-fill" fill="#000"/>';
     return '<svg class="target-sheet" viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '">' +
-      '<text x="' + (w/2) + '" y="24" text-anchor="middle" font-family="DM Mono, monospace" font-size="14">Diagnostic — numbered cells</text>' + nums + '</svg>';
+      '<text x="' + (w/2) + '" y="24" text-anchor="middle" font-family="DM Mono, monospace" font-size="14">Diagnostic — MOA rings @ 100 yd</text>' + rings +
+      '<text x="' + (w/2) + '" y="' + (h-16) + '" text-anchor="middle" font-size="10" font-family="DM Mono, monospace">Labels = MOA from center</text></svg>';
   }
 
   function calSquare(){
