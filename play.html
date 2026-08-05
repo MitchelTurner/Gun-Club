@@ -91,11 +91,12 @@
               <button class="btn btn-ghost btn-block" type="button" id="windUnitToggle" aria-label="Toggle MOA or mils">MOA</button>
             </div>
           </div>
-          <button class="btn btn-primary" type="button" id="windSubmit">Submit</button>
-          <p class="muted" style="margin-top:1rem">Streak: <strong id="windStreak">0</strong></p>
+          <button class="btn btn-primary" type="button" id="windSubmit">Submit hold</button>
+          <p class="muted" style="margin-top:1rem">Streak: <strong id="windStreak">0</strong> · 10-round sessions</p>
+          <div id="windImpact" style="margin-top:1rem"></div>
           <div id="windResults" style="margin-top:1rem"></div>
         </div>
-        <p class="kbd-hint">Enter — submit hold · Tab — switch panels</p>
+        <p class="kbd-hint">Enter — submit hold · truth from the come-up card solver</p>
       </div>
 
       <div class="panel-stack" id="silPanel" data-active="false" role="tabpanel" aria-labelledby="silTab">
@@ -104,8 +105,7 @@
           <button class="btn btn-primary" type="button" id="silStart">Start run</button>
           <button class="btn btn-ghost" type="button" id="silSound" aria-pressed="false">Sound off</button>
         </div>
-        <p class="muted" style="margin-top:1rem">Score: <strong id="silScore">0</strong> · Time: <strong id="silTimer">0.0</strong> s</p>
-        <p class="kbd-hint">Click each animal in order · Space — start run</p>
+        <p class="muted" style="margin-top:1rem">Score: <strong id="silScore">0</strong> · Time: <strong id="silTimer">0.0</strong> s · Best: <strong id="silPB">—</strong></p>
       </div>
     </div>
   </section>
