@@ -53,11 +53,13 @@ the site in **brass with a dotted underline** (`.tk`). Search the source for
 
 ## Deploying
 
-Cloudflare Pages, Netlify, or GitHub Pages — all free, all fine.
+Cloudflare Pages, Netlify, GitHub Pages, or Railway — all fine for this
+static site. No build command. Root directory is `/` (the repo root has
+`index.html` and a `Staticfile` for Railpack/Railway detection).
 
-Cloudflare Pages: connect the repo, leave the build command empty, set the
-output directory to `/`. `_headers` and `_redirects` are already written and
-are picked up automatically by Cloudflare and Netlify.
+Cloudflare Pages / Netlify: connect the repo, leave the build command empty,
+set the output directory to `/`. `_headers` and `_redirects` are picked up
+automatically when those files are present.
 
 ## Day-to-day, for officers
 
