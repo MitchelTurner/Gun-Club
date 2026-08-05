@@ -223,52 +223,7 @@ a{color:inherit}
 /* ---------- range plan ---------- */
 .planwrap{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:clamp(.9rem,3vw,1.6rem)}
 .scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.scroller svg{display:block;min-width:680px;width:100%;height:auto}
-
-/* ---------- facility discipline cards ---------- */
-.facility{display:grid;gap:1rem;margin-bottom:1.5rem}
-@media(min-width:620px){.facility{grid-template-columns:1fr 1fr}}
-@media(min-width:1040px){.facility{grid-template-columns:repeat(4,1fr)}}
-.fac{
-  position:relative;overflow:hidden;
-  padding:1.2rem 1.25rem 1.3rem 1.5rem;border-radius:var(--r);
-  background:var(--surface);border:1px solid var(--line);
-  transition:border-color .2s ease;
-}
-.fac:hover{border-color:var(--line-strong)}
-.fac::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blaze);opacity:.6}
-.fac h3{display:flex;align-items:center;gap:.45rem;font-size:1.05rem;letter-spacing:.02em}
-.fac h3 svg{width:17px;height:17px;flex:none;color:var(--blaze)}
-.fac .dist{
-  font-family:var(--display);font-weight:800;line-height:.95;
-  font-size:clamp(1.6rem,5vw,2.05rem);color:var(--blaze);
-  margin:.4rem 0 .15rem;text-transform:uppercase;
-}
-.fac .unit{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.6rem}
-.fac p{margin:0;font-size:.9rem;color:var(--muted)}
-@media (prefers-reduced-motion:reduce){.fac{transition:none}}
-
-/* ---------- conditions strip ---------- */
-.conditions{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.5rem 0 0}
-.cond{
-  display:inline-flex;align-items:center;gap:.5rem;
-  padding:.6rem .9rem;border-radius:999px;
-  background:var(--surface-2);border:1px solid var(--line);
-  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
-}
-.cond svg{width:14px;height:14px;flex:none;color:var(--blaze)}
-
-/* ---------- plan legend ---------- */
-.plan-legend{display:flex;flex-wrap:wrap;gap:1.1rem;margin:1rem 0 0}
-.plan-legend span{
-  display:inline-flex;align-items:center;gap:.45rem;
-  font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
-}
-.plan-legend i{width:14px;height:10px;border-radius:2px;flex:none;display:inline-block}
-.plan-legend i.k-band{background:var(--surface-2);border:1px solid #5E7269}
-.plan-legend i.k-berm{background:#2A3B33}
-.plan-legend i.k-mark{background:var(--blaze)}
-.plan-legend i.k-tree{background:#1D2C25;border:1px solid #2A3B33}
+.scroller svg{display:block;min-width:640px;width:100%;height:auto}
 .hint{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:.75rem 0 0}
 @media(min-width:760px){.hint{display:none}}
 #planNote{font-family:var(--mono);font-size:.85rem;line-height:1.5;margin:1rem 0 0;padding-top:1rem;border-top:1px solid var(--line);min-height:3.6em;color:var(--muted)}
@@ -281,16 +236,10 @@ a{color:inherit}
 .tick:hover .label,.tick[data-active="true"] .label{fill:#FF6A2B}
 .tick:focus{outline:none}
 .tick:focus-visible rect{stroke:#FF6A2B;stroke-width:2;fill:rgba(255,106,43,.08)}
-.band{fill:#1D2C25;stroke:#5E7269;stroke-width:1}
-.band-accent{fill:#FF6A2B;opacity:.55}
-.bandlabel{font-family:"DM Mono",monospace;font-size:13px;letter-spacing:.16em;fill:#C6D3CC}
+.band{fill:none;stroke:#5E7269;stroke-width:1;stroke-dasharray:4 5}
+.bandlabel{font-family:"DM Mono",monospace;font-size:14px;letter-spacing:.14em;fill:#8FA39A}
 .planfig{fill:#C6D3CC}
-.plantext{font-family:"Public Sans",sans-serif;font-size:14px;fill:#8FA39A}
-.plan-sub{font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.12em;fill:#5E7269}
-.planfig-label{font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.08em;fill:#8FA39A}
-.plan-rule{stroke:#5E7269;stroke-width:1}
-.plan-axis{stroke:#8FA39A;stroke-width:2}
-.plan-berm{fill:#2A3B33}
+.plantext{font-family:"Public Sans",sans-serif;font-size:15px;fill:#8FA39A}
 
 /* ---------- accordion ---------- */
 .acc{border-top:1px solid var(--line)}
