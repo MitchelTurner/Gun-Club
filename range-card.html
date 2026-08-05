@@ -82,12 +82,12 @@
             <div class="field">
               <label for="preset">Preset</label>
               <select id="preset">
-                <option value="22lr-std">.22 LR — standard</option>
+                <option value="22lr-std">.22 LR — high velocity</option>
                 <option value="22lr-match">.22 LR — match</option>
-                <option value="223-55">.223 — 55 gr</option>
-                <option value="308-168">.308 — 168 gr</option>
-                <option value="3006-180">.30-06 — 180 gr</option>
-                <option value="65cm-140">6.5 CM — 140 gr</option>
+                <option value="223-55">.223 Rem 55 gr</option>
+                <option value="308-168">.308 Win 168 gr</option>
+                <option value="3006-180">.30-06 180 gr</option>
+                <option value="65cm-140">6.5 Creedmoor 140 gr</option>
                 <option value="custom">Custom</option>
               </select>
             </div>
@@ -107,8 +107,9 @@
               <input id="bc" type="number" min="0.05" max="1" step="0.001" value="0.470">
             </div>
             <div class="field">
-              <label for="mvFps">Muzzle velocity (fps)</label>
+              <label for="mvFps">Muzzle velocity (fps) <span class="tk">nominal</span></label>
               <input id="mvFps" type="number" min="500" max="4000" step="1" value="2650">
+              <p class="form-note" id="mvNote">Preset velocities are nominal — <span class="tk">they vary by barrel</span>. Chronograph yours.</p>
             </div>
             <div class="field">
               <label for="sightHeightIn">Sight height (in)</label>
