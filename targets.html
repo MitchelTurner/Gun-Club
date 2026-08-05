@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Printable targets — Ketchikan Rod &amp; Gun Club</title>
+<meta name="description" content="Print sight-in grids, rimfire bulls, and silhouette targets for the Ketchikan Rod & Gun Club range.">
+<meta name="theme-color" content="#0E1714">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/img/icons/apple-touch-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=DM+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/print.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="head">
+  <a class="mark" href="index.html">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="4.5" fill="#FF6A2B"/>
+      <path d="M20 2v6M20 32v6M2 20h6M32 20h6" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span><b>Ketchikan Rod &amp; Gun</b><i>Mile 11 &middot; N Tongass Hwy</i></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#events">Matches</a>
+    <a href="visitors.html">Visiting</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-sm head-cta" href="index.html#membership">Join the club</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-top"><button class="close" id="drawerClose" aria-label="Close menu">&times;</button></div>
+  <nav>
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#safety">Safety</a>
+    <a href="index.html#events">Matches</a>
+    <a href="range-card.html">Come-up card</a>
+    <a href="targets.html">Printable targets</a>
+    <a href="play.html">Train &amp; play</a>
+    <a href="standings.html">Rimfire Cup</a>
+    <a href="recaps.html">Match recaps</a>
+    <a href="waiver.html">Waiver</a>
+    <a href="visitors.html">Visiting shooters</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-block" href="index.html#membership">Join the club</a>
+</div>
+
+<main id="main">
+  <section class="pagehead">
+    <div class="wrap narrow">
+      <p class="eyebrow">Paper drills</p>
+      <h1>Printable targets</h1>
+      <p class="lede">Sight-in grids, rimfire bulls, and silhouette outlines sized for letter or A4. Measure the calibration square after printing — it must be exactly one inch.</p>
+    </div>
+  </section>
+
+  <section class="section plain">
+    <div class="wrap">
+      <div class="form-grid cols-2 no-print" style="margin-bottom:1.5rem">
+        <div class="field">
+          <label for="targetType">Target type</label>
+          <select id="targetType">
+            <option value="sightin-25">Sight-in — 25 yd grid</option>
+            <option value="sightin-100">Sight-in — 100 yd grid</option>
+            <option value="rimfire">Rimfire bulls (25 yd)</option>
+            <option value="silhouette">Metallic silhouette</option>
+            <option value="fivebull">Five-bull (F-Class style)</option>
+            <option value="diagnostic">Diagnostic grid</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="paperSize">Paper size</label>
+          <select id="paperSize">
+            <option value="letter">US Letter (8.5 × 11 in)</option>
+            <option value="a4">A4 (210 × 297 mm)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="checkline" style="border:0;padding-top:1.75rem">
+            <input type="checkbox" id="scaleExact" checked>
+            <span>Print at exact scale (1 in = 1 in)</span>
+          </label>
+        </div>
+        <div class="field">
+          <label class="checkline" style="border:0;padding-top:1.75rem">
+            <input type="checkbox" id="inkSaver">
+            <span>Ink saver (outlines only)</span>
+          </label>
+        </div>
+      </div>
+
+      <p class="muted no-print" style="margin-bottom:1rem">After printing, measure the calibration square with a ruler. If it is not one inch on a side, disable browser scaling and set print scale to 100%.</p>
+
+      <button class="btn btn-primary no-print" type="button" id="printTargetBtn" style="margin-bottom:1.25rem">Print target</button>
+
+      <div class="target-preview" id="targetPreview" aria-live="polite"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div>
+    <h4>Ketchikan Rod &amp; Gun Club</h4>
+    <p class="muted" style="max-width:34ch;font-size:.9rem">North Tongass Highway, Ketchikan, Alaska. Open to the public, run by its members.</p>
+    <p class="fine">Flag up means the line is hot</p>
+  </div>
+  <div>
+    <h4>Shooting</h4>
+    <ul>
+      <li><a href="first-visit.html">Your first visit</a></li>
+      <li><a href="index.html#range">The range</a></li>
+      <li><a href="index.html#safety">Range rules</a></li>
+      <li><a href="range-card.html">Come-up card</a></li>
+      <li><a href="targets.html">Printable targets</a></li>
+      <li><a href="play.html">Train &amp; play</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Club</h4>
+    <ul>
+      <li><a href="standings.html">Rimfire Cup</a></li>
+      <li><a href="recaps.html">Match recaps</a></li>
+      <li><a href="members.html">Members area</a></li>
+      <li><a href="tel:+19072478400">(907) 247-8400</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script>
+(function(){
+  "use strict";
+  var $ = function(s){ return document.querySelector(s); };
+  var SIL = {
+    chicken: "M0 0v-14h4l2-6h5l1 6h4V0z",
+    pig: "M-2 0v-9h-3l-2-7h20l3 7h-3v9z",
+    turkey: "M0 0v-12l-6-9h6l2-5h4l2 5 6-3-4 8v16z",
+    ram: "M-4 0v-11h-4l-3-9h6a5 5 0 1 1 6 3h10l3 6v11z"
+  };
+
+  function inch(n){ return n * 96; }
+  function mm(n){ return n * 3.7795275591; }
+
+  function pageDims(paper){
+    if(paper === "a4"){ return { w: mm(210), h: mm(297), label: "A4" }; }
+    return { w: inch(8.5), h: inch(11), label: "Letter" };
+  }
+
+  function gridSvg(w, h, step, title){
+    var lines = "";
+    for(var x = 0; x <= w; x += step){
+      lines += '<line x1="' + x + '" y1="0" x2="' + x + '" y2="' + h + '" class="target-stroke" stroke="#000" stroke-width="1"/>';
+    }
+    for(var y = 0; y <= h; y += step){
+      lines += '<line x1="0" y1="' + y + '" x2="' + w + '" y2="' + y + '" class="target-stroke" stroke="#000" stroke-width="1"/>';
+    }
+    var cx = w / 2, cy = h / 2;
+    return '<svg class="target-sheet" viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '" xmlns="http://www.w3.org/2000/svg">' +
+      '<text x="' + (w/2) + '" y="24" text-anchor="middle" font-family="DM Mono, monospace" font-size="14">' + title + '</text>' +
+      lines +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="' + step + '" fill="none" class="target-stroke" stroke="#000" stroke-width="2"/>' +
+      '<circle cx="' + cx + '" cy="' + cy + '" r="4" class="target-fill" fill="#000"/>' +
+      '</svg>';
+  }
+
+  function bullsSvg(count, spacing, radius){
+    var w = spacing * 3, h = spacing * 3;
+    var g = "";
+    for(var i = 0; i < count; i++){
+      var col = i % 3, row = Math.floor(i / 3);
+      var cx = spacing * (col + 1), cy = spacing * (row + 1) + 30;
+      g += '<g><circle cx="' + cx + '" cy="' + cy + '" r="' + radius + '" fill="none" class="target-stroke" stroke="#000" stroke-width="2"/>' +
+        '<circle cx="' + cx + '" cy="' + cy + '" r="' + (radius * 0.4) + '" class="target-fill" fill="#000"/></g>';
+    }
+    return '<svg class="target-sheet" viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '">' + g + '</svg>';
+  }
+
+  function silhouetteSvg(){
+    var items = [
+      { d: SIL.chicken, x: 40, y: 120, label: "Chicken" },
+      { d: SIL.pig, x: 140, y: 120, label: "Pig" },
+      { d: SIL.turkey, x: 260, y: 120, label: "Turkey" },
+      { d: SIL.ram, x: 380, y: 120, label: "Ram" }
+    ];
+    var w = inch(8), h = inch(5);
+    var g = items.map(function(it){
+      return '<g transform="translate(' + it.x + ',' + it.y + ') scale(2)"><path d="' + it.d + '" class="target-fill" fill="#000"/><text x="8" y="20" font-size="8" font-family="DM Mono, monospace">' + it.label + '</text></g>';
+    }).join("");
+    return '<svg class="target-sheet" viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '">' +
+      '<text x="' + (w/2) + '" y="24" text-anchor="middle" font-family="DM Mono, monospace" font-size="14">Metallic silhouette — cut or trace</text>' + g + '</svg>';
+  }
+
+  function diagnosticSvg(){
+    var w = inch(8), h = inch(10);
+    var cx = w/2, cy = h/2 + 10;
+    /* MOA rings at 100 yd: 1 MOA ≈ 1.047 in */
+    var rings = "";
+    for(var moa = 1; moa <= 8; moa++){
+      var r = moa * inch(1.047);
+      rings += '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" class="target-stroke" stroke="#000" stroke-width="' + (moa===1?2:1) + '"/>';
+      rings += '<text x="' + (cx + r + 4) + '" y="' + cy + '" font-size="10" font-family="DM Mono, monospace">' + moa + '</text>';
+    }
+    rings += '<circle cx="' + cx + '" cy="' + cy + '" r="3" class="target-fill" fill="#000"/>';
+    return '<svg class="target-sheet" viewBox="0 0 ' + w + ' ' + h + '" width="' + w + '" height="' + h + '">' +
+      '<text x="' + (w/2) + '" y="24" text-anchor="middle" font-family="DM Mono, monospace" font-size="14">Diagnostic — MOA rings @ 100 yd</text>' + rings +
+      '<text x="' + (w/2) + '" y="' + (h-16) + '" text-anchor="middle" font-size="10" font-family="DM Mono, monospace">Labels = MOA from center</text></svg>';
+  }
+
+  function calSquare(){
+    return '<div style="margin-top:12px"><div class="cal-square" title="Must measure 1 inch"></div><p class="cal-label">Calibration — must measure 1.00 in on each side</p></div>';
+  }
+
+  function render(){
+    var type = $("#targetType").value;
+    var paper = $("#paperSize").value;
+    var exact = $("#scaleExact").checked;
+    var ink = $("#inkSaver").checked;
+    var dims = pageDims(paper);
+    var host = $("#targetPreview");
+    var svg = "";
+
+    if(type === "sightin-25"){
+      svg = gridSvg(inch(7), inch(7), inch(0.5), "25 yd sight-in — ½ in grid");
+    } else if(type === "sightin-100"){
+      svg = gridSvg(inch(7), inch(7), inch(1), "100 yd sight-in — 1 in grid");
+    } else if(type === "rimfire"){
+      svg = bullsSvg(9, inch(2.2), inch(0.5));
+    } else if(type === "silhouette"){
+      svg = silhouetteSvg();
+    } else if(type === "fivebull"){
+      svg = bullsSvg(5, inch(2.8), inch(0.75));
+    } else {
+      svg = diagnosticSvg();
+    }
+
+    document.body.classList.toggle("print-letter", paper === "letter");
+    document.body.classList.toggle("print-a4", paper === "a4");
+    document.body.classList.toggle("scale-exact", exact);
+    document.body.classList.toggle("ink-saver", ink);
+
+    host.innerHTML = '<div class="target-sheet-wrap">' + svg + calSquare() + '</div>';
+  }
+
+  ["targetType","paperSize","scaleExact","inkSaver"].forEach(function(id){
+    $("#" + id).addEventListener("change", render);
+  });
+  $("#printTargetBtn").addEventListener("click", function(){
+    render();
+    window.print();
+  });
+  render();
+})();
+</script>
+<script src="assets/js/pwa.js"></script>
+</body>
+</html>

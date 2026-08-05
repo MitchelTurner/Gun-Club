@@ -1,26 +1,108 @@
 {
-  "_comment": "Add a match object after each match. 'scores' must be in finishing order — the leaderboard awards 20 points for a win and one less for each place below.",
+  "_comment": "Add a match object after each match. Scores must be in finishing order. Points: 20 for a win, one fewer per place, min 1. Optional fields (id, discipline, weather, slug, sights, hidden, notes) are Phase 1 extensions — missing ones must not break the page.",
   "matches": [
     {
+      "id": "2026-07-04-rimfire",
       "season": "2026",
       "date": "2026-07-04",
+      "discipline": "rimfire",
       "name": "Rimfire match — July",
+      "weather": "rain",
       "shooters": 14,
       "scores": [
-        { "shooter": "Example, A.", "score": 87 },
-        { "shooter": "Example, B.", "score": 81 },
-        { "shooter": "Example, C.", "score": 74 }
+        { "shooter": "Example, A.", "slug": "example-a", "score": 87, "sights": "iron", "hidden": false, "notes": "clean on rams", "longestHitYd": 100 },
+        { "shooter": "Example, B.", "slug": "example-b", "score": 81, "sights": "optic", "hidden": false },
+        { "shooter": "Example, C.", "slug": "example-c", "score": 74, "sights": "iron", "hidden": false },
+        { "shooter": "Example, D.", "slug": "example-d", "score": 70, "sights": "optic", "hidden": false },
+        { "shooter": "Example, E.", "slug": "example-e", "score": 65, "sights": "iron", "hidden": false }
       ]
     },
     {
+      "id": "2026-06-06-rimfire",
       "season": "2026",
       "date": "2026-06-06",
+      "discipline": "rimfire",
       "name": "Rimfire match — June",
+      "weather": "overcast",
       "shooters": 11,
       "scores": [
-        { "shooter": "Example, B.", "score": 79 },
-        { "shooter": "Example, A.", "score": 76 },
-        { "shooter": "Example, D.", "score": 70 }
+        { "shooter": "Example, B.", "slug": "example-b", "score": 79, "sights": "optic", "hidden": false },
+        { "shooter": "Example, A.", "slug": "example-a", "score": 76, "sights": "iron", "hidden": false },
+        { "shooter": "Example, D.", "slug": "example-d", "score": 70, "sights": "optic", "hidden": false },
+        { "shooter": "Example, C.", "slug": "example-c", "score": 68, "sights": "iron", "hidden": false }
+      ]
+    },
+    {
+      "id": "2026-01-03-rimfire",
+      "season": "2026",
+      "date": "2026-01-03",
+      "discipline": "rimfire",
+      "name": "Rimfire match — January",
+      "weather": "rain",
+      "shooters": 8,
+      "scores": [
+        { "shooter": "Example, A.", "slug": "example-a", "score": 72, "sights": "iron", "hidden": false, "longestHitYd": 100 },
+        { "shooter": "Example, E.", "slug": "example-e", "score": 66, "sights": "iron", "hidden": false },
+        { "shooter": "Example, B.", "slug": "example-b", "score": 61, "sights": "optic", "hidden": false }
+      ]
+    },
+    {
+      "id": "2025-12-06-rimfire",
+      "season": "2025",
+      "date": "2025-12-06",
+      "discipline": "rimfire",
+      "name": "Rimfire match — December",
+      "weather": "rain",
+      "shooters": 9,
+      "scores": [
+        { "shooter": "Example, C.", "slug": "example-c", "score": 80, "sights": "iron", "hidden": false, "notes": "clean on rams" },
+        { "shooter": "Example, A.", "slug": "example-a", "score": 77, "sights": "iron", "hidden": false },
+        { "shooter": "Example, D.", "slug": "example-d", "score": 71, "sights": "optic", "hidden": false }
+      ]
+    },
+    {
+      "id": "2025-11-01-rimfire",
+      "season": "2025",
+      "date": "2025-11-01",
+      "discipline": "rimfire",
+      "name": "Rimfire match — November",
+      "weather": "clear",
+      "shooters": 10,
+      "scores": [
+        { "shooter": "Example, B.", "slug": "example-b", "score": 84, "sights": "optic", "hidden": false },
+        { "shooter": "Example, A.", "slug": "example-a", "score": 82, "sights": "iron", "hidden": false },
+        { "shooter": "Example, E.", "slug": "example-e", "score": 69, "sights": "iron", "hidden": false }
+      ]
+    },
+    {
+      "id": "2025-10-04-rimfire",
+      "season": "2025",
+      "date": "2025-10-04",
+      "discipline": "rimfire",
+      "name": "Rimfire match — October",
+      "weather": "overcast",
+      "shooters": 12,
+      "scores": [
+        { "shooter": "Example, A.", "slug": "example-a", "score": 88, "sights": "iron", "hidden": false, "notes": "clean on rams", "longestHitYd": 100 },
+        { "shooter": "Example, C.", "slug": "example-c", "score": 75, "sights": "iron", "hidden": false },
+        { "shooter": "Example, B.", "slug": "example-b", "score": 73, "sights": "optic", "hidden": false },
+        { "shooter": "Example, D.", "slug": "example-d", "score": 68, "sights": "optic", "hidden": false },
+        { "shooter": "Example, E.", "slug": "example-e", "score": 60, "sights": "iron", "hidden": false }
+      ]
+    },
+    {
+      "id": "2025-09-06-rimfire",
+      "season": "2025",
+      "date": "2025-09-06",
+      "discipline": "rimfire",
+      "name": "Rimfire match — September",
+      "weather": "clear",
+      "shooters": 13,
+      "scores": [
+        { "shooter": "Example, D.", "slug": "example-d", "score": 85, "sights": "optic", "hidden": false },
+        { "shooter": "Example, B.", "slug": "example-b", "score": 78, "sights": "optic", "hidden": false },
+        { "shooter": "Example, A.", "slug": "example-a", "score": 74, "sights": "iron", "hidden": false },
+        { "shooter": "Example, C.", "slug": "example-c", "score": 70, "sights": "iron", "hidden": false }
       ]
     }
   ]

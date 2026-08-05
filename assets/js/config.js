@@ -2,6 +2,7 @@
    KRGC — SITE CONFIG
    This is the only file the club needs to edit for normal changes.
    Everything marked TODO must be filled in before launch.
+   Add new keys; never rename or remove existing ones.
    ============================================================= */
 
 window.KRGC = {
@@ -90,5 +91,35 @@ window.KRGC = {
   /* ---------- analytics ----------
      Plausible is privacy-friendly and needs no cookie banner.
      Leave empty to run with no analytics at all.              */
-  plausibleDomain: ""                             // TODO e.g. "ketchikanrodandgun.org"
+  plausibleDomain: "",                            // TODO e.g. "ketchikanrodandgun.org"
+
+  /* ---------- standings / Rimfire Cup ----------
+     How shooter names appear on public standings pages.
+     "full" | "last-initial" | "opt-in"
+     Default last-initial. Set hidden:true on a score entry
+     to list that shooter as Anonymous.                        */
+  standings: {
+    nameFormat: "last-initial",
+    dropWorst: 2,
+    winPoints: 20
+  },
+
+  /* ---------- ballistics defaults (Ketchikan) ----------
+     Station defaults for the come-up card. Marked as defaults
+     in the UI — shooters should override for their day.       */
+  ballistics: {
+    temperatureF: 50,
+    pressureInHg: 29.9,
+    altitudeFt: 0,
+    sightHeightIn: 1.5,
+    zeroYd: 50
+  },
+
+  /* ---------- Phase 2 placeholders (unused in Phase 1) ----------
+     Added so keys exist before the server-backed season.
+     Both remain .tk in the UI until the board sets them.      */
+  hours: {
+    creditPerHour: null,                          // TODO board sets $
+    maxCredit: null                               // TODO board sets $
+  }
 };

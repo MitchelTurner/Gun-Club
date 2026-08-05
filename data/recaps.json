@@ -1,0 +1,21 @@
+{
+  "_comment": "Match recaps. Add a block after each match — date, title, 2–4 sentences, optional photos[], matchId linking to results.json. Newest first.",
+  "recaps": [
+    {
+      "id": "2026-07-04-rimfire",
+      "date": "2026-07-04",
+      "title": "Rimfire match — July",
+      "matchId": "2026-07-04-rimfire",
+      "body": "Fourteen shooters, wet decking, and a clean win for Example, A. Loaner rifles went out to three first-timers. Sample recap — replace with the real write-up after the next match.",
+      "photos": []
+    },
+    {
+      "id": "2026-06-06-rimfire",
+      "date": "2026-06-06",
+      "title": "Rimfire match — June",
+      "matchId": "2026-06-06-rimfire",
+      "body": "Eleven on the line for the June rimfire. Example, B. took it with a 79. Sample recap — delete or rewrite when real notes land.",
+      "photos": []
+    }
+  ]
+}

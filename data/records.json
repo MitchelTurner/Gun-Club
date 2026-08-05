@@ -1,0 +1,54 @@
+{
+  "_comment": "Club records board. Confirm every entry before removing .tk marks in the UI. Values here are placeholders until officers verify.",
+  "season": "2026",
+  "records": [
+    {
+      "id": "longest-hit",
+      "label": "Longest confirmed hit",
+      "value": "—",
+      "holder": "—",
+      "detail": "Confirm distance, cartridge, and witness before posting.",
+      "confirmed": false
+    },
+    {
+      "id": "best-rimfire",
+      "label": "Best rimfire match score",
+      "value": "87",
+      "holder": "Example, A.",
+      "detail": "Rimfire match — July 2026 (sample data)",
+      "confirmed": false
+    },
+    {
+      "id": "work-party",
+      "label": "Most work-party hours",
+      "value": "—",
+      "holder": "—",
+      "detail": "Tracked in Phase 2; leave blank until then.",
+      "confirmed": false
+    },
+    {
+      "id": "oldest-match",
+      "label": "Oldest to shoot a match",
+      "value": "—",
+      "holder": "—",
+      "detail": "Confirm with the shooter before listing.",
+      "confirmed": false
+    },
+    {
+      "id": "youngest-match",
+      "label": "Youngest to shoot a match",
+      "value": "—",
+      "holder": "—",
+      "detail": "Confirm with a parent/guardian before listing.",
+      "confirmed": false
+    },
+    {
+      "id": "rain-total",
+      "label": "Season rain total",
+      "value": "— in",
+      "holder": "Ketchikan",
+      "detail": "Inches at the airport for the match season — update when known.",
+      "confirmed": false
+    }
+  ]
+}

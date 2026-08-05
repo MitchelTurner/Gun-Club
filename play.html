@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Train &amp; play — Ketchikan Rod &amp; Gun Club</title>
+<meta name="description" content="Wind-call trainer and silhouette knockdown simulation — practice between range trips.">
+<meta name="theme-color" content="#0E1714">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/img/icons/apple-touch-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=DM+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="head">
+  <a class="mark" href="index.html">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="4.5" fill="#FF6A2B"/>
+      <path d="M20 2v6M20 32v6M2 20h6M32 20h6" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span><b>Ketchikan Rod &amp; Gun</b><i>Mile 11 &middot; N Tongass Hwy</i></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#events">Matches</a>
+    <a href="visitors.html">Visiting</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-sm head-cta" href="index.html#membership">Join the club</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-top"><button class="close" id="drawerClose" aria-label="Close menu">&times;</button></div>
+  <nav>
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#safety">Safety</a>
+    <a href="index.html#events">Matches</a>
+    <a href="range-card.html">Come-up card</a>
+    <a href="targets.html">Printable targets</a>
+    <a href="play.html">Train &amp; play</a>
+    <a href="standings.html">Rimfire Cup</a>
+    <a href="recaps.html">Match recaps</a>
+    <a href="waiver.html">Waiver</a>
+    <a href="visitors.html">Visiting shooters</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-block" href="index.html#membership">Join the club</a>
+</div>
+
+<main id="main">
+  <section class="pagehead">
+    <div class="wrap narrow">
+      <p class="eyebrow">Between range trips</p>
+      <h1>Train &amp; play</h1>
+      <p class="lede">Practice wind calls and silhouette transitions on your phone. Nothing here replaces live fire or coaching on the line.</p>
+      <p class="sim-label">This is a simulation</p>
+    </div>
+  </section>
+
+  <section class="section plain">
+    <div class="wrap">
+      <div class="tabs" role="tablist" aria-label="Training games">
+        <button class="tier" role="tab" aria-selected="true" aria-controls="windPanel" id="windTab">Wind-call trainer</button>
+        <button class="tier" role="tab" aria-selected="false" aria-controls="silPanel" id="silTab">Silhouette knockdown</button>
+      </div>
+
+      <div class="panel-stack" id="windPanel" data-active="true" role="tabpanel" aria-labelledby="windTab">
+        <div class="game-stage" id="windStage">
+          <p class="eyebrow">Scenario</p>
+          <p style="font-family:var(--display);font-size:2rem;text-transform:uppercase;margin-bottom:1rem"><span id="windDistance">—</span></p>
+          <div id="windFlag" style="margin-bottom:1rem;color:var(--fog)"></div>
+          <p id="windMirage" class="muted" style="margin-bottom:1rem">Mirage: —</p>
+          <div class="form-grid cols-2" style="max-width:420px">
+            <div class="field">
+              <label for="windHold">Your hold (windage)</label>
+              <input id="windHold" type="number" step="0.1" inputmode="decimal" placeholder="0.0">
+            </div>
+            <div class="field">
+              <label for="windUnitToggle">Units</label>
+              <button class="btn btn-ghost btn-block" type="button" id="windUnitToggle" aria-label="Toggle MOA or mils">MOA</button>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="button" id="windSubmit">Submit hold</button>
+          <p class="muted" style="margin-top:1rem">Streak: <strong id="windStreak">0</strong> · 10-round sessions</p>
+          <div id="windImpact" style="margin-top:1rem"></div>
+          <div id="windResults" style="margin-top:1rem"></div>
+        </div>
+        <p class="kbd-hint">Enter — submit hold · truth from the come-up card solver</p>
+      </div>
+
+      <div class="panel-stack" id="silPanel" data-active="false" role="tabpanel" aria-labelledby="silTab">
+        <div class="game-stage" id="silStage"></div>
+        <div class="pillrow" style="margin-top:1rem">
+          <button class="btn btn-primary" type="button" id="silStart">Start run</button>
+          <button class="btn btn-ghost" type="button" id="silSound" aria-pressed="false">Sound off</button>
+        </div>
+        <p class="muted" style="margin-top:1rem">Score: <strong id="silScore">0</strong> · Time: <strong id="silTimer">0.0</strong> s · Best: <strong id="silPB">—</strong></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div>
+    <h4>Ketchikan Rod &amp; Gun Club</h4>
+    <p class="muted" style="max-width:34ch;font-size:.9rem">North Tongass Highway, Ketchikan, Alaska. Open to the public, run by its members.</p>
+    <p class="fine">Flag up means the line is hot</p>
+  </div>
+  <div>
+    <h4>Shooting</h4>
+    <ul>
+      <li><a href="first-visit.html">Your first visit</a></li>
+      <li><a href="index.html#range">The range</a></li>
+      <li><a href="index.html#safety">Range rules</a></li>
+      <li><a href="range-card.html">Come-up card</a></li>
+      <li><a href="targets.html">Printable targets</a></li>
+      <li><a href="play.html">Train &amp; play</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Club</h4>
+    <ul>
+      <li><a href="standings.html">Rimfire Cup</a></li>
+      <li><a href="recaps.html">Match recaps</a></li>
+      <li><a href="members.html">Members area</a></li>
+      <li><a href="tel:+19072478400">(907) 247-8400</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/ballistics.js"></script>
+<script src="assets/js/games.js"></script>
+<script src="assets/js/pwa.js"></script>
+</body>
+</html>

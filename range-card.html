@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Come-up card — Ketchikan Rod &amp; Gun Club</title>
+<meta name="description" content="Build a printable come-up card for rifle shooting at the Ketchikan Rod & Gun Club.">
+<meta name="theme-color" content="#0E1714">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/img/icons/apple-touch-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=DM+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/print.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="head">
+  <a class="mark" href="index.html">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="4.5" fill="#FF6A2B"/>
+      <path d="M20 2v6M20 32v6M2 20h6M32 20h6" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span><b>Ketchikan Rod &amp; Gun</b><i>Mile 11 &middot; N Tongass Hwy</i></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#events">Matches</a>
+    <a href="visitors.html">Visiting</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-sm head-cta" href="index.html#membership">Join the club</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-top"><button class="close" id="drawerClose" aria-label="Close menu">&times;</button></div>
+  <nav>
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#safety">Safety</a>
+    <a href="index.html#events">Matches</a>
+    <a href="range-card.html">Come-up card</a>
+    <a href="targets.html">Printable targets</a>
+    <a href="play.html">Train &amp; play</a>
+    <a href="standings.html">Rimfire Cup</a>
+    <a href="recaps.html">Match recaps</a>
+    <a href="waiver.html">Waiver</a>
+    <a href="visitors.html">Visiting shooters</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-block" href="index.html#membership">Join the club</a>
+</div>
+
+<main id="main">
+  <section class="pagehead">
+    <div class="wrap narrow">
+      <p class="eyebrow">Rifle line</p>
+      <h1>Come-up card</h1>
+      <p class="lede">Build a drop chart for your load. Save profiles on this device, print a wallet card, and verify every solution on paper before you shoot.</p>
+    </div>
+  </section>
+
+  <section class="section plain">
+    <div class="wrap">
+      <div class="safety-note" role="note">
+        <b>Safety — read this</b>
+        <p>Computed solutions are <strong>starting points only</strong>. You must confirm every come-up on paper at the range before you send a round. If any input is wrong — velocity, BC, sight height, zero, weather — this card is invalid. The club is not responsible for shots fired on bad data.</p>
+      </div>
+
+      <div class="panel rise">
+        <div class="panel-form">
+          <h3 style="margin-bottom:1rem">Load &amp; rifle</h3>
+          <div class="form-grid cols-2">
+            <div class="field">
+              <label for="preset">Preset</label>
+              <select id="preset">
+                <option value="22lr-std">.22 LR — high velocity</option>
+                <option value="22lr-match">.22 LR — match</option>
+                <option value="223-55">.223 Rem 55 gr</option>
+                <option value="308-168">.308 Win 168 gr</option>
+                <option value="3006-180">.30-06 180 gr</option>
+                <option value="65cm-140">6.5 Creedmoor 140 gr</option>
+                <option value="custom">Custom</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="dragModel">Drag model</label>
+              <select id="dragModel">
+                <option value="G1">G1</option>
+                <option value="G7">G7</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bulletGr">Bullet weight (gr)</label>
+              <input id="bulletGr" type="number" min="20" max="750" step="1" value="168">
+            </div>
+            <div class="field">
+              <label for="bc">Ballistic coefficient</label>
+              <input id="bc" type="number" min="0.05" max="1" step="0.001" value="0.470">
+            </div>
+            <div class="field">
+              <label for="mvFps">Muzzle velocity (fps) <span class="tk">nominal</span></label>
+              <input id="mvFps" type="number" min="500" max="4000" step="1" value="2650">
+              <p class="form-note" id="mvNote">Preset velocities are nominal — <span class="tk">they vary by barrel</span>. Chronograph yours.</p>
+            </div>
+            <div class="field">
+              <label for="sightHeightIn">Sight height (in)</label>
+              <input id="sightHeightIn" type="number" min="0.5" max="4" step="0.05" value="1.5">
+            </div>
+            <div class="field">
+              <label for="zeroYd">Zero distance (yd)</label>
+              <input id="zeroYd" type="number" min="25" max="300" step="5" value="50">
+            </div>
+          </div>
+
+          <h3 style="margin:1.5rem 0 1rem">Atmosphere <span class="muted" style="font-size:.85rem;font-weight:400">— Ketchikan defaults</span></h3>
+          <div class="form-grid cols-3">
+            <div class="field">
+              <label for="tempF">Temperature (°F)</label>
+              <input id="tempF" type="number" min="-20" max="100" step="1" value="50">
+            </div>
+            <div class="field">
+              <label for="pressureInHg">Pressure (inHg)</label>
+              <input id="pressureInHg" type="number" min="25" max="31" step="0.01" value="29.9">
+            </div>
+            <div class="field">
+              <label for="altitudeFt">Altitude (ft)</label>
+              <input id="altitudeFt" type="number" min="0" max="12000" step="10" value="0">
+            </div>
+          </div>
+
+          <div class="pillrow no-print" style="margin-top:1.25rem">
+            <button class="btn btn-primary" type="button" id="computeBtn">Compute</button>
+            <button class="btn btn-ghost" type="button" id="printCardBtn">Print card</button>
+          </div>
+        </div>
+
+        <div class="panel-left">
+          <h3>Saved profiles</h3>
+          <div class="field">
+            <label for="profileName">Profile name</label>
+            <input id="profileName" type="text" placeholder="e.g. 308 match load">
+          </div>
+          <div class="pillrow">
+            <button class="btn btn-ghost btn-sm" type="button" id="saveProfileBtn">Save profile</button>
+            <button class="btn btn-ghost btn-sm" type="button" id="exportBtn">Export</button>
+            <label class="btn btn-ghost btn-sm" for="importFile">Import<input id="importFile" type="file" accept="application/json,.json" hidden></label>
+          </div>
+          <ul class="dope-list" id="dopeList"></ul>
+        </div>
+      </div>
+
+      <div class="section" style="padding-left:0;padding-right:0">
+        <div class="section-head">
+          <h2>Solution</h2>
+        </div>
+        <div class="tablewrap" id="dopeTable"></div>
+        <div class="chart-wrap no-print">
+          <canvas id="trajChart" width="600" height="220" aria-label="Trajectory chart"></canvas>
+        </div>
+        <div class="wallet-card" id="walletCard" hidden></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div>
+    <h4>Ketchikan Rod &amp; Gun Club</h4>
+    <p class="muted" style="max-width:34ch;font-size:.9rem">North Tongass Highway, Ketchikan, Alaska. Open to the public, run by its members.</p>
+    <p class="fine">Flag up means the line is hot</p>
+  </div>
+  <div>
+    <h4>Shooting</h4>
+    <ul>
+      <li><a href="first-visit.html">Your first visit</a></li>
+      <li><a href="index.html#range">The range</a></li>
+      <li><a href="index.html#safety">Range rules</a></li>
+      <li><a href="range-card.html">Come-up card</a></li>
+      <li><a href="targets.html">Printable targets</a></li>
+      <li><a href="play.html">Train &amp; play</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Club</h4>
+    <ul>
+      <li><a href="standings.html">Rimfire Cup</a></li>
+      <li><a href="recaps.html">Match recaps</a></li>
+      <li><a href="members.html">Members area</a></li>
+      <li><a href="tel:+19072478400">(907) 247-8400</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/ballistics.js"></script>
+<script src="assets/js/pwa.js"></script>
+</body>
+</html>
