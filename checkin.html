@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gate check-in — Ketchikan Rod &amp; Gun Club</title>
+<meta name="description" content="Check in at the Ketchikan Rod &amp; Gun Club gate. Records purge after 90 days; the public site shows a count only.">
+<meta name="theme-color" content="#0E1714">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/img/icons/apple-touch-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=DM+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="head">
+  <a class="mark" href="index.html">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="4.5" fill="#FF6A2B"/>
+      <path d="M20 2v6M20 32v6M2 20h6M32 20h6" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span><b>Ketchikan Rod &amp; Gun</b><i>Mile 11 &middot; N Tongass Hwy</i></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#events">Matches</a>
+    <a href="visitors.html">Visiting</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-sm head-cta" href="index.html#membership">Join the club</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-top"><button class="close" id="drawerClose" aria-label="Close menu">&times;</button></div>
+  <nav>
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#safety">Safety</a>
+    <a href="index.html#events">Matches</a>
+    <a href="range-card.html">Come-up card</a>
+    <a href="targets.html">Printable targets</a>
+    <a href="play.html">Train &amp; play</a>
+    <a href="standings.html">Rimfire Cup</a>
+    <a href="recaps.html">Match recaps</a>
+    <a href="waiver.html">Waiver</a>
+    <a href="visitors.html">Visiting shooters</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-block" href="index.html#membership">Join the club</a>
+</div>
+
+<main id="main">
+  <section class="pagehead">
+    <div class="wrap narrow">
+      <p class="eyebrow">At the gate</p>
+      <h1>Gate check-in</h1>
+      <p class="lede">Tap once when you arrive. Tap again when you leave. Cell service is spotty out here — load this page before you lose signal.</p>
+    </div>
+  </section>
+
+  <section class="section plain">
+    <div class="wrap narrow">
+      <div class="safety-note" id="privacyNote">
+        <b>Privacy</b>
+        <p>Check-in records purge after 90 days. Public site shows a count only — never names.</p>
+      </div>
+
+      <div id="signedOut">
+        <p class="muted" style="margin-bottom:1.25rem">Sign in with the email on your roster. No account? Use the season passcode an officer gave you.</p>
+        <div class="panel rise">
+          <div class="panel-form">
+            <h3 style="margin-bottom:1rem">Magic link</h3>
+            <div class="field">
+              <label for="emailIn">Email</label>
+              <input id="emailIn" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com">
+            </div>
+            <div id="turnstile"></div>
+            <button class="btn btn-primary btn-block" id="magicBtn" type="button" style="margin-top:1rem">Send sign-in link</button>
+            <div class="alert" id="magicAlert"></div>
+
+            <hr style="border:0;border-top:1px solid var(--line);margin:2rem 0">
+
+            <h3 style="margin-bottom:1rem">Passcode fallback</h3>
+            <p class="muted" style="font-size:.9rem;margin-bottom:1rem">One shared code for the season. Officers rotate it with the gate code.</p>
+            <div class="field">
+              <label for="passIn">Passcode</label>
+              <input id="passIn" type="password" autocomplete="off">
+            </div>
+            <button class="btn btn-ghost btn-block" id="passBtn" type="button">Sign in with passcode</button>
+            <div class="alert" id="passAlert"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="signedIn" hidden>
+        <div class="panel rise" style="margin-bottom:1.5rem">
+          <div class="panel-left" style="border:0">
+            <p class="eyebrow">Signed in</p>
+            <p id="memberName" style="font-family:var(--display);font-size:1.8rem;text-transform:uppercase;margin:0 0 .5rem"></p>
+            <p class="muted" id="memberMeta" style="margin:0"></p>
+            <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button" style="margin-top:1rem">Sign out</button>
+          </div>
+        </div>
+
+        <p id="statusHost" class="muted" style="margin-bottom:1rem"></p>
+
+        <button class="btn btn-primary btn-block" id="toggleBtn" type="button" style="min-height:52px;font-size:1.15rem">Check in</button>
+        <div class="alert" id="checkAlert"></div>
+
+        <div id="onRangeBlock" hidden style="margin-top:2.5rem">
+          <h2 style="margin-bottom:.75rem">On the range</h2>
+          <ul class="offline-list" id="onRangeList"></ul>
+        </div>
+
+        <div id="officerBlock" hidden style="margin-top:2rem">
+          <button class="btn btn-ghost btn-block" id="csvBtn" type="button">Download CSV (this month)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div>
+    <h4>Ketchikan Rod &amp; Gun Club</h4>
+    <p class="muted" style="max-width:34ch;font-size:.9rem">North Tongass Highway, Ketchikan, Alaska. Open to the public, run by its members.</p>
+    <p class="fine">Flag up means the line is hot</p>
+  </div>
+  <div>
+    <h4>Shooting</h4>
+    <ul>
+      <li><a href="first-visit.html">Your first visit</a></li>
+      <li><a href="index.html#range">The range</a></li>
+      <li><a href="index.html#safety">Range rules</a></li>
+      <li><a href="range-card.html">Come-up card</a></li>
+      <li><a href="targets.html">Printable targets</a></li>
+      <li><a href="play.html">Train &amp; play</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Club</h4>
+    <ul>
+      <li><a href="standings.html">Rimfire Cup</a></li>
+      <li><a href="recaps.html">Match recaps</a></li>
+      <li><a href="members.html">Members area</a></li>
+      <li><a href="tel:+19072478400">(907) 247-8400</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var API = window.KRGC_API;
+  var params = new URLSearchParams(location.search);
+  var loc = params.get("loc") || "gate";
+  var member = null;
+  var checkedIn = false;
+  var monthlyCsv = "";
+
+  var signedOut = document.getElementById("signedOut");
+  var signedIn = document.getElementById("signedIn");
+  var statusHost = document.getElementById("statusHost");
+  var toggleBtn = document.getElementById("toggleBtn");
+  var onRangeBlock = document.getElementById("onRangeBlock");
+  var onRangeList = document.getElementById("onRangeList");
+  var officerBlock = document.getElementById("officerBlock");
+  var turnstileToken = "";
+
+  function alert(el, msg, ok){
+    if(!el) return;
+    el.textContent = msg || "";
+    el.dataset.show = msg ? "true" : "false";
+    el.classList.toggle("ok", !!ok);
+    el.classList.toggle("bad", !!msg && !ok);
+  }
+
+  function fmtTime(iso){
+    if(!iso) return "";
+    try{
+      return new Date(iso).toLocaleString("en-US", {
+        month:"short", day:"numeric", hour:"numeric", minute:"2-digit"
+      });
+    } catch(e){ return iso; }
+  }
+
+  function showSignedIn(){
+    signedOut.hidden = true;
+    signedIn.hidden = false;
+    document.getElementById("memberName").textContent = member.name || "Member";
+    document.getElementById("memberMeta").textContent = member.email + " · " + (member.role || "member");
+    officerBlock.hidden = member.role !== "officer";
+  }
+
+  function showSignedOut(){
+    signedOut.hidden = false;
+    signedIn.hidden = true;
+    member = null;
+    checkedIn = false;
+    monthlyCsv = "";
+  }
+
+  function renderStatus(data){
+    checkedIn = !!data.checkedIn;
+    toggleBtn.textContent = checkedIn ? "Check out" : "Check in";
+    toggleBtn.classList.toggle("btn-primary", !checkedIn);
+    toggleBtn.classList.toggle("btn-ghost", checkedIn);
+
+    if(checkedIn && data.checkin){
+      statusHost.textContent = "Checked in since " + fmtTime(data.checkin.checked_in_at) +
+        (data.checkin.location ? " at " + data.checkin.location : "") + ".";
+    } else {
+      statusHost.textContent = "You are not checked in.";
+    }
+
+    if(data.onRange && data.onRange.length){
+      onRangeBlock.hidden = false;
+      onRangeList.innerHTML = data.onRange.map(function(r){
+        return "<li><span>" + fmtTime(r.checked_in_at) + "</span><strong>" +
+          escapeHtml(r.name) + "</strong></li>";
+      }).join("");
+    } else if(member && (member.role === "member" || member.role === "ro" || member.role === "officer")){
+      onRangeBlock.hidden = false;
+      onRangeList.innerHTML = "<li><span>—</span><span class=\"muted\">Nobody checked in right now.</span></li>";
+    } else {
+      onRangeBlock.hidden = true;
+    }
+
+    if(data.monthlyCsv) monthlyCsv = data.monthlyCsv;
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  function refreshCheckin(){
+    return API.api("/api/checkin").then(function(data){
+      renderStatus(data);
+    }).catch(function(err){
+      alert(document.getElementById("checkAlert"), err.message || "Could not load check-in status.", false);
+    });
+  }
+
+  function loadMe(){
+    return API.api("/api/auth").then(function(data){
+      if(data.member){
+        member = data.member;
+        showSignedIn();
+        return refreshCheckin();
+      }
+      showSignedOut();
+    }).catch(function(){
+      showSignedOut();
+    });
+  }
+
+  function initTurnstile(){
+    var key = API.turnstileSiteKey();
+    if(!key) return;
+    var s = document.createElement("script");
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+    s.async = true;
+    s.onload = function(){
+      if(!window.turnstile) return;
+      window.turnstile.render("#turnstile", {
+        sitekey: key,
+        callback: function(token){ turnstileToken = token; },
+        "expired-callback": function(){ turnstileToken = ""; }
+      });
+    };
+    document.head.appendChild(s);
+  }
+
+  function getTs(){
+    return turnstileToken || undefined;
+  }
+
+  document.getElementById("magicBtn").addEventListener("click", function(){
+    var email = document.getElementById("emailIn").value.trim();
+    alert(document.getElementById("magicAlert"), "", false);
+    if(!email){ alert(document.getElementById("magicAlert"), "Enter your roster email.", false); return; }
+    API.api("/api/auth", { method:"POST", body:{
+      action:"request", email:email, turnstileToken:getTs()
+    }}).then(function(res){
+      var msg = res.message || "Link sent if that email is on the roster.";
+      if(res.devLink) msg += " Dev: " + res.devLink;
+      alert(document.getElementById("magicAlert"), msg, true);
+    }).catch(function(err){
+      alert(document.getElementById("magicAlert"), err.message || "Request failed.", false);
+    });
+  });
+
+  document.getElementById("passBtn").addEventListener("click", function(){
+    var pass = document.getElementById("passIn").value;
+    alert(document.getElementById("passAlert"), "", false);
+    API.api("/api/auth", { method:"POST", body:{
+      action:"passcode", passcode:pass, turnstileToken:getTs()
+    }}).then(function(res){
+      member = res.member;
+      showSignedIn();
+      refreshCheckin();
+      alert(document.getElementById("passAlert"), "Signed in.", true);
+    }).catch(function(err){
+      alert(document.getElementById("passAlert"), err.message || "Wrong passcode.", false);
+    });
+  });
+
+  document.getElementById("logoutBtn").addEventListener("click", function(){
+    API.api("/api/auth", { method:"POST", body:{ action:"logout" } })
+      .finally(function(){ showSignedOut(); });
+  });
+
+  toggleBtn.addEventListener("click", function(){
+    alert(document.getElementById("checkAlert"), "", false);
+    toggleBtn.disabled = true;
+    var action = checkedIn ? "checkout" : "checkin";
+    API.api("/api/checkin", { method:"POST", body:{ location:loc, action:action } })
+      .then(function(data){
+        renderStatus(data);
+        alert(document.getElementById("checkAlert"),
+          data.message || (checkedIn ? "Checked in." : "Checked out."), true);
+      })
+      .catch(function(err){
+        alert(document.getElementById("checkAlert"), err.message || "Check-in failed.", false);
+      })
+      .finally(function(){ toggleBtn.disabled = false; });
+  });
+
+  document.getElementById("csvBtn").addEventListener("click", function(){
+    if(!monthlyCsv){
+      refreshCheckin().then(function(){
+        if(monthlyCsv) downloadCsv();
+        else alert(document.getElementById("checkAlert"), "No records for this month.", false);
+      });
+      return;
+    }
+    downloadCsv();
+  });
+
+  function downloadCsv(){
+    var blob = new Blob([monthlyCsv], { type:"text/csv" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "krgc-checkins-" + new Date().toISOString().slice(0,7) + ".csv";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  var magic = params.get("magic");
+  if(magic){
+    API.api("/api/auth", { method:"POST", body:{ action:"verify", token:magic } })
+      .then(function(res){
+        member = res.member;
+        showSignedIn();
+        refreshCheckin();
+        history.replaceState({}, "", location.pathname + (loc !== "gate" ? "?loc=" + encodeURIComponent(loc) : ""));
+      })
+      .catch(function(err){
+        alert(document.getElementById("magicAlert"), err.message || "Link expired or invalid.", false);
+      })
+      .finally(loadMe);
+  } else {
+    loadMe();
+  }
+
+  initTurnstile();
+})();
+</script>
+<script src="assets/js/pwa.js"></script>
+</body>
+</html>
