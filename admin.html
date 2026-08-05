@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Officer tools — Ketchikan Rod &amp; Gun Club</title>
+<meta name="description" content="Officer tools for the Ketchikan Rod &amp; Gun Club: range status, work-party hours, match setup, and closure alerts.">
+<meta name="theme-color" content="#0E1714">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/img/icons/apple-touch-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=DM+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="head">
+  <a class="mark" href="index.html">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="4.5" fill="#FF6A2B"/>
+      <path d="M20 2v6M20 32v6M2 20h6M32 20h6" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span><b>Ketchikan Rod &amp; Gun</b><i>Mile 11 &middot; N Tongass Hwy</i></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#events">Matches</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-sm head-cta" href="index.html#membership">Join the club</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-top"><button class="close" id="drawerClose" aria-label="Close menu">&times;</button></div>
+  <nav>
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#safety">Safety</a>
+    <a href="index.html#events">Matches</a>
+    <a href="range-card.html">Come-up card</a>
+    <a href="targets.html">Printable targets</a>
+    <a href="play.html">Train &amp; play</a>
+    <a href="standings.html">Rimfire Cup</a>
+    <a href="recaps.html">Match recaps</a>
+    <a href="waiver.html">Waiver</a>
+    <a href="visitors.html">Visiting shooters</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-block" href="index.html#membership">Join the club</a>
+</div>
+
+<main id="main">
+  <section class="pagehead">
+    <div class="wrap narrow">
+      <p class="eyebrow">Officers only</p>
+      <h1>Officer tools</h1>
+      <p class="lede">Range status, work-party hours, match setup, and closure alerts. Sign in with your officer email.</p>
+    </div>
+  </section>
+
+  <section class="section plain">
+    <div class="wrap narrow">
+
+      <div id="gatePanel">
+        <div class="panel rise">
+          <div class="panel-form">
+            <div class="field">
+              <label for="emailIn">Officer email</label>
+              <input id="emailIn" type="email" inputmode="email" autocomplete="email">
+            </div>
+            <button class="btn btn-primary btn-block" id="magicBtn" type="button">Send sign-in link</button>
+            <div class="alert" id="magicAlert"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="deniedPanel" hidden>
+        <div class="safety-note">
+          <b>Access</b>
+          <p>Officer role required. If you should have access, ask the board to update your roster role.</p>
+        </div>
+        <button class="btn btn-ghost" id="deniedLogout" type="button">Sign out</button>
+      </div>
+
+      <div id="adminPanel" hidden>
+
+        <p class="muted" style="margin-bottom:2rem">
+          Signed in as <span id="whoami"></span>.
+          <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button">Sign out</button>
+        </p>
+
+        <h2 style="margin-bottom:1rem">Range status</h2>
+        <p class="muted" style="margin-bottom:1.25rem">Updates the live banner on the home page and pings closure subscribers.</p>
+
+        <div class="toggle tiers" role="group" aria-label="Range open or closed">
+          <button class="tier" id="openYes" type="button" aria-selected="true">Open</button>
+          <button class="tier" id="openNo" type="button" aria-selected="false">Closed</button>
+        </div>
+
+        <div class="form-grid" style="margin-bottom:1rem">
+          <div class="field">
+            <label for="detailIn">Detail</label>
+            <input id="detailIn" type="text" placeholder="e.g. Pistol bays only">
+          </div>
+          <div class="field">
+            <label for="noticeIn">Notice</label>
+            <textarea id="noticeIn" placeholder="Short closure reason shown on the site"></textarea>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="saveStatusBtn" type="button">Save range status</button>
+        <div class="alert" id="statusAlert"></div>
+
+        <p class="muted" style="margin:1.25rem 0 .75rem;font-size:.88rem">Saved status (read-only):</p>
+        <pre class="codeblock" id="statusPreview">{}</pre>
+
+        <p class="muted" style="margin-top:1rem;font-size:.88rem">
+          If the API is down, copy this JSON into <code>data/status.json</code> and deploy — legacy fallback.
+        </p>
+
+        <hr style="border:0;border-top:1px solid var(--line);margin:2.5rem 0">
+
+        <h2 style="margin-bottom:1rem">Closure alerts</h2>
+        <p class="muted" style="margin-bottom:1rem">Send a test broadcast to everyone subscribed to closure alerts.</p>
+        <button class="btn btn-ghost" id="broadcastBtn" type="button">Test broadcast</button>
+        <div class="alert" id="broadcastAlert"></div>
+
+        <hr style="border:0;border-top:1px solid var(--line);margin:2.5rem 0">
+
+        <h2 style="margin-bottom:1rem">Log work-party hours</h2>
+        <form id="hoursForm" class="form-grid cols-2">
+          <div class="field">
+            <label for="hoursMember">Member ID</label>
+            <input id="hoursMember" type="text" required placeholder="m_abc123">
+          </div>
+          <div class="field">
+            <label for="hoursDate">Event date</label>
+            <input id="hoursDate" type="date" required>
+          </div>
+          <div class="field">
+            <label for="hoursAmt">Hours</label>
+            <input id="hoursAmt" type="number" step="0.25" min="0.25" required>
+          </div>
+          <div class="field">
+            <label for="hoursNote">Note</label>
+            <input id="hoursNote" type="text" placeholder="Trail work, berm repair…">
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <button class="btn btn-primary" type="submit">Log hours</button>
+          </div>
+        </form>
+        <div class="alert" id="hoursAlert"></div>
+        <p class="muted tk" style="font-size:.85rem;margin-top:.75rem">Member picker from roster — confirm before launch.</p>
+
+        <hr style="border:0;border-top:1px solid var(--line);margin:2.5rem 0">
+
+        <h2 style="margin-bottom:1rem">Create match</h2>
+        <form id="matchForm" class="form-grid cols-2">
+          <div class="field">
+            <label for="matchName">Name</label>
+            <input id="matchName" type="text" required placeholder="February rimfire">
+          </div>
+          <div class="field">
+            <label for="matchDate">Date</label>
+            <input id="matchDate" type="date" required>
+          </div>
+          <div class="field">
+            <label for="matchDisc">Discipline</label>
+            <select id="matchDisc">
+              <option value="rimfire">Rimfire</option>
+              <option value="pistol">Pistol</option>
+              <option value="rifle">Rifle</option>
+              <option value="trap">Trap</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="matchCap">Capacity</label>
+            <input id="matchCap" type="number" min="4" max="60" value="24">
+          </div>
+          <div class="field">
+            <label for="matchWeather">Weather <span class="muted">(optional)</span></label>
+            <input id="matchWeather" type="text" placeholder="Rain, 42°F">
+          </div>
+          <div class="field">
+            <label for="matchStatus">Status</label>
+            <select id="matchStatus">
+              <option value="open">Open signup</option>
+              <option value="live">Live</option>
+              <option value="draft">Draft</option>
+            </select>
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <button class="btn btn-primary" type="submit">Create match</button>
+          </div>
+        </form>
+        <div class="alert" id="matchAlert"></div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div>
+    <h4>Ketchikan Rod &amp; Gun Club</h4>
+    <p class="muted" style="max-width:34ch;font-size:.9rem">North Tongass Highway, Ketchikan, Alaska. Open to the public, run by its members.</p>
+    <p class="fine">Flag up means the line is hot</p>
+  </div>
+  <div>
+    <h4>Shooting</h4>
+    <ul>
+      <li><a href="first-visit.html">Your first visit</a></li>
+      <li><a href="index.html#range">The range</a></li>
+      <li><a href="index.html#safety">Range rules</a></li>
+      <li><a href="range-card.html">Come-up card</a></li>
+      <li><a href="targets.html">Printable targets</a></li>
+      <li><a href="play.html">Train &amp; play</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Club</h4>
+    <ul>
+      <li><a href="standings.html">Rimfire Cup</a></li>
+      <li><a href="recaps.html">Match recaps</a></li>
+      <li><a href="members.html">Members area</a></li>
+      <li><a href="tel:+19072478400">(907) 247-8400</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var API = window.KRGC_API;
+  var member = null;
+  var rangeOpen = true;
+
+  var gatePanel = document.getElementById("gatePanel");
+  var deniedPanel = document.getElementById("deniedPanel");
+  var adminPanel = document.getElementById("adminPanel");
+  var statusPreview = document.getElementById("statusPreview");
+  var openYes = document.getElementById("openYes");
+  var openNo = document.getElementById("openNo");
+
+  function alert(el, msg, ok){
+    if(!el) return;
+    el.textContent = msg || "";
+    el.dataset.show = msg ? "true" : "false";
+    el.classList.toggle("ok", !!ok);
+    el.classList.toggle("bad", !!msg && !ok);
+  }
+
+  function setOpen(val){
+    rangeOpen = !!val;
+    openYes.setAttribute("aria-selected", rangeOpen ? "true" : "false");
+    openNo.setAttribute("aria-selected", rangeOpen ? "false" : "true");
+  }
+
+  function previewStatus(obj){
+    statusPreview.textContent = JSON.stringify(obj, null, 2);
+  }
+
+  function isOfficer(m){
+    return m && m.role === "officer";
+  }
+
+  function showGate(){
+    gatePanel.hidden = false;
+    deniedPanel.hidden = true;
+    adminPanel.hidden = true;
+  }
+
+  function showDenied(){
+    gatePanel.hidden = true;
+    deniedPanel.hidden = false;
+    adminPanel.hidden = true;
+  }
+
+  function showAdmin(){
+    gatePanel.hidden = true;
+    deniedPanel.hidden = true;
+    adminPanel.hidden = false;
+    document.getElementById("whoami").textContent = member.name + " (officer)";
+    loadStatus();
+    var today = new Date().toISOString().slice(0, 10);
+    document.getElementById("hoursDate").value = today;
+    document.getElementById("matchDate").value = today;
+  }
+
+  function loadMe(){
+    return API.api("/api/auth").then(function(data){
+      member = data.member || null;
+      if(!member) return showGate();
+      if(!isOfficer(member)) return showDenied();
+      showAdmin();
+    }).catch(function(){ showGate(); });
+  }
+
+  function loadStatus(){
+    API.api("/api/status").then(function(data){
+      setOpen(data.open !== false && data.open !== 0);
+      document.getElementById("detailIn").value = data.detail || "";
+      document.getElementById("noticeIn").value = data.notice || "";
+      previewStatus({
+        open: rangeOpen,
+        detail: data.detail || "",
+        notice: data.notice || ""
+      });
+    }).catch(function(){
+      fetch("data/status.json").then(function(r){ return r.json(); }).then(function(data){
+        setOpen(data.open !== false);
+        document.getElementById("detailIn").value = data.detail || "";
+        document.getElementById("noticeIn").value = data.notice || "";
+        previewStatus(data);
+      }).catch(function(){
+        previewStatus({ open:true, detail:"", notice:"" });
+      });
+    });
+  }
+
+  openYes.addEventListener("click", function(){ setOpen(true); });
+  openNo.addEventListener("click", function(){ setOpen(false); });
+
+  document.getElementById("magicBtn").addEventListener("click", function(){
+    var email = document.getElementById("emailIn").value.trim();
+    alert(document.getElementById("magicAlert"), "", false);
+    if(!email){ alert(document.getElementById("magicAlert"), "Enter your email.", false); return; }
+    API.api("/api/auth", { method:"POST", body:{ action:"request", email:email } })
+      .then(function(res){
+        var msg = res.message || "Check your email.";
+        if(res.devLink) msg += " Dev: " + res.devLink;
+        alert(document.getElementById("magicAlert"), msg, true);
+      })
+      .catch(function(err){
+        alert(document.getElementById("magicAlert"), err.message || "Failed.", false);
+      });
+  });
+
+  function logout(){
+    API.api("/api/auth", { method:"POST", body:{ action:"logout" } }).finally(function(){
+      member = null;
+      showGate();
+    });
+  }
+  document.getElementById("logoutBtn").addEventListener("click", logout);
+  document.getElementById("deniedLogout").addEventListener("click", logout);
+
+  document.getElementById("saveStatusBtn").addEventListener("click", function(){
+    var body = {
+      action: "status",
+      open: rangeOpen,
+      detail: document.getElementById("detailIn").value.trim(),
+      notice: document.getElementById("noticeIn").value.trim()
+    };
+    alert(document.getElementById("statusAlert"), "", false);
+    API.api("/api/alerts", { method:"POST", body:body })
+      .then(function(res){
+        var saved = res.status || body;
+        previewStatus({
+          open: saved.open !== false,
+          detail: saved.detail || "",
+          notice: saved.notice || ""
+        });
+        alert(document.getElementById("statusAlert"), "Range status saved.", true);
+      })
+      .catch(function(err){
+        previewStatus({
+          open: body.open,
+          detail: body.detail,
+          notice: body.notice
+        });
+        alert(document.getElementById("statusAlert"),
+          (err.message || "API unavailable.") + " Copy the JSON below into data/status.json.", false);
+      });
+  });
+
+  document.getElementById("broadcastBtn").addEventListener("click", function(){
+    alert(document.getElementById("broadcastAlert"), "", false);
+    API.api("/api/alerts", { method:"POST", body:{ action:"broadcast" } })
+      .then(function(res){
+        var n = res.results ? res.results.length : 0;
+        alert(document.getElementById("broadcastAlert"), "Broadcast sent to " + n + " subscriber(s).", true);
+      })
+      .catch(function(err){
+        alert(document.getElementById("broadcastAlert"), err.message || "Broadcast failed.", false);
+      });
+  });
+
+  document.getElementById("hoursForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert(document.getElementById("hoursAlert"), "", false);
+    API.api("/api/hours", { method:"POST", body:{
+      memberId: document.getElementById("hoursMember").value.trim(),
+      eventDate: document.getElementById("hoursDate").value,
+      hours: Number(document.getElementById("hoursAmt").value),
+      note: document.getElementById("hoursNote").value.trim() || null
+    }}).then(function(){
+      alert(document.getElementById("hoursAlert"), "Hours logged.", true);
+      document.getElementById("hoursAmt").value = "";
+      document.getElementById("hoursNote").value = "";
+    }).catch(function(err){
+      alert(document.getElementById("hoursAlert"), err.message || "Could not log hours.", false);
+    });
+  });
+
+  document.getElementById("matchForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert(document.getElementById("matchAlert"), "", false);
+    API.api("/api/squad", { method:"POST", body:{
+      action: "create",
+      name: document.getElementById("matchName").value.trim(),
+      date: document.getElementById("matchDate").value,
+      discipline: document.getElementById("matchDisc").value,
+      capacity: Number(document.getElementById("matchCap").value) || 24,
+      weather: document.getElementById("matchWeather").value.trim() || null,
+      status: document.getElementById("matchStatus").value
+    }}).then(function(res){
+      alert(document.getElementById("matchAlert"),
+        "Match created: " + (res.matchId || "ok") + ". Open score.html to run it.", true);
+      document.getElementById("matchName").value = "";
+    }).catch(function(err){
+      alert(document.getElementById("matchAlert"), err.message || "Could not create match.", false);
+    });
+  });
+
+  var magic = new URLSearchParams(location.search).get("magic");
+  if(magic){
+    API.api("/api/auth", { method:"POST", body:{ action:"verify", token:magic } })
+      .then(function(){ history.replaceState({}, "", location.pathname); })
+      .finally(loadMe);
+  } else {
+    loadMe();
+  }
+})();
+</script>
+<script src="assets/js/pwa.js"></script>
+</body>
+</html>

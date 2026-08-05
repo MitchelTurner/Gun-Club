@@ -1,0 +1,27 @@
+# Cloudflare Pages + D1 — Phase 2
+# Create DB:  wrangler d1 create krgc
+# Migrate:    wrangler d1 execute krgc --file=schema.sql
+# Bind the database_id below after create.
+
+name = "krgc"
+compatibility_date = "2026-01-01"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "krgc"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+preview_database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+# Required secrets (wrangler pages secret put …):
+#   SESSION_SECRET
+#   TURNSTILE_SECRET_KEY
+# Optional:
+#   TURNSTILE_SITE_KEY (also mirrored in config.js for the widget)
+#   MAGIC_LINK_FROM
+#   RESEND_API_KEY          (or leave unset — links returned in JSON when ALLOW_DEV_LINKS=1)
+#   ALLOW_DEV_LINKS=1
+#   TWILIO_ACCOUNT_SID
+#   TWILIO_AUTH_TOKEN
+#   TWILIO_FROM_NUMBER
+#   PASSCODE_FALLBACK       (defaults to matching config.memberPasscode server-side)

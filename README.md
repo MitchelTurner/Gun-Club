@@ -1,97 +1,69 @@
 # Ketchikan Rod & Gun Club — website
 
-Static site. No build step, no framework, no server. Every page is plain
-HTML sharing one stylesheet and one script. Phase 1 adds offline tools
-(PWA), a come-up card, printable targets, Rimfire Cup standings, games,
-and match recaps.
+Vanilla HTML/CSS/JS. Phase 1 is the offline static site. Phase 2 adds
+Cloudflare Pages Functions + D1 for identity, check-in, scoring, hours,
+and closure alerts. No npm, no bundler.
 
 ```
-index.html              home — membership, range, matches, FAQ, tools
-first-visit.html        walkthrough for people who have never shot
-visitors.html           out-of-town shooters + visit request
-waiver.html             liability waiver, signed online
-members.html            gate code, documents, results, bay requests (noindex)
+index.html              home — membership, range, matches, on-range count
+first-visit.html        walkthrough for first-timers
+visitors.html / waiver.html / members.html
 range-card.html         ballistic come-up card (offline)
-targets.html            printable targets (offline)
-play.html               wind-call trainer + silhouette game
-standings.html          Rimfire Cup, badges, records, profiles
-recaps.html             match recaps index
-offline.html            offline fallback shell
-sw.js / manifest        PWA — service worker must stay at site root
-assets/css/site.css     shared stylesheet
-assets/css/print.css    print rules for wallet card + targets
-assets/js/config.js     ← the only file you edit for normal changes
-assets/js/site.js       shared behaviour
-assets/js/ballistics.js come-up solver
-assets/js/standings.js  Rimfire Cup math + badges
-assets/js/games.js      training games
-assets/js/pwa.js        install prompt + SW registration
-data/status.json        open/closed + banner
-data/results.json       match results — source of truth for standings
-data/badges.json        badge definitions
-data/records.json       club records board
-data/recaps.json        match recaps (newest first)
-_headers / _redirects   Cloudflare Pages helpers
-Staticfile              Railway / Railpack static detection
+targets.html / play.html / standings.html / recaps.html
+checkin.html            QR gate check-in (Phase 2)
+score.html              RO live scoring + offline queue (Phase 2)
+admin.html              officer status, hours, match create (Phase 2)
+offline.html / sw.js / manifest.webmanifest
+assets/js/config.js     ← club edit point
+assets/js/api.js        Phase 2 API client + score queue
+functions/api/*         Cloudflare Pages Functions
+functions/_lib/*        shared auth, crypto, alerts
+functions/_middleware.js
+schema.sql              D1 schema
+wrangler.toml           Pages + D1 binding
+data/*.json             Phase 1 static fallbacks
 ```
 
-## Launch checklist
+## Phase 2 setup (Cloudflare)
 
-Nothing here is guessed. Anything the club still has to confirm shows on
-the site in **brass with a dotted underline** (`.tk`). Search the source for
-`TODO` and for `class="tk"`.
+1. `wrangler d1 create krgc` — paste `database_id` into `wrangler.toml`
+2. `wrangler d1 execute krgc --file=schema.sql`
+3. Set Pages secrets:
+   - `SESSION_SECRET` (long random)
+   - `TURNSTILE_SECRET_KEY`
+   - `PASSCODE_FALLBACK` (same as `config.memberPasscode` for the season)
+   - Optional: `RESEND_API_KEY`, `MAGIC_LINK_FROM`, `TWILIO_*`, `SITE_URL`
+   - Dev only: `ALLOW_DEV_LINKS=1` returns magic links in JSON
+4. Put the Turnstile **site** key in `assets/js/config.js` → `turnstile.siteKey`
+5. Deploy as Cloudflare Pages with Functions; output directory `/`
 
-**Must do before launch**
+## Launch checklist (Phase 1 still applies)
 
-1. `assets/js/config.js` — real domain, email, dues, gate code, member passcode.
-2. **Form endpoint.** Set `formEndpoint` to a Formspree/Basin/Netlify Forms URL.
-3. **Stripe.** Create one Payment Link per membership type, paste into `config.stripe`.
-4. **Waiver legal review.** Draft text — Alaska attorney + insurer sign-off.
-5. **Photos.** Drop JPGs into `assets/img/` (see README there).
-6. Delete the `.tk` rule in `assets/css/site.css` once real values are in.
+Search `TODO` and `class="tk"`. Fill `config.js`, form endpoint, Stripe,
+waiver legal review, photos.
 
-## Posting a match recap
+## Posting a match recap (Phase 1 path)
 
-Add a block to `data/recaps.json` (newest first):
+Add to `data/recaps.json` and `data/results.json`. Or close a live match
+via `score.html` → Publish (writes D1; `/api/results` feeds standings).
 
-```json
-{ "id": "2026-08-02-rimfire", "date": "2026-08-02", "title": "Rimfire — August",
-  "matchId": "2026-08-02-rimfire", "body": "Two to four sentences.", "photos": [] }
-```
+## Day-to-day
 
-Then add the matching scores object to `data/results.json`. Standings recompute
-themselves. No other files to touch.
+| Task | Where |
+|---|---|
+| Close the range + alert subscribers | `admin.html` (API) |
+| Gate check-in | Printed QR → `checkin.html?loc=gate` |
+| Live scores | `score.html` (works offline, syncs later) |
+| Work-party hours | `admin.html` |
+| Passcode fallback | `members.html` — keep for one season |
 
-## Deploying
+## Privacy
 
-Cloudflare Pages: connect the repo, leave the build command empty, set the
-output directory to `/`. `_headers` and `_redirects` are picked up
-automatically. Railway/Railpack also works via `index.html` + `Staticfile`.
+- Public `/api/onrange` returns a **count only** — never names
+- Members see names when signed in
+- Check-in rows purge after 90 days (opportunistic on API traffic)
+- Closure SMS includes STOP; email has one-tap unsubscribe
 
-After each deploy that changes cached assets, bump `CACHE = "krgc-v1"` in
-`sw.js` (e.g. to `krgc-v2`) so clients drop the old shell.
+## Commit convention
 
-## Day-to-day, for officers
-
-**Closing the range for a day:** open `admin.html` when available, or edit
-`data/status.json` directly (`open`, `detail`, `notice`).
-
-**After a match:** add scores to `data/results.json` (finishing order) and a
-recap block to `data/recaps.json`.
-
-**Changing dues:** edit the five prices in `assets/js/config.js`.
-
-## Notes on the members area
-
-The passcode is a shared secret held in memory for one page view. It keeps the
-gate code off the open web and off search engines; it is not authentication.
-
-## Phase 2 (not started)
-
-Server-backed check-in, magic-link auth, live scoring, work-party hours, and
-closure alerts. Do not start until Phase 1 is deployed. See the build spec.
-
-## Not built
-
-Recurring auto-billing for dues and a full bay booking calendar. Out of scope
-for a club this size.
+One commit per numbered build-spec section (`2.1`, `2.2`, …).

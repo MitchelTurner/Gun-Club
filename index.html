@@ -110,6 +110,7 @@
         <div><dt>Longest line</dt><dd>500 yd<small>Steel and paper</small></dd></div>
         <div><dt>Next match</dt><dd class="tk">First Sat<small>Rimfire · 10:00</small></dd></div>
       </dl>
+      <p class="muted" id="onRangeCount" style="margin:.75rem 0 0;font-size:.92rem"></p>
       <div class="notice" id="statusNotice"></div>
 
       <div class="gallery hero-strip rise">
@@ -450,6 +451,32 @@
     </div>
   </section>
 
+  <section class="section plain" id="alerts">
+    <div class="wrap narrow">
+      <div class="section-head">
+        <p class="eyebrow">Closures only</p>
+        <h2>Range alerts</h2>
+        <p>Email or text when the range closes. Never marketing. STOP and one-tap unsubscribe are honored immediately.</p>
+      </div>
+      <div class="panel-form rise" style="max-width:420px">
+        <div class="field">
+          <label for="alertChannel">Channel</label>
+          <select id="alertChannel">
+            <option value="email">Email</option>
+            <option value="sms">SMS</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="alertAddress">Email or phone</label>
+          <input id="alertAddress" type="text" autocomplete="on" placeholder="you@example.org or +1907…">
+        </div>
+        <div id="turnstileHome" style="margin:1rem 0"></div>
+        <button class="btn btn-primary btn-block" type="button" id="alertBtn">Subscribe</button>
+        <div class="alert" id="alertMsg"></div>
+      </div>
+    </div>
+  </section>
+
   <section class="final">
     <div class="wrap">
       <h2>Come shoot first</h2>
@@ -494,30 +521,53 @@
 </div>
 
 <script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/pwa.js"></script>
 <script>
 (function(){
   var host = document.getElementById("homeRecap");
-  if(!host){ return; }
-  fetch("data/recaps.json", { cache:"no-store" })
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      var recap = (data.recaps || [])[0];
-      if(!recap){
-        host.innerHTML = '<p class="muted">No recaps posted yet. After a match, add a block to <code>data/recaps.json</code>.</p>';
-        return;
-      }
-      host.innerHTML = '<article class="recap" style="border:0;padding:0">' +
-        '<p class="eyebrow">' + recap.date + '</p>' +
-        '<h3 style="margin:.35rem 0 .75rem">' + recap.title + '</h3>' +
-        '<p class="muted">' + recap.body + '</p>' +
-        (recap.matchId ? '<p><a href="standings.html">See standings</a></p>' : '') +
-        '</article>';
-    })
-    .catch(function(){
-      host.innerHTML = '<p class="muted">Recap unavailable offline until it has been cached once.</p>';
+  if(host){
+    fetch("data/recaps.json", { cache:"no-store" })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        var recap = (data.recaps || [])[0];
+        if(!recap){
+          host.innerHTML = '<p class="muted">No recaps posted yet. After a match, add a block to <code>data/recaps.json</code>.</p>';
+          return;
+        }
+        host.innerHTML = '<article class="recap" style="border:0;padding:0">' +
+          '<p class="eyebrow">' + recap.date + '</p>' +
+          '<h3 style="margin:.35rem 0 .75rem">' + recap.title + '</h3>' +
+          '<p class="muted">' + recap.body + '</p>' +
+          (recap.matchId ? '<p><a href="standings.html">See standings</a></p>' : '') +
+          '</article>';
+      })
+      .catch(function(){
+        host.innerHTML = '<p class="muted">Recap unavailable offline until it has been cached once.</p>';
+      });
+  }
+
+  var btn = document.getElementById("alertBtn");
+  var msg = document.getElementById("alertMsg");
+  if(btn && window.KRGC_API){
+    btn.addEventListener("click", function(){
+      var channel = document.getElementById("alertChannel").value;
+      var address = (document.getElementById("alertAddress").value || "").trim();
+      window.KRGC_API.api("/api/alerts", {
+        method: "POST",
+        body: { channel: channel, address: address, turnstileToken: "" }
+      }).then(function(j){
+        msg.className = "alert ok";
+        msg.textContent = j.message + (j.verifyUrl ? " Verify: " + j.verifyUrl : "");
+        msg.setAttribute("data-show","true");
+      }).catch(function(e){
+        msg.className = "alert err";
+        msg.textContent = e.message || "Could not subscribe — API may not be deployed yet.";
+        msg.setAttribute("data-show","true");
+      });
     });
+  }
 })();
 </script>
 </body>

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Live scoring — Ketchikan Rod &amp; Gun Club</title>
+<meta name="description" content="Range officer live scoring for Ketchikan Rod &amp; Gun Club matches. Offline-tolerant score queue.">
+<meta name="theme-color" content="#0E1714">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/img/icons/apple-touch-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=DM+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="head">
+  <a class="mark" href="index.html">
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      <circle cx="20" cy="20" r="4.5" fill="#FF6A2B"/>
+      <path d="M20 2v6M20 32v6M2 20h6M32 20h6" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+    <span><b>Ketchikan Rod &amp; Gun</b><i>Mile 11 &middot; N Tongass Hwy</i></span>
+  </a>
+  <nav class="nav" aria-label="Primary">
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#events">Matches</a>
+    <a href="standings.html">Rimfire Cup</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-sm head-cta" href="index.html#membership">Join the club</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
+</header>
+
+<div class="drawer" id="drawer" data-open="false" role="dialog" aria-modal="true" aria-label="Menu">
+  <div class="drawer-top"><button class="close" id="drawerClose" aria-label="Close menu">&times;</button></div>
+  <nav>
+    <a href="index.html#membership">Membership</a>
+    <a href="first-visit.html">First visit</a>
+    <a href="index.html#range">The range</a>
+    <a href="index.html#safety">Safety</a>
+    <a href="index.html#events">Matches</a>
+    <a href="range-card.html">Come-up card</a>
+    <a href="targets.html">Printable targets</a>
+    <a href="play.html">Train &amp; play</a>
+    <a href="standings.html">Rimfire Cup</a>
+    <a href="recaps.html">Match recaps</a>
+    <a href="waiver.html">Waiver</a>
+    <a href="visitors.html">Visiting shooters</a>
+    <a href="members.html">Members</a>
+  </nav>
+  <a class="btn btn-primary btn-block" href="index.html#membership">Join the club</a>
+</div>
+
+<main id="main">
+  <section class="pagehead">
+    <div class="wrap narrow">
+      <p class="eyebrow">Range officer</p>
+      <h1>Live scoring</h1>
+      <p class="lede">Enter scores as shooters come off the line. Works offline — scores queue until you sync.</p>
+    </div>
+  </section>
+
+  <section class="section plain">
+    <div class="wrap">
+      <div id="gatePanel">
+        <div class="panel rise" style="max-width:520px;margin:0 auto">
+          <div class="panel-form">
+            <p class="muted" id="gateMsg">Sign in to enter scores. RO and officers only.</p>
+            <div id="signInForm">
+              <div class="field">
+                <label for="emailIn">Email</label>
+                <input id="emailIn" type="email" inputmode="email" autocomplete="email">
+              </div>
+              <button class="btn btn-primary btn-block" id="magicBtn" type="button">Send sign-in link</button>
+              <div class="alert" id="magicAlert"></div>
+              <p class="form-note" style="margin-top:1rem">Or open the link from your email on this device.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="deniedPanel" hidden>
+        <div class="safety-note">
+          <b>Access</b>
+          <p id="deniedMsg">This page is for range officers and club officers. Ask the match director if you need access.</p>
+        </div>
+        <button class="btn btn-ghost" id="deniedLogout" type="button">Sign out</button>
+      </div>
+
+      <div id="scorePanel" hidden>
+        <div class="pillrow" style="align-items:center;justify-content:space-between">
+          <span class="muted" style="font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase">
+            Pending queue: <strong id="queueCount">0</strong>
+          </span>
+          <button class="btn btn-ghost btn-sm" id="syncBtn" type="button">Sync queue</button>
+        </div>
+
+        <div class="field" style="max-width:480px">
+          <label for="matchSelect">Match</label>
+          <select id="matchSelect"><option value="">Loading matches…</option></select>
+        </div>
+
+        <div id="provHost" class="tablewrap compact" style="margin:1.5rem 0"></div>
+
+        <div class="panel rise" style="margin-top:2rem">
+          <div class="panel-left">
+            <p class="eyebrow">Score entry</p>
+            <h3>Stage scores</h3>
+            <p class="muted" style="margin:0">Higher is better. Re-entering a stage overwrites the previous value.</p>
+          </div>
+          <div class="panel-form">
+            <form id="scoreForm" class="form-grid cols-2">
+              <div class="field">
+                <label for="memberSelect">Shooter</label>
+                <select id="memberSelect" required><option value="">Pick a match first</option></select>
+              </div>
+              <div class="field">
+                <label for="stageIn">Stage</label>
+                <input id="stageIn" type="number" min="1" max="20" value="1" required>
+              </div>
+              <div class="field">
+                <label for="valueIn">Score</label>
+                <input id="valueIn" type="number" step="0.01" required>
+              </div>
+              <div class="field">
+                <label for="sightsIn">Sights</label>
+                <select id="sightsIn">
+                  <option value="iron">Iron</option>
+                  <option value="optic">Optic</option>
+                </select>
+              </div>
+              <div class="field" style="grid-column:1/-1">
+                <button class="btn btn-primary btn-block" type="submit">Submit score</button>
+              </div>
+            </form>
+            <div class="alert" id="scoreAlert"></div>
+          </div>
+        </div>
+
+        <div id="officerPublish" hidden style="margin-top:2rem;max-width:480px">
+          <button class="btn btn-ghost btn-block" id="publishBtn" type="button">Publish match to standings</button>
+          <p class="muted" style="font-size:.88rem;margin-top:.75rem">Closes the match and pushes results to the season feed. Officers only.</p>
+          <div class="alert" id="publishAlert"></div>
+        </div>
+
+        <p class="muted" style="margin-top:2rem">
+          Signed in as <span id="whoami"></span>.
+          <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button" style="margin-left:.5rem">Sign out</button>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div>
+    <h4>Ketchikan Rod &amp; Gun Club</h4>
+    <p class="muted" style="max-width:34ch;font-size:.9rem">North Tongass Highway, Ketchikan, Alaska. Open to the public, run by its members.</p>
+    <p class="fine">Flag up means the line is hot</p>
+  </div>
+  <div>
+    <h4>Shooting</h4>
+    <ul>
+      <li><a href="first-visit.html">Your first visit</a></li>
+      <li><a href="index.html#range">The range</a></li>
+      <li><a href="index.html#safety">Range rules</a></li>
+      <li><a href="range-card.html">Come-up card</a></li>
+      <li><a href="targets.html">Printable targets</a></li>
+      <li><a href="play.html">Train &amp; play</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Club</h4>
+    <ul>
+      <li><a href="standings.html">Rimfire Cup</a></li>
+      <li><a href="recaps.html">Match recaps</a></li>
+      <li><a href="members.html">Members area</a></li>
+      <li><a href="tel:+19072478400">(907) 247-8400</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/api.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var API = window.KRGC_API;
+  var member = null;
+  var matches = [];
+  var squad = [];
+  var live = false;
+  var pollTimer = null;
+  var currentMatchId = "";
+
+  var gatePanel = document.getElementById("gatePanel");
+  var deniedPanel = document.getElementById("deniedPanel");
+  var scorePanel = document.getElementById("scorePanel");
+  var matchSelect = document.getElementById("matchSelect");
+  var memberSelect = document.getElementById("memberSelect");
+  var provHost = document.getElementById("provHost");
+  var queueCount = document.getElementById("queueCount");
+
+  function alert(el, msg, ok){
+    if(!el) return;
+    el.textContent = msg || "";
+    el.dataset.show = msg ? "true" : "false";
+    el.classList.toggle("ok", !!ok);
+    el.classList.toggle("bad", !!msg && !ok);
+  }
+
+  function canScore(m){
+    return m && (m.role === "ro" || m.role === "officer");
+  }
+
+  function updateQueue(){
+    queueCount.textContent = String(API.pendingCount());
+  }
+
+  function showGate(){
+    gatePanel.hidden = false;
+    deniedPanel.hidden = true;
+    scorePanel.hidden = true;
+    stopPoll();
+  }
+
+  function showDenied(msg){
+    gatePanel.hidden = true;
+    deniedPanel.hidden = false;
+    scorePanel.hidden = true;
+    document.getElementById("deniedMsg").textContent = msg ||
+      "This page is for range officers and club officers.";
+    stopPoll();
+  }
+
+  function showScore(){
+    gatePanel.hidden = true;
+    deniedPanel.hidden = true;
+    scorePanel.hidden = false;
+    document.getElementById("whoami").textContent = member.name + " (" + member.role + ")";
+    document.getElementById("officerPublish").hidden = member.role !== "officer";
+    updateQueue();
+    loadMatches();
+  }
+
+  function stopPoll(){
+    if(pollTimer){ clearInterval(pollTimer); pollTimer = null; }
+    live = false;
+  }
+
+  function startPoll(){
+    stopPoll();
+    if(!currentMatchId) return;
+    pollTimer = setInterval(loadStandings, 30000);
+  }
+
+  function loadMe(){
+    return API.api("/api/auth").then(function(data){
+      member = data.member || null;
+      if(!member) return showGate();
+      if(!canScore(member)) return showDenied();
+      showScore();
+    }).catch(function(){ showGate(); });
+  }
+
+  document.getElementById("magicBtn").addEventListener("click", function(){
+    var email = document.getElementById("emailIn").value.trim();
+    alert(document.getElementById("magicAlert"), "", false);
+    if(!email){ alert(document.getElementById("magicAlert"), "Enter your email.", false); return; }
+    API.api("/api/auth", { method:"POST", body:{ action:"request", email:email } })
+      .then(function(res){
+        var msg = res.message || "Check your email.";
+        if(res.devLink) msg += " Dev: " + res.devLink;
+        alert(document.getElementById("magicAlert"), msg, true);
+      })
+      .catch(function(err){
+        alert(document.getElementById("magicAlert"), err.message || "Failed.", false);
+      });
+  });
+
+  function logout(){
+    API.api("/api/auth", { method:"POST", body:{ action:"logout" } }).finally(function(){
+      member = null;
+      showGate();
+    });
+  }
+  document.getElementById("logoutBtn").addEventListener("click", logout);
+  document.getElementById("deniedLogout").addEventListener("click", logout);
+
+  function loadMatches(){
+    API.api("/api/squad").then(function(data){
+      matches = data.matches || [];
+      matchSelect.innerHTML = matches.length
+        ? matches.map(function(m){
+            return "<option value=\"" + m.id + "\">" + esc(m.date) + " — " + esc(m.name) +
+              (m.status === "live" ? " (live)" : "") + "</option>";
+          }).join("")
+        : "<option value=\"\">No open matches</option>";
+      if(matches.length){
+        currentMatchId = matches[0].id;
+        matchSelect.value = currentMatchId;
+        onMatchChange();
+      }
+    }).catch(function(){
+      matchSelect.innerHTML = "<option value=\"\">Could not load matches</option>";
+    });
+  }
+
+  function esc(s){
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+  }
+
+  function onMatchChange(){
+    currentMatchId = matchSelect.value;
+    if(!currentMatchId) return;
+    API.api("/api/squad?matchId=" + encodeURIComponent(currentMatchId)).then(function(data){
+      squad = (data.squad || []).filter(function(s){ return !s.waitlisted; });
+      memberSelect.innerHTML = squad.length
+        ? squad.map(function(s){
+            return "<option value=\"" + s.member_id + "\">" + esc(s.name) + "</option>";
+          }).join("")
+        : "<option value=\"\">No shooters signed up</option>";
+    });
+    loadStandings();
+  }
+
+  matchSelect.addEventListener("change", onMatchChange);
+
+  function renderStandings(data){
+    live = !!data.live;
+    var rows = data.provisional || [];
+    if(!rows.length){
+      provHost.innerHTML = "<p class=\"muted\">No scores yet" + (live ? " — match is live." : ".") + "</p>";
+      if(live) startPoll(); else stopPoll();
+      return;
+    }
+    var html = "<table><thead><tr><th>#</th><th>Shooter</th><th>Total</th></tr></thead><tbody>";
+    rows.forEach(function(r, i){
+      html += "<tr><td>" + (i+1) + "</td><td>" + esc(r.name) + "</td><td>" + r.total + "</td></tr>";
+    });
+    html += "</tbody></table>";
+    if(live) html += "<p class=\"muted\" style=\"margin-top:.75rem;font-size:.85rem\">Provisional — refreshes every 30s while live.</p>";
+    provHost.innerHTML = html;
+    if(live) startPoll(); else stopPoll();
+  }
+
+  function loadStandings(){
+    if(!currentMatchId) return;
+    API.api("/api/score?matchId=" + encodeURIComponent(currentMatchId))
+      .then(renderStandings)
+      .catch(function(){
+        provHost.innerHTML = "<p class=\"muted\">Could not load standings.</p>";
+      });
+  }
+
+  document.getElementById("scoreForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert(document.getElementById("scoreAlert"), "", false);
+    var payload = {
+      matchId: currentMatchId,
+      memberId: memberSelect.value,
+      stage: Number(document.getElementById("stageIn").value) || 1,
+      value: Number(document.getElementById("valueIn").value),
+      sights: document.getElementById("sightsIn").value
+    };
+    if(!payload.matchId || !payload.memberId || isNaN(payload.value)){
+      alert(document.getElementById("scoreAlert"), "Fill in shooter, stage, and score.", false);
+      return;
+    }
+
+    function done(msg){
+      alert(document.getElementById("scoreAlert"), msg, true);
+      document.getElementById("valueIn").value = "";
+      loadStandings();
+      updateQueue();
+    }
+
+    if(navigator.onLine){
+      API.api("/api/score", { method:"POST", body: Object.assign({}, payload, { setLive:true }) })
+        .then(function(){ done("Score saved."); })
+        .catch(function(){
+          API.queueScores([payload]);
+          done("Offline — score queued.");
+        });
+    } else {
+      API.queueScores([payload]);
+      done("Offline — score queued.");
+    }
+  });
+
+  document.getElementById("syncBtn").addEventListener("click", function(){
+    API.syncScoreQueue().then(function(res){
+      updateQueue();
+      alert(document.getElementById("scoreAlert"),
+        res.offline ? "Still offline — " + res.pending + " pending." :
+        "Synced " + res.synced + ". " + (res.pending ? res.pending + " still pending." : ""),
+        !res.pending);
+      if(res.synced) loadStandings();
+    });
+  });
+
+  document.getElementById("publishBtn").addEventListener("click", function(){
+    if(!currentMatchId) return;
+    if(!confirm("Publish this match? It closes scoring and updates standings.")) return;
+    API.api("/api/results", { method:"POST", body:{ action:"publish", matchId:currentMatchId } })
+      .then(function(res){
+        alert(document.getElementById("publishAlert"), res.message || "Published.", true);
+        loadMatches();
+      })
+      .catch(function(err){
+        alert(document.getElementById("publishAlert"), err.message || "Publish failed.", false);
+      });
+  });
+
+  var magic = new URLSearchParams(location.search).get("magic");
+  if(magic){
+    API.api("/api/auth", { method:"POST", body:{ action:"verify", token:magic } })
+      .then(function(){ history.replaceState({}, "", location.pathname); })
+      .finally(loadMe);
+  } else {
+    loadMe();
+  }
+
+  updateQueue();
+  window.addEventListener("online", updateQueue);
+})();
+</script>
+<script src="assets/js/pwa.js"></script>
+</body>
+</html>

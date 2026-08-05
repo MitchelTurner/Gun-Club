@@ -70,11 +70,15 @@
   <section class="section plain">
     <div class="wrap">
       <div class="gate" id="gateForm">
-        <p class="muted">Enter the member passcode. Any officer can give it to you, and it changes when the gate code changes.</p>
-        <div class="field"><label for="gateInput">Passcode</label><input id="gateInput" type="password" autocomplete="off"></div>
-        <button class="btn btn-primary btn-block" id="gateBtn" type="button">Unlock</button>
+        <p class="muted">Sign in with your roster email (magic link), or use the shared passcode fallback for this season.</p>
+        <div class="field"><label for="magicEmail">Email</label><input id="magicEmail" type="email" autocomplete="email" inputmode="email"></div>
+        <button class="btn btn-primary btn-block" id="magicBtn" type="button">Email me a sign-in link</button>
+        <div id="turnstileMembers" style="margin:1rem 0"></div>
+        <hr style="border:0;border-top:1px solid var(--line);margin:1.5rem 0">
+        <div class="field"><label for="gateInput">Passcode fallback</label><input id="gateInput" type="password" autocomplete="off"></div>
+        <button class="btn btn-ghost btn-block" id="gateBtn" type="button">Unlock with passcode</button>
         <div class="alert" id="gateAlert"></div>
-        <p class="form-note">This is a shared passcode, not an account. Don't post it anywhere public.</p>
+        <p class="form-note">Passcode stays available for one full season. Don't post it anywhere public. Officers: <a href="admin.html">admin tools</a> · <a href="checkin.html">gate check-in</a> · <a href="score.html">live scoring</a>.</p>
       </div>
 
       <div class="locked">
@@ -170,7 +174,75 @@
 </footer>
 
 <script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
 <script src="assets/js/site.js"></script>
+<script>
+(function(){
+  var C = window.KRGC || {};
+  var api = window.KRGC_API && window.KRGC_API.api;
+  var alertEl = document.getElementById("gateAlert");
+  var locked = document.querySelector(".locked");
+  function show(msg, ok){
+    if(!alertEl){ return; }
+    alertEl.textContent = msg;
+    alertEl.className = "alert " + (ok ? "ok" : "err");
+    alertEl.setAttribute("data-show","true");
+  }
+  function unlock(member){
+    if(locked){ locked.setAttribute("data-unlocked","true"); }
+    var gateForm = document.getElementById("gateForm");
+    if(gateForm){ gateForm.style.display = "none"; }
+    var code = document.getElementById("gateCodeValue");
+    if(code && C.gateCode){ code.textContent = C.gateCode; }
+    show("Signed in as " + (member && member.name ? member.name : "member"), true);
+  }
+  if(!api){ return; }
+
+  var params = new URLSearchParams(location.search);
+  var magic = params.get("magic");
+  if(magic){
+    api("/api/auth", { method:"POST", body:{ action:"verify", token:magic } })
+      .then(function(j){ unlock(j.member); history.replaceState({}, "", "members.html"); })
+      .catch(function(e){ show(e.message || "Link invalid", false); });
+  } else {
+    api("/api/auth").then(function(j){ if(j.member){ unlock(j.member); } }).catch(function(){});
+  }
+
+  var magicBtn = document.getElementById("magicBtn");
+  if(magicBtn){
+    magicBtn.addEventListener("click", function(){
+      var email = (document.getElementById("magicEmail").value || "").trim();
+      api("/api/auth", { method:"POST", body:{ action:"request", email:email, turnstileToken:"" } })
+        .then(function(j){
+          show(j.message + (j.devLink ? " Dev link: " + j.devLink : ""), true);
+        })
+        .catch(function(e){ show(e.message || "Could not send link", false); });
+    });
+  }
+
+  var gateBtn = document.getElementById("gateBtn");
+  if(gateBtn){
+    gateBtn.addEventListener("click", function(){
+      var pass = document.getElementById("gateInput").value || "";
+      api("/api/auth", { method:"POST", body:{ action:"passcode", passcode:pass, turnstileToken:"" } })
+        .then(function(j){ unlock(j.member); })
+        .catch(function(){
+          /* Local Phase 1 fallback if Functions are down */
+          if(pass && pass === C.memberPasscode){
+            if(locked){ locked.setAttribute("data-unlocked","true"); }
+            var gateForm = document.getElementById("gateForm");
+            if(gateForm){ gateForm.style.display = "none"; }
+            var code = document.getElementById("gateCodeValue");
+            if(code){ code.textContent = C.gateCode || "____"; }
+            show("Unlocked with local passcode (API offline)", true);
+          } else {
+            show("Incorrect passcode", false);
+          }
+        });
+    });
+  }
+})();
+</script>
 <script src="assets/js/pwa.js"></script>
 </body>
 </html>

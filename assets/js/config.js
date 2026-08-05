@@ -115,11 +115,27 @@ window.KRGC = {
     zeroYd: 50
   },
 
-  /* ---------- Phase 2 placeholders (unused in Phase 1) ----------
-     Added so keys exist before the server-backed season.
-     Both remain .tk in the UI until the board sets them.      */
+  /* ---------- work-party hours (Phase 2) ----------
+     Shown on members hours view and used by /api/hours.
+     Leave null until the board sets dollar amounts — UI marks .tk. */
   hours: {
-    creditPerHour: null,                          // TODO board sets $
-    maxCredit: null                               // TODO board sets $
+    creditPerHour: null,                          // TODO board sets $ per hour
+    maxCredit: null                               // TODO board sets max $ credit
+  },
+
+  /* ---------- Cloudflare Turnstile (Phase 2) ----------
+     Site key is public; secret lives in Pages env TURNSTILE_SECRET_KEY. */
+  turnstile: {
+    siteKey: ""                                   // TODO Turnstile site key
+  },
+
+  /* ---------- Phase 2 API ----------
+     When true, clients prefer /api/* over static JSON. Falls back if offline
+     or the Functions binding is missing. */
+  api: {
+    enabled: true,
+    resultsPath: "/api/results",
+    statusPath: "/api/status",
+    onRangePath: "/api/onrange"
   }
 };
