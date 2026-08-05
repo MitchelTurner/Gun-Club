@@ -252,53 +252,156 @@
         <p>Everything is outdoors and under open sky. Plan for weather, and plan for light.</p>
       </div>
 
+      <div class="facility rise">
+        <article class="fac">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+          <h3>Pistol bays</h3>
+          <p class="dist">7&ndash;50 yd</p>
+          <span class="unit">Paper &amp; steel</span>
+          <p>Short bays for handgun work, close-range drills and sighting in a new optic.</p>
+        </article>
+        <article class="fac">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 12h18"/><path d="M3 9v6M21 9v6"/><path d="M9 7v10M15 7v10"/></svg>
+          <h3>Rifle line</h3>
+          <p class="dist">To 500 yd</p>
+          <span class="unit">Covered firing points</span>
+          <p>Marked distances from 25 yards out. Steel only at the far end, paper closer in.</p>
+        </article>
+        <article class="fac">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 20v-7H2l1-4h4l1 4H6v7z"/><path d="M12 20v-8l-3-4h3l1-3h2l1 3 3-1-2 4v9z"/></svg>
+          <h3>Silhouette</h3>
+          <p class="dist">40&ndash;100 m</p>
+          <span class="unit">Rifle &amp; pistol classes</span>
+          <p>Chickens, pigs, turkeys and rams. Knock it down or it doesn't count.</p>
+        </article>
+        <article class="fac">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 20h5l-1-5H4z"/><path d="M8 17c3-6 8-9 13-9"/><circle cx="20" cy="7" r="2" fill="currentColor" stroke="none"/></svg>
+          <h3>Trap field</h3>
+          <p class="dist">5 stations</p>
+          <span class="unit">Clays available</span>
+          <p>Runs Sunday evenings in summer, once the light is long enough. Club shotgun on hand.</p>
+        </article>
+      </div>
+
       <div class="planwrap rise">
         <div class="scroller">
-          <svg viewBox="0 0 1000 440" role="img" aria-label="Schematic plan of the club: firing line at left, rifle distances to 500 yards, silhouette lanes and trap field.">
-            <line x1="86" y1="30" x2="86" y2="410" stroke="#C6D3CC" stroke-width="3"/>
-            <text x="72" y="24" text-anchor="end" font-family="DM Mono, monospace" font-size="13" letter-spacing="2" fill="#8FA39A">FIRING LINE</text>
-            <path d="M946 40 L985 100 L985 380 L946 400 Z" fill="#2A3B33"/>
-            <text x="934" y="230" text-anchor="end" font-family="DM Mono, monospace" font-size="13" letter-spacing="2" fill="#8FA39A" transform="rotate(-90 934 230)">IMPACT BERM</text>
+          <svg viewBox="0 0 1000 500" role="img" aria-label="Plan of the club grounds: a covered firing line on the left, the rifle line running out to a 500-yard impact berm, with pistol bays, silhouette lanes and the trap field alongside. Rainforest on all sides.">
+            <defs>
+              <pattern id="planSpruce" width="64" height="30" patternUnits="userSpaceOnUse">
+                <path d="M0 30 L12 4 L24 30 Z" fill="#1D2C25"/>
+                <path d="M28 30 L36 13 L44 30 Z" fill="#1D2C25"/>
+                <path d="M46 30 L56 1 L66 30 Z" fill="#1D2C25"/>
+              </pattern>
+              <pattern id="planRoof" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="7" stroke="#5E7269" stroke-width="1"/>
+              </pattern>
+            </defs>
 
-            <rect class="band" x="86" y="42" width="290" height="80" rx="3"/>
-            <text class="bandlabel" x="100" y="66">PISTOL BAYS</text>
-            <text class="plantext" x="100" y="96">7 to 50 yards · paper and steel</text>
+            <rect x="0" y="0" width="1000" height="30" fill="url(#planSpruce)"/>
+            <rect x="0" y="470" width="1000" height="30" fill="url(#planSpruce)"/>
+            <text class="plan-sub" x="8" y="46">TONGASS RAINFOREST</text>
 
-            <rect class="band" x="86" y="140" width="850" height="118" rx="3"/>
-            <text class="bandlabel" x="100" y="164">RIFLE LINE</text>
-            <line x1="86" y1="222" x2="936" y2="222" stroke="#5E7269" stroke-width="1"/>
+            <path class="plan-berm" d="M936 44 L1000 96 L1000 394 L936 434 Z"/>
+            <g class="plan-rule" opacity=".55">
+              <line x1="948" y1="80" x2="948" y2="402"/>
+              <line x1="964" y1="98" x2="964" y2="388"/>
+              <line x1="980" y1="112" x2="980" y2="376"/>
+            </g>
+            <text class="bandlabel" x="988" y="239" text-anchor="middle" transform="rotate(-90 988 239)">IMPACT BERM</text>
 
-            <g class="tick" tabindex="0" role="button" aria-label="25 yards" data-note="&lt;b&gt;25 yd&lt;/b&gt; — rimfire zero, and where a new shooter should spend their first box of ammunition."><rect x="146" y="184" width="54" height="62"/><line class="stem" x1="172" y1="202" x2="172" y2="222"/><text class="label" x="172" y="196" text-anchor="middle">25</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="50 yards" data-note="&lt;b&gt;50 yd&lt;/b&gt; — standard rimfire match distance and a common pistol zero."><rect x="218" y="184" width="54" height="62"/><line class="stem" x1="244" y1="202" x2="244" y2="222"/><text class="label" x="244" y="196" text-anchor="middle">50</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="100 yards" data-note="&lt;b&gt;100 yd&lt;/b&gt; — the working zero for most hunting rifles in Southeast."><rect x="318" y="184" width="60" height="62"/><line class="stem" x1="348" y1="202" x2="348" y2="222"/><text class="label" x="348" y="196" text-anchor="middle">100</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="200 yards" data-note="&lt;b&gt;200 yd&lt;/b&gt; — first real wind call. Read the flags before you break the shot."><rect x="458" y="184" width="60" height="62"/><line class="stem" x1="488" y1="202" x2="488" y2="222"/><text class="label" x="488" y="196" text-anchor="middle">200</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="300 yards" data-note="&lt;b&gt;300 yd&lt;/b&gt; — where a spotter and a written come-up chart start earning their keep."><rect x="592" y="184" width="60" height="62"/><line class="stem" x1="622" y1="202" x2="622" y2="222"/><text class="label" x="622" y="196" text-anchor="middle">300</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="500 yards" data-note="&lt;b&gt;500 yd&lt;/b&gt; — the long line. Steel only, and check the flag before anyone walks out."><rect x="872" y="184" width="66" height="62"/><line class="stem" x1="904" y1="202" x2="904" y2="222"/><text class="label" x="904" y="196" text-anchor="middle">500</text></g>
-            <text x="100" y="248" font-family="DM Mono, monospace" font-size="12" letter-spacing="1" fill="#5E7269">YARDS</text>
+            <rect x="56" y="150" width="44" height="140" fill="url(#planRoof)" opacity=".5"/>
+            <rect x="56" y="150" width="44" height="140" fill="none" stroke="#5E7269" stroke-width="1"/>
+            <text class="planfig-label" x="96" y="142" text-anchor="end">COVERED</text>
 
-            <rect class="band" x="86" y="276" width="560" height="80" rx="3"/>
-            <text class="bandlabel" x="100" y="300">SILHOUETTE LANES</text>
-            <text class="plantext" x="100" y="330">Rifle &amp; pistol</text>
+            <line class="plan-axis" x1="100" y1="44" x2="100" y2="434" stroke-width="3" stroke="#C6D3CC"/>
+            <text class="bandlabel" x="100" y="456" text-anchor="middle">FIRING LINE</text>
+
+            <rect class="band" x="100" y="52" width="300" height="78" rx="4"/>
+            <rect class="band-accent" x="100" y="52" width="3" height="78"/>
+            <text class="bandlabel" x="118" y="78">PISTOL BAYS</text>
+            <text class="plantext" x="118" y="106">7 to 50 yards &middot; paper and steel</text>
+
+            <rect class="band" x="100" y="152" width="836" height="136" rx="4"/>
+            <rect class="band-accent" x="100" y="152" width="3" height="136"/>
+            <text class="bandlabel" x="118" y="178">RIFLE LINE &mdash; TO SCALE</text>
+            <line class="plan-rule" x1="100" y1="252" x2="920" y2="252"/>
+
+            <g class="tick" tabindex="0" role="button" aria-label="25 yards" data-note="&lt;b&gt;25 yd&lt;/b&gt; — rimfire zero, and where a new shooter should spend their first box of ammunition."><rect x="117" y="212" width="48" height="58"/><line class="stem" x1="141" y1="232" x2="141" y2="252"/><text class="label" x="141" y="226" text-anchor="middle">25</text></g>
+            <g class="tick" tabindex="0" role="button" aria-label="50 yards" data-note="&lt;b&gt;50 yd&lt;/b&gt; — standard rimfire match distance and a common pistol zero."><rect x="167" y="212" width="48" height="58"/><line class="stem" x1="182" y1="232" x2="182" y2="252"/><text class="label" x="182" y="226" text-anchor="middle">50</text></g>
+            <g class="tick" tabindex="0" role="button" aria-label="100 yards" data-note="&lt;b&gt;100 yd&lt;/b&gt; — the working zero for most hunting rifles in Southeast."><rect x="236" y="212" width="56" height="58"/><line class="stem" x1="264" y1="232" x2="264" y2="252"/><text class="label" x="264" y="226" text-anchor="middle">100</text></g>
+            <g class="tick" tabindex="0" role="button" aria-label="200 yards" data-note="&lt;b&gt;200 yd&lt;/b&gt; — first real wind call. Read the flags before you break the shot."><rect x="400" y="212" width="56" height="58"/><line class="stem" x1="428" y1="232" x2="428" y2="252"/><text class="label" x="428" y="226" text-anchor="middle">200</text></g>
+            <g class="tick" tabindex="0" role="button" aria-label="300 yards" data-note="&lt;b&gt;300 yd&lt;/b&gt; — where a spotter and a written come-up chart start earning their keep."><rect x="564" y="212" width="56" height="58"/><line class="stem" x1="592" y1="232" x2="592" y2="252"/><text class="label" x="592" y="226" text-anchor="middle">300</text></g>
+            <g class="tick" tabindex="0" role="button" aria-label="500 yards" data-note="&lt;b&gt;500 yd&lt;/b&gt; — the long line. Steel only, and check the flag before anyone walks out."><rect x="892" y="212" width="56" height="58"/><line class="stem" x1="920" y1="232" x2="920" y2="252"/><text class="label" x="920" y="226" text-anchor="middle">500</text></g>
+
+            <g class="plan-rule" opacity=".6">
+              <line x1="223" y1="246" x2="223" y2="252"/>
+              <line x1="305" y1="246" x2="305" y2="252"/>
+              <line x1="346" y1="246" x2="346" y2="252"/>
+              <line x1="387" y1="246" x2="387" y2="252"/>
+              <line x1="469" y1="246" x2="469" y2="252"/>
+              <line x1="510" y1="246" x2="510" y2="252"/>
+              <line x1="551" y1="246" x2="551" y2="252"/>
+              <line x1="633" y1="246" x2="633" y2="252"/>
+              <line x1="674" y1="246" x2="674" y2="252"/>
+              <line x1="715" y1="246" x2="715" y2="252"/>
+              <line x1="756" y1="246" x2="756" y2="252"/>
+              <line x1="797" y1="246" x2="797" y2="252"/>
+              <line x1="838" y1="246" x2="838" y2="252"/>
+              <line x1="879" y1="246" x2="879" y2="252"/>
+            </g>
+            <text class="plan-sub" x="118" y="272">YARDS DOWNRANGE</text>
+
+            <rect class="band" x="100" y="306" width="500" height="92" rx="4"/>
+            <rect class="band-accent" x="100" y="306" width="3" height="92"/>
+            <text class="bandlabel" x="118" y="330">SILHOUETTE LANES</text>
+            <line class="plan-rule" x1="118" y1="374" x2="582" y2="374" opacity=".5"/>
             <g class="planfig">
-              <g transform="translate(250,326)"><path d="M0 0v-14h4l2-6h5l1 6h4V0z"/><text x="8" y="16" font-family="DM Mono, monospace" font-size="11" fill="#8FA39A" text-anchor="middle">40m</text></g>
-              <g transform="translate(350,326)"><path d="M-2 0v-9h-3l-2-7h20l3 7h-3v9z"/><text x="6" y="16" font-family="DM Mono, monospace" font-size="11" fill="#8FA39A" text-anchor="middle">60m</text></g>
-              <g transform="translate(452,326)"><path d="M0 0v-12l-6-9h6l2-5h4l2 5 6-3-4 8v16z"/><text x="4" y="16" font-family="DM Mono, monospace" font-size="11" fill="#8FA39A" text-anchor="middle">77m</text></g>
-              <g transform="translate(552,326)"><path d="M-4 0v-11h-4l-3-9h6a5 5 0 1 1 6 3h10l3 6v11z"/><text x="4" y="16" font-family="DM Mono, monospace" font-size="11" fill="#8FA39A" text-anchor="middle">100m</text></g>
+              <g transform="translate(206,372) scale(1.2)"><path d="M0 0v-14h4l2-6h5l1 6h4V0z"/></g>
+              <g transform="translate(306,372) scale(1.2)"><path d="M-2 0v-9h-3l-2-7h20l3 7h-3v9z"/></g>
+              <g transform="translate(406,372) scale(1.2)"><path d="M0 0v-12l-6-9h6l2-5h4l2 5 6-3-4 8v16z"/></g>
+              <g transform="translate(506,372) scale(1.2)"><path d="M-4 0v-11h-4l-3-9h6a5 5 0 1 1 6 3h10l3 6v11z"/></g>
+            </g>
+            <g class="planfig-label" text-anchor="middle">
+              <text x="216" y="391">40m</text>
+              <text x="315" y="391">60m</text>
+              <text x="410" y="391">77m</text>
+              <text x="509" y="391">100m</text>
             </g>
 
-            <rect class="band" x="700" y="276" width="236" height="80" rx="3"/>
-            <text class="bandlabel" x="714" y="300">TRAP FIELD</text>
-            <g transform="translate(716,314)">
-              <rect x="0" y="18" width="26" height="12" fill="#C6D3CC"/>
-              <path d="M30 30 A 66 66 0 0 1 150 30" fill="none" stroke="#5E7269" stroke-width="1"/>
-              <circle cx="150" cy="8" r="6" fill="#FF6A2B"/>
-              <text class="plantext" x="0" y="48">Five stations · clays available</text>
+            <rect class="band" x="640" y="306" width="296" height="92" rx="4"/>
+            <rect class="band-accent" x="640" y="306" width="3" height="92"/>
+            <text class="bandlabel" x="658" y="330">TRAP FIELD</text>
+            <g transform="translate(658,330)">
+              <path class="plan-rule" d="M4 34 A 78 78 0 0 1 148 34" fill="none"/>
+              <g fill="#C6D3CC">
+                <rect x="2" y="30" width="9" height="7" rx="1"/>
+                <rect x="30" y="16" width="9" height="7" rx="1"/>
+                <rect x="68" y="10" width="9" height="7" rx="1"/>
+                <rect x="106" y="16" width="9" height="7" rx="1"/>
+                <rect x="138" y="30" width="9" height="7" rx="1"/>
+              </g>
+              <circle cx="176" cy="12" r="5" fill="#FF6A2B"/>
+              <text class="planfig-label" x="0" y="61">Five stations &middot; clays</text>
             </g>
-            <text class="plantext" x="100" y="394">Muzzleloading shares the rifle bays — coordinate with anyone on the line.</text>
+
+            <text class="plantext" x="118" y="428">Muzzleloading shares the rifle bays &mdash; coordinate with anyone on the line.</text>
           </svg>
         </div>
-        <p class="hint">Swipe the diagram · tap a distance</p>
+        <p class="hint">Swipe the diagram &middot; tap a distance</p>
+        <div class="plan-legend" aria-hidden="true">
+          <span><i class="k-band"></i>Shooting area</span>
+          <span><i class="k-mark"></i>Marked distance</span>
+          <span><i class="k-berm"></i>Impact berm</span>
+          <span><i class="k-tree"></i>Treeline</span>
+        </div>
         <p id="planNote">Tap or hover a distance marker to see what that line is for.</p>
+      </div>
+
+      <div class="conditions">
+        <span class="cond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 14h16"/><path d="M7 4v6M12 2v8M17 4v6"/></svg>Covered firing line</span>
+        <span class="cond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>Daylight only</span>
+        <span class="cond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 21V3"/><path d="M5 4h12l-2 4 2 4H5"/></svg>Flag up means hot</span>
+        <span class="cond"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l18 18"/><path d="M9 17a3 3 0 0 1 6 0"/><path d="M6 13a8 8 0 0 1 4-2M18 13a8 8 0 0 0-6-3"/></svg>No cell service</span>
       </div>
     </div>
   </section>
