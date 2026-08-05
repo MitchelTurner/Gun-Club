@@ -4,15 +4,24 @@ Static site. No build step, no framework, no server. Every page is plain
 HTML sharing one stylesheet and one script.
 
 ```
-index.html          home — membership, range, matches, FAQ
-first-visit.html    walkthrough for people who have never shot
-visitors.html       out-of-town shooters + visit request
-waiver.html         liability waiver, signed online
-members.html        gate code, documents, results, bay requests (noindex)
-admin.html          officer tool: set the range status (noindex)
-assets/js/config.js ← the only file you edit for normal changes
-data/status.json    open/closed + banner, written by admin.html
-data/results.json   match results; feeds the season leaderboard
+index.html              home — membership, range, matches, FAQ
+visitors.html           out-of-town shooters + visit request
+waiver.html             liability waiver, signed online
+members.html            gate code, documents, results, bay requests (noindex)
+assets/css/site.css     shared stylesheet
+assets/js/config.js     ← the only file you edit for normal changes
+assets/js/site.js       shared behaviour
+assets/img/             photos (see README in that folder)
+assets/fonts/           optional self-hosted fonts
+data/status.json        open/closed + banner
+data/results.json       match results; feeds the season leaderboard
+robots.txt / sitemap.xml
+Staticfile              Railway / Railpack static detection
+
+Still to add when you have them:
+first-visit.html        walkthrough for people who have never shot
+admin.html              officer tool: set the range status (noindex)
+_headers / _redirects   Cloudflare / Netlify helpers
 ```
 
 ## Launch checklist

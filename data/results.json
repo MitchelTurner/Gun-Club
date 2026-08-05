@@ -1,0 +1,27 @@
+{
+  "_comment": "Add a match object after each match. 'scores' must be in finishing order — the leaderboard awards 20 points for a win and one less for each place below.",
+  "matches": [
+    {
+      "season": "2026",
+      "date": "2026-07-04",
+      "name": "Rimfire match — July",
+      "shooters": 14,
+      "scores": [
+        { "shooter": "Example, A.", "score": 87 },
+        { "shooter": "Example, B.", "score": 81 },
+        { "shooter": "Example, C.", "score": 74 }
+      ]
+    },
+    {
+      "season": "2026",
+      "date": "2026-06-06",
+      "name": "Rimfire match — June",
+      "shooters": 11,
+      "scores": [
+        { "shooter": "Example, B.", "score": 79 },
+        { "shooter": "Example, A.", "score": 76 },
+        { "shooter": "Example, D.", "score": 70 }
+      ]
+    }
+  ]
+}
