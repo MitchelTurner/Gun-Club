@@ -9,5 +9,8 @@
 /visitors    /visitors.html    200
 /waiver      /waiver.html      200
 /offline     /offline.html     200
+/checkin     /checkin.html     200
+/score       /score.html       200
+/admin       /admin.html       200
 
 # SPA-style fallback not used — static multipage site

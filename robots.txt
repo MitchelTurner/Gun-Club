@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /score.html
+Disallow: /checkin.html
+Disallow: /members.html
 
 Sitemap: https://ketchikanrodandgun.org/sitemap.xml

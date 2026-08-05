@@ -113,8 +113,7 @@
   });
 
   /* ---------- range status ----------
-     Reads /data/status.json so the club can post a closure without
-     touching code. Falls back to "open" if the file is missing.  */
+     Prefers /api/status (Phase 2 D1), then data/status.json.  */
   (function(){
     var pill = $("#statusPill"), noticeEl = $("#statusNotice");
     if(!pill){ return; }
@@ -129,10 +128,32 @@
       var until = $("#statusUntil");
       if(until && s.detail){ until.textContent = s.detail; }
     };
-    fetch("data/status.json", { cache:"no-store" })
-      .then(function(r){ return r.json(); })
-      .then(apply)
-      .catch(function(){ apply({ open:true }); });
+    var apiPath = (C.api && C.api.statusPath) || "/api/status";
+    var loadStatic = function(){
+      return fetch("data/status.json", { cache:"no-store" }).then(function(r){ return r.json(); });
+    };
+    var load = (C.api && C.api.enabled !== false)
+      ? fetch(apiPath, { cache:"no-store" }).then(function(r){ return r.ok ? r.json() : Promise.reject(); }).catch(loadStatic)
+      : loadStatic();
+    load.then(apply).catch(function(){ apply({ open:true }); });
+  })();
+
+  /* ---------- on-range count (public: count only, never names) ---------- */
+  (function(){
+    var el = $("#onRangeCount");
+    if(!el){ return; }
+    var path = (C.api && C.api.onRangePath) || "/api/onrange";
+    fetch(path, { cache:"no-store" })
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+      .then(function(j){
+        var n = Number(j.count) || 0;
+        el.textContent = n === 0 ? "No check-ins right now"
+          : (n === 1 ? "1 shooter on the range now" : n + " shooters on the range now");
+      })
+      .catch(function(){
+        el.textContent = "";
+        el.setAttribute("data-offline", "true");
+      });
   })();
 
   /* ---------- approximate sunset, Ketchikan ---------- */
@@ -408,11 +429,11 @@
   })();
 
   /* ---------- members gate ----------
-     A shared passcode, held in memory only for this page view. It
-     keeps the gate code off the open web; it is not real auth.   */
+     Phase 1 local passcode. Skipped when api.js is present (Phase 2). */
   (function(){
     var btn = $("#gateBtn");
     if(!btn){ return; }
+    if(window.KRGC_API){ return; }
     var unlock = function(){
       $("#gateForm").style.display = "none";
       $$(".locked").forEach(function(n){ n.setAttribute("data-unlocked","true"); });

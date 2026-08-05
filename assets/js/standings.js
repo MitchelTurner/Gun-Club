@@ -357,8 +357,15 @@
     if(!$("#standingsHost")){ return; }
     bindTabs();
 
+    var resultsUrl = (C.api && C.api.enabled !== false && C.api.resultsPath)
+      ? C.api.resultsPath
+      : "data/results.json";
+    var loadResults = fetch(resultsUrl, { cache: "no-store" })
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+      .catch(function(){ return fetch("data/results.json", { cache: "no-store" }).then(function(r){ return r.json(); }); });
+
     Promise.all([
-      fetch("data/results.json", { cache: "no-store" }).then(function(r){ return r.json(); }),
+      loadResults,
       fetch("data/badges.json", { cache: "no-store" }).then(function(r){ return r.json(); }),
       fetch("data/records.json", { cache: "no-store" }).then(function(r){ return r.json(); })
     ]).then(function(res){

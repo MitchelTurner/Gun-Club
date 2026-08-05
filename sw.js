@@ -1,5 +1,5 @@
 /* KRGC service worker — offline shell for range tools */
-var CACHE = "krgc-v1";
+var CACHE = "krgc-v2";
 var OFFLINE = "/offline.html";
 
 /* App shell — cache-first */
@@ -24,6 +24,10 @@ var SHELL = [
   "/assets/js/games.js",
   "/assets/js/standings.js",
   "/assets/js/pwa.js",
+  "/assets/js/api.js",
+  "/checkin.html",
+  "/score.html",
+  "/admin.html",
   "/manifest.webmanifest",
   "/assets/img/icons/icon-192.png",
   "/assets/img/icons/icon-512.png",

@@ -10,4 +10,5 @@
   <url><loc>https://ketchikanrodandgun.org/standings.html</loc><priority>0.8</priority></url>
   <url><loc>https://ketchikanrodandgun.org/recaps.html</loc><priority>0.7</priority></url>
   <url><loc>https://ketchikanrodandgun.org/members.html</loc><priority>0.4</priority></url>
+  <url><loc>https://ketchikanrodandgun.org/checkin.html</loc><priority>0.3</priority></url>
 </urlset>
