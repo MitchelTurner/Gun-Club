@@ -1,0 +1,53 @@
+{
+  "_comment": "Badge definitions. Awarded by pure functions in standings.js against results.json — do not store earned state here.",
+  "badges": [
+    {
+      "id": "first-steel",
+      "name": "First Steel",
+      "blurb": "First recorded hit at 100 yards or farther.",
+      "icon": "steel"
+    },
+    {
+      "id": "ram-slayer",
+      "name": "Ram Slayer",
+      "blurb": "Clean silhouette run — all rams down.",
+      "icon": "ram"
+    },
+    {
+      "id": "rain-dog",
+      "name": "Rain Dog",
+      "blurb": "Shot a match flagged weather: rain.",
+      "icon": "rain"
+    },
+    {
+      "id": "dark-thirty",
+      "name": "Dark Thirty",
+      "blurb": "Shot a match in November, December, or January.",
+      "icon": "dark"
+    },
+    {
+      "id": "iron-will",
+      "name": "Iron Will",
+      "blurb": "Top-3 finish with iron sights.",
+      "icon": "iron"
+    },
+    {
+      "id": "regular",
+      "name": "Regular",
+      "blurb": "Shot six matches in one season.",
+      "icon": "regular"
+    },
+    {
+      "id": "podium",
+      "name": "Podium",
+      "blurb": "First top-3 finish.",
+      "icon": "podium"
+    },
+    {
+      "id": "centurion",
+      "name": "Centurion",
+      "blurb": "100 season points (after drop-two).",
+      "icon": "centurion"
+    }
+  ]
+}
