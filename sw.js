@@ -1,5 +1,5 @@
 /* KRGC service worker — offline shell for range tools */
-var CACHE = "krgc-v4";
+var CACHE = "krgc-v5";
 var OFFLINE = "/offline.html";
 
 /* App shell — cache-first */
@@ -16,10 +16,21 @@ var SHELL = [
   "/waiver.html",
   "/visitors.html",
   "/members.html",
+  "/blog/",
+  "/blog/index.html",
+  "/blog/zero-rimfire-rifle.html",
+  "/blog/wind-calls-southeast-alaska.html",
+  "/blog/first-rimfire-match.html",
+  "/blog/range-commands-cease-fire.html",
+  "/blog/shooting-in-the-rain.html",
+  "/blog/come-up-card-basics.html",
+  "/blog/eye-ear-protection-range.html",
+  "/blog/metallic-silhouette-beginners.html",
   "/assets/css/site.css",
   "/assets/css/print.css",
   "/assets/js/config.js",
   "/assets/js/site.js",
+  "/assets/js/blog.js",
   "/assets/js/ballistics.js",
   "/assets/js/games.js",
   "/assets/js/standings.js",
@@ -43,7 +54,8 @@ var DATA = [
   "/data/badges.json",
   "/data/records.json",
   "/data/recaps.json",
-  "/data/schedule.json"
+  "/data/schedule.json",
+  "/data/posts.json"
 ];
 
 self.addEventListener("install", function(e){

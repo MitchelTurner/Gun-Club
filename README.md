@@ -7,8 +7,10 @@ and closure alerts. No npm, no bundler.
 ```
 index.html              home — membership, range, matches, on-range count
 first-visit.html        visitor funnel: hours → rules → waiver → contact
+blog/                   SEO shooting blog (static articles + index)
 visitors.html / waiver.html / members.html
 sitemap.xml / robots.txt  local SEO
+data/posts.json         blog index metadata
 assets/img/og.jpg       Open Graph share image (1200×630)
 range-card.html         ballistic come-up card (offline)
 targets.html / play.html / standings.html / recaps.html
@@ -50,6 +52,15 @@ in `config.js` → `site.hoursSummary`, `site.directionsSummary`.
 
 Add to `data/recaps.json` and `data/results.json`. Or close a live match
 via `score.html` → Publish (writes D1; `/api/results` feeds standings).
+
+## Adding a blog post
+
+1. Create `blog/your-slug.html` (copy an existing post for SEO head + layout).
+2. Add metadata to `data/posts.json`.
+3. Add the URL to `sitemap.xml` and `sw.js` SHELL list.
+4. Link it from `blog/index.html` (or regenerate the index card list).
+
+Posts are static HTML on purpose — full text is crawlable without JavaScript.
 
 ## Day-to-day
 

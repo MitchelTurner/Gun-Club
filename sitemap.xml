@@ -11,6 +11,51 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://ketchikanrodandgun.org/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ketchikanrodandgun.org/blog/zero-rimfire-rifle.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ketchikanrodandgun.org/blog/wind-calls-southeast-alaska.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ketchikanrodandgun.org/blog/first-rimfire-match.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ketchikanrodandgun.org/blog/range-commands-cease-fire.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ketchikanrodandgun.org/blog/shooting-in-the-rain.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ketchikanrodandgun.org/blog/come-up-card-basics.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ketchikanrodandgun.org/blog/eye-ear-protection-range.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://ketchikanrodandgun.org/blog/metallic-silhouette-beginners.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ketchikanrodandgun.org/waiver.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
