@@ -1,0 +1,132 @@
+{
+  "posts": [
+    {
+      "slug": "metallic-silhouette-beginners",
+      "title": "Metallic silhouette for beginners",
+      "description": "Beginner\u2019s guide to metallic silhouette at KRGC: chickens, pigs, turkeys, rams, distances, classes, and how to start without fancy gear.",
+      "date": "2026-08-07",
+      "updated": "2026-08-07",
+      "category": "Matches",
+      "tags": [
+        "silhouette",
+        "match",
+        "beginner"
+      ],
+      "minutes": 6,
+      "lede": "Silhouette is simple to explain and hard to finish clean: knock the steel down or it does not count. Here is how the KRGC match is shaped for newer shooters.",
+      "url": "/blog/metallic-silhouette-beginners.html"
+    },
+    {
+      "slug": "come-up-card-basics",
+      "title": "Come-up cards explained (and how to make one)",
+      "description": "What a come-up card is, why KRGC shooters carry one, and how to build a printable dope card with the club\u2019s offline ballistics tool.",
+      "date": "2026-08-06",
+      "updated": "2026-08-06",
+      "category": "Marksmanship",
+      "tags": [
+        "ballistics",
+        "come-up",
+        "rifle"
+      ],
+      "minutes": 5,
+      "lede": "A come-up card is a cheat sheet for elevation (and sometimes wind) at known distances. It turns \u201cI think hold a little high\u201d into a number you already trusted at the bench.",
+      "url": "/blog/come-up-card-basics.html"
+    },
+    {
+      "slug": "eye-ear-protection-range",
+      "title": "Eye and ear protection for outdoor ranges",
+      "description": "How to choose eye and ear protection for the Ketchikan Rod & Gun Club: glasses standards, muffs vs plugs, spectators, and wet-weather practicality.",
+      "date": "2026-08-06",
+      "updated": "2026-08-06",
+      "category": "Safety",
+      "tags": [
+        "safety",
+        "gear",
+        "beginner"
+      ],
+      "minutes": 5,
+      "lede": "Hearing damage is cumulative and permanent. Eye hits are instant. Both are optional injuries \u2014 dress for the line every time, including when you are \u201cjust watching.\u201d",
+      "url": "/blog/eye-ear-protection-range.html"
+    },
+    {
+      "slug": "shooting-in-the-rain",
+      "title": "How to shoot well in Ketchikan rain",
+      "description": "Keep groups honest in Southeast weather: lens care, footing, ammo storage, clothing, and match habits that work at the Ketchikan Rod & Gun Club.",
+      "date": "2026-08-05",
+      "updated": "2026-08-05",
+      "category": "Marksmanship",
+      "tags": [
+        "weather",
+        "alaska",
+        "rimfire"
+      ],
+      "minutes": 6,
+      "lede": "If you only practice on bluebird days, you will only shoot well on bluebird days. KRGC is an outdoor club in a rainforest \u2014 rain is a skill, not a cancellation notice.",
+      "url": "/blog/shooting-in-the-rain.html"
+    },
+    {
+      "slug": "range-commands-cease-fire",
+      "title": "Range commands and cease fire, explained",
+      "description": "Plain-language guide to KRGC range commands: cease fire, the line is hot, actions open, and what to do when someone is downrange.",
+      "date": "2026-08-04",
+      "updated": "2026-08-04",
+      "category": "Safety",
+      "tags": [
+        "safety",
+        "rules",
+        "beginner"
+      ],
+      "minutes": 5,
+      "lede": "Range talk is short on purpose. Learn the phrases before your first visit so you are not decoding them with a loaded rifle in your hands.",
+      "url": "/blog/range-commands-cease-fire.html"
+    },
+    {
+      "slug": "first-rimfire-match",
+      "title": "Your first rimfire match: what to expect at KRGC",
+      "description": "What happens at the Ketchikan Rod & Gun Club monthly rimfire match \u2014 gear list, stages, loaner rifles, scoring, and how new shooters fit in.",
+      "date": "2026-08-03",
+      "updated": "2026-08-03",
+      "category": "Matches",
+      "tags": [
+        "rimfire",
+        "match",
+        "beginner"
+      ],
+      "minutes": 8,
+      "lede": "The rimfire match is the easiest door into competition at KRGC. Show up with a .22, or empty-handed on loaner days, and you will leave knowing more than you did at 10:00.",
+      "url": "/blog/first-rimfire-match.html"
+    },
+    {
+      "slug": "wind-calls-southeast-alaska",
+      "title": "How to call wind on a Southeast Alaska range",
+      "description": "Practical wind reading for the Ketchikan Rod & Gun Club: flags, mirage, terrain funnels, and simple holds for rimfire and centerfire.",
+      "date": "2026-08-02",
+      "updated": "2026-08-02",
+      "category": "Marksmanship",
+      "tags": [
+        "wind",
+        "ballistics",
+        "alaska"
+      ],
+      "minutes": 7,
+      "lede": "On Tongass, the wind rarely reads like a prairie range. It swirls off the timber, dies in the cut, and comes back from a new direction. Learn to watch the range \u2014 not just the flag at the bench.",
+      "url": "/blog/wind-calls-southeast-alaska.html"
+    },
+    {
+      "slug": "zero-rimfire-rifle",
+      "title": "How to zero a .22 LR rifle for the rimfire match",
+      "description": "A clear 50-yard zero process for .22 LR at the Ketchikan Rod & Gun Club: rest, group, adjust, and confirm before match day.",
+      "date": "2026-08-01",
+      "updated": "2026-08-01",
+      "category": "Marksmanship",
+      "tags": [
+        "rimfire",
+        "zero",
+        "beginner"
+      ],
+      "minutes": 6,
+      "lede": "A solid 50-yard zero is the difference between chasing clicks and stacking steel. Here is the process we walk new shooters through on the KRGC rimfire line.",
+      "url": "/blog/zero-rimfire-rifle.html"
+    }
+  ]
+}
