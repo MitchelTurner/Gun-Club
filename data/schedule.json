@@ -1,0 +1,5 @@
+{
+  "_comment": "Optional one-off matches and cancellations. Recurring series live in config.js → schedule.series. upcoming[] entries win over computed series dates for the same day; cancelled[] suppresses a YYYY-MM-DD.",
+  "upcoming": [],
+  "cancelled": []
+}

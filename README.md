@@ -60,6 +60,8 @@ via `score.html` → Publish (writes D1; `/api/results` feeds standings).
 | Live scores | `score.html` (works offline, syncs later) |
 | Work-party hours | `admin.html` |
 | Passcode fallback | `members.html` — keep for one season |
+| Next-match tile / series dates | `config.js` → `schedule.series` or `data/schedule.json` |
+| FAQ / guest / loaner copy | `config.js` → `policy` |
 
 ## Privacy
 
