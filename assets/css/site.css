@@ -453,6 +453,7 @@ tbody tr:nth-child(1) td.rank{color:var(--blaze)}
 
 .toolgrid{display:grid;gap:1rem}
 @media(min-width:800px){.toolgrid{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.toolgrid{grid-template-columns:repeat(3,1fr)}}
 .toolcard{
   display:block;padding:1.35rem 1.4rem;border-radius:var(--r);
   background:var(--surface);border:1px solid var(--line);text-decoration:none;
