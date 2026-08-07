@@ -1,5 +1,5 @@
 /* KRGC service worker — offline shell for range tools */
-var CACHE = "krgc-v3";
+var CACHE = "krgc-v4";
 var OFFLINE = "/offline.html";
 
 /* App shell — cache-first */
@@ -42,7 +42,8 @@ var DATA = [
   "/data/results.json",
   "/data/badges.json",
   "/data/records.json",
-  "/data/recaps.json"
+  "/data/recaps.json",
+  "/data/schedule.json"
 ];
 
 self.addEventListener("install", function(e){

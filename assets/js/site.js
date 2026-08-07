@@ -211,35 +211,269 @@
     return d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate()) +
       "T" + pad(d.getHours()) + pad(d.getMinutes()) + "00";
   }
-  $$("[data-ics]").forEach(function(btn){
-    btn.addEventListener("click", function(){
-      var title = btn.getAttribute("data-ics");
-      var start = new Date(btn.getAttribute("data-start"));
-      var hours = parseFloat(btn.getAttribute("data-hours") || "3");
-      var rrule = btn.getAttribute("data-rrule");
-      var end   = new Date(start.getTime() + hours * 3600000);
-      var lines = [
-        "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//KRGC//EN","CALSCALE:GREGORIAN",
-        "BEGIN:VEVENT",
-        "UID:" + Date.now() + "@krgc",
-        "DTSTAMP:" + icsDate(new Date()),
-        "DTSTART:" + icsDate(start),
-        "DTEND:"   + icsDate(end),
-        "SUMMARY:" + title,
-        "LOCATION:Ketchikan Rod & Gun Club, North Tongass Highway, Ketchikan AK",
-        "DESCRIPTION:" + (btn.getAttribute("data-desc") || "")
-      ];
-      if(rrule){ lines.push("RRULE:" + rrule); }
-      lines.push("END:VEVENT","END:VCALENDAR");
-      var blob = new Blob([lines.join("\r\n")], { type:"text/calendar;charset=utf-8" });
-      var a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = title.toLowerCase().replace(/[^a-z0-9]+/g,"-") + ".ics";
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-      URL.revokeObjectURL(a.href);
-      track("Calendar download", { match:title });
+  function bindIcsButtons(root){
+    $$("[data-ics]", root || document).forEach(function(btn){
+      if(btn.getAttribute("data-ics-bound") === "1"){ return; }
+      btn.setAttribute("data-ics-bound", "1");
+      btn.addEventListener("click", function(){
+        var title = btn.getAttribute("data-ics");
+        var start = new Date(btn.getAttribute("data-start"));
+        var hours = parseFloat(btn.getAttribute("data-hours") || "3");
+        var rrule = btn.getAttribute("data-rrule");
+        var end   = new Date(start.getTime() + hours * 3600000);
+        var lines = [
+          "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//KRGC//EN","CALSCALE:GREGORIAN",
+          "BEGIN:VEVENT",
+          "UID:" + Date.now() + "@krgc",
+          "DTSTAMP:" + icsDate(new Date()),
+          "DTSTART:" + icsDate(start),
+          "DTEND:"   + icsDate(end),
+          "SUMMARY:" + title,
+          "LOCATION:Ketchikan Rod & Gun Club, North Tongass Highway, Ketchikan AK",
+          "DESCRIPTION:" + (btn.getAttribute("data-desc") || "")
+        ];
+        if(rrule){ lines.push("RRULE:" + rrule); }
+        lines.push("END:VEVENT","END:VCALENDAR");
+        var blob = new Blob([lines.join("\r\n")], { type:"text/calendar;charset=utf-8" });
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = title.toLowerCase().replace(/[^a-z0-9]+/g,"-") + ".ics";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+        track("Calendar download", { match:title });
+      });
     });
-  });
+  }
+  bindIcsButtons();
+
+  /* ---------- next match + series dates ----------
+     Prefers open/live matches from /api/squad, then data/schedule.json
+     one-offs, then recurring series in config.schedule.            */
+  (function(){
+    var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var series = ((C.schedule && C.schedule.series) || []).slice();
+
+    function nthWeekday(year, month, weekday, n){
+      var count = 0;
+      for(var day = 1; day <= 31; day++){
+        var dt = new Date(year, month, day, 12, 0, 0, 0);
+        if(dt.getMonth() !== month){ break; }
+        if(dt.getDay() === weekday){
+          count += 1;
+          if(count === n){ return dt; }
+        }
+      }
+      return null;
+    }
+
+    function applyTime(dt, time){
+      var parts = String(time || "10:00").split(":");
+      return new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(),
+        parseInt(parts[0], 10) || 10, parseInt(parts[1], 10) || 0, 0, 0);
+    }
+
+    function ymd(d){
+      return d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate());
+    }
+
+    function formatWhen(d){
+      return MONTHS[d.getMonth()] + " " + d.getDate();
+    }
+
+    function formatClock(d){
+      var h = d.getHours(), m = d.getMinutes();
+      var h12 = (h % 12 === 0) ? 12 : (h % 12);
+      return h12 + ":" + pad(m) + (h >= 12 ? " pm" : " am");
+    }
+
+    function nextFromSeries(s, from){
+      var y = from.getFullYear(), m = from.getMonth();
+      for(var i = 0; i < 14; i++){
+        var base = nthWeekday(y, m, s.weekday, s.week);
+        if(base){
+          var dt = applyTime(base, s.time);
+          if(dt.getTime() >= from.getTime()){ return dt; }
+        }
+        m += 1;
+        if(m > 11){ m = 0; y += 1; }
+      }
+      return null;
+    }
+
+    function parseLocalDate(dateStr, timeStr){
+      var bits = String(dateStr || "").split("-");
+      if(bits.length < 3){ return null; }
+      var t = String(timeStr || "10:00").split(":");
+      return new Date(
+        parseInt(bits[0], 10),
+        parseInt(bits[1], 10) - 1,
+        parseInt(bits[2], 10),
+        parseInt(t[0], 10) || 10,
+        parseInt(t[1], 10) || 0,
+        0, 0
+      );
+    }
+
+    function paintNext(ev){
+      var el = $("#nextMatch");
+      if(!el || !ev){ return; }
+      el.classList.remove("tk");
+      el.innerHTML = formatWhen(ev.date) +
+        "<small>" + (ev.short || ev.name) + " · " + formatClock(ev.date) + "</small>";
+    }
+
+    function paintSeriesCards(byId){
+      $$("[data-series]").forEach(function(card){
+        var id = card.getAttribute("data-series");
+        var ev = byId[id];
+        if(!ev){ return; }
+        var when = card.querySelector(".when");
+        if(when){
+          when.classList.remove("tk");
+          when.textContent = formatWhen(ev.date) + " · " + formatClock(ev.date);
+        }
+        var btn = card.querySelector("[data-ics]");
+        if(btn){
+          btn.setAttribute("data-start",
+            ev.date.getFullYear() + "-" + pad(ev.date.getMonth()+1) + "-" + pad(ev.date.getDate()) +
+            "T" + pad(ev.date.getHours()) + ":" + pad(ev.date.getMinutes()));
+          btn.setAttribute("data-hours", String(ev.hours || 3));
+          if(ev.rrule){ btn.setAttribute("data-rrule", ev.rrule); }
+          if(ev.desc){ btn.setAttribute("data-desc", ev.desc); }
+          btn.setAttribute("data-ics", ev.name);
+        }
+        if(ev.hot){ card.classList.add("hot"); }
+        else { card.classList.remove("hot"); }
+      });
+      bindIcsButtons();
+    }
+
+    function fromConfig(now, cancelled){
+      var cancel = {};
+      (cancelled || []).forEach(function(d){ cancel[d] = true; });
+      var list = [];
+      series.forEach(function(s){
+        var dt = nextFromSeries(s, now);
+        if(!dt){ return; }
+        if(cancel[ymd(dt)]){
+          var after = new Date(dt.getTime() + 86400000);
+          dt = nextFromSeries(s, after);
+          if(!dt || cancel[ymd(dt)]){ return; }
+        }
+        list.push({
+          id: s.id,
+          name: s.name,
+          short: s.short || s.name,
+          date: dt,
+          hours: s.hours || 3,
+          rrule: s.rrule || "",
+          desc: s.desc || "",
+          hot: !!s.hot || s.id === "rimfire",
+          source: "series"
+        });
+      });
+      list.sort(function(a, b){ return a.date - b.date; });
+      return list;
+    }
+
+    function mergeUpcoming(base, upcoming, cancelled){
+      var cancel = {};
+      (cancelled || []).forEach(function(d){ cancel[d] = true; });
+      var byDay = {};
+      base.forEach(function(ev){ byDay[ymd(ev.date) + "|" + ev.id] = ev; });
+      (upcoming || []).forEach(function(u){
+        var dt = parseLocalDate(u.date, u.time || "10:00");
+        if(!dt || cancel[ymd(dt)]){ return; }
+        if(dt.getTime() < Date.now() - 3600000){ return; }
+        var id = u.seriesId || u.id || ymd(dt);
+        byDay[ymd(dt) + "|" + id] = {
+          id: id,
+          name: u.name || "Club match",
+          short: u.short || u.name || "Match",
+          date: dt,
+          hours: u.hours || 3,
+          rrule: u.rrule || "",
+          desc: u.desc || "",
+          hot: u.hot !== false,
+          source: "schedule"
+        };
+      });
+      var list = Object.keys(byDay).map(function(k){ return byDay[k]; });
+      list.sort(function(a, b){ return a.date - b.date; });
+      return list;
+    }
+
+    function applyList(list){
+      if(!list.length){
+        var el = $("#nextMatch");
+        if(el){ el.innerHTML = "TBD<small>See matches below</small>"; }
+        return;
+      }
+      paintNext(list[0]);
+      var byId = {};
+      series.forEach(function(s){
+        var only = fromConfig(new Date(), []).filter(function(e){ return e.id === s.id; })[0];
+        if(only){ byId[s.id] = only; }
+      });
+      list.forEach(function(ev){
+        if(ev.id && series.some(function(s){ return s.id === ev.id; })){
+          byId[ev.id] = ev;
+        }
+      });
+      var soonestId = list[0] && list[0].id;
+      Object.keys(byId).forEach(function(id){
+        byId[id].hot = (id === soonestId);
+      });
+      paintSeriesCards(byId);
+    }
+
+    var now = new Date();
+    var loadStatic = function(){
+      return fetch("data/schedule.json", { cache:"no-store" })
+        .then(function(r){ return r.ok ? r.json() : { upcoming:[], cancelled:[] }; })
+        .catch(function(){ return { upcoming:[], cancelled:[] }; })
+        .then(function(j){
+          var base = fromConfig(now, j.cancelled || []);
+          return mergeUpcoming(base, j.upcoming || [], j.cancelled || []);
+        });
+    };
+
+    var squadPath = (C.api && C.api.squadPath) || "/api/squad";
+    var loadApi = function(){
+      if(!C.api || C.api.enabled === false){ return Promise.reject(); }
+      return fetch(squadPath, { cache:"no-store" })
+        .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+        .then(function(j){
+          var rows = j.matches || [];
+          var list = rows.map(function(m){
+            var dt = parseLocalDate(m.date, m.time || "10:00");
+            if(!dt){ return null; }
+            return {
+              id: m.discipline || m.id,
+              name: m.name || "Club match",
+              short: m.discipline
+                ? (m.discipline.charAt(0).toUpperCase() + m.discipline.slice(1))
+                : (m.name || "Match"),
+              date: dt,
+              hours: 3,
+              rrule: "",
+              desc: "",
+              hot: m.status === "live" || m.discipline === "rimfire",
+              source: "api"
+            };
+          }).filter(Boolean).filter(function(ev){
+            return ev.date.getTime() >= now.getTime() - 6 * 3600000;
+          });
+          list.sort(function(a, b){ return a.date - b.date; });
+          if(!list.length){ return Promise.reject(); }
+          return list;
+        });
+    };
+
+    loadApi().catch(loadStatic).then(applyList).catch(function(){
+      applyList(fromConfig(now, []));
+    });
+  })();
 
   /* ---------- membership picker + checkout ---------- */
   (function(){
@@ -253,7 +487,10 @@
       if(!p){ return; }
       chosen = key;
       nameEl.textContent = p.name;
-      $("#planPrice").textContent = p.price;
+      var priceEl = $("#planPrice");
+      var placeholder = !p.price || /\$__|__/.test(p.price);
+      priceEl.textContent = p.price;
+      priceEl.classList.toggle("tk", placeholder);
       $("#planUnit").textContent = p.unit;
       $("#planFor").textContent = p.blurb;
       $("#planList").innerHTML = p.perks.map(function(t){
@@ -274,7 +511,10 @@
         }
       }
       var bar = $("#barPrice");
-      if(bar){ bar.textContent = p.price + " " + p.unit; }
+      if(bar){
+        bar.textContent = p.price + " " + p.unit;
+        bar.classList.toggle("tk", placeholder);
+      }
       track("Tier viewed", { tier: p.name });
     }
 
@@ -566,9 +806,10 @@
     if(cta){ cta.addEventListener("click", function(){ track("Sticky CTA tapped"); }); }
   })();
 
-  /* ---------- fill config-driven NAP / contact ---------- */
+  /* ---------- fill config-driven NAP / contact / policy ---------- */
   (function(){
     var site = C.site || {};
+    var policy = C.policy || {};
     var lat = site.lat, lng = site.lng;
     var name = site.name || "Ketchikan Rod & Gun Club";
     var derived = {
@@ -601,6 +842,21 @@
         val = "tel:" + val;
       }
       el.setAttribute("href", val);
+    });
+
+    var policyValues = Object.assign({}, policy);
+    if(policy.dayUseFee){
+      policyValues.dayUseFeeLabel = "Currently " + policy.dayUseFee + ".";
+    } else {
+      policyValues.dayUseFeeLabel = "Ask at the shack for the current amount.";
+    }
+
+    $$("[data-policy]").forEach(function(el){
+      var key = el.getAttribute("data-policy");
+      var val = policyValues[key];
+      if(val == null || val === ""){ return; }
+      el.textContent = String(val);
+      el.classList.remove("tk");
     });
   })();
 })();

@@ -108,6 +108,53 @@ window.KRGC = {
     winPoints: 20
   },
 
+  /* ---------- public policy copy ----------
+     Edit these strings to update FAQ / visitor pages.
+     Leave dayUseFee empty to say "ask at the shack".
+     Set firstVisitNote to "First visit free" only when the board confirms. */
+  policy: {
+    firstVisitNote: "Public welcome",
+    sponsorAnswer: "No sponsor is required to shoot as a visitor. Membership applications are reviewed by the club.",
+    guestAnswer: "Yes — guests are welcome with a member or on public days. Everyone signs the waiver. Non-members pay a day-use fee at the range; ask at the shack for the current amount.",
+    dayUseFee: "",
+    loanersNote: "Loaner rimfires are often available on rimfire match days — ask when you arrive.",
+    emptyHandedNote: "On rimfire match days, loaner rifles and ammunition are often on hand. On other days, bring your own firearm or request a visit so someone can meet you.",
+    meetings: "Call or email for the next meeting date"
+  },
+
+  /* ---------- match schedule (recurring series) ----------
+     Used for the home “Next match” tile and event card dates.
+     One-off dates / cancellations can override via data/schedule.json.
+     weekday: 0=Sun … 6=Sat. week: nth that weekday in the month. */
+  schedule: {
+    series: [
+      {
+        id: "rimfire",
+        name: "Rimfire match",
+        short: "Rimfire",
+        week: 1,
+        weekday: 6,
+        time: "10:00",
+        hours: 3,
+        cadence: "First Saturday",
+        rrule: "FREQ=MONTHLY;BYDAY=1SA",
+        desc: "Monthly .22 LR match at the Ketchikan Rod & Gun Club. Loaner rifles available."
+      },
+      {
+        id: "silhouette",
+        name: "Metallic silhouette",
+        short: "Silhouette",
+        week: 3,
+        weekday: 6,
+        time: "11:00",
+        hours: 3,
+        cadence: "Third Saturday",
+        rrule: "FREQ=MONTHLY;BYDAY=3SA",
+        desc: "Monthly metallic silhouette match, 40 to 100 metres."
+      }
+    ]
+  },
+
   /* ---------- ballistics defaults (Ketchikan) ----------
      Station defaults for the come-up card. Marked as defaults
      in the UI — shooters should override for their day.       */
@@ -140,6 +187,7 @@ window.KRGC = {
     enabled: true,
     resultsPath: "/api/results",
     statusPath: "/api/status",
-    onRangePath: "/api/onrange"
+    onRangePath: "/api/onrange",
+    squadPath: "/api/squad"
   }
 };

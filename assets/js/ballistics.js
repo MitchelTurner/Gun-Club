@@ -288,7 +288,7 @@
     $("#dragModel").value = p.dragModel;
     $("#mvFps").value = p.mvFps;
     var note = $("#mvNote");
-    if(note){ note.innerHTML = 'Muzzle velocity is nominal for this preset — <span class="tk">varies by barrel</span>. Chronograph yours.'; }
+    if(note){ note.innerHTML = 'Muzzle velocity is nominal for this preset — varies by barrel. Chronograph yours.'; }
   }
 
   function renderProfileList(){
