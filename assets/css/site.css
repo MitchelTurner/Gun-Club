@@ -349,24 +349,54 @@ tbody tr:nth-child(1) td.rank{color:var(--blaze)}
 }
 .drive-steps{
   list-style:none;margin:0;padding:0;counter-reset:drive;
-  display:grid;grid-template-columns:1fr;gap:1px;
-  background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  display:flex;flex-direction:column;gap:0;
+  border-top:1px solid var(--line);
 }
-@media(min-width:760px){.drive-steps{grid-template-columns:1fr 1fr}}
 .drive-steps li{
-  counter-increment:drive;display:grid;grid-template-columns:2.4rem 1fr;gap:1rem;
-  padding:clamp(1.35rem,3vw,1.75rem);background:var(--surface);margin:0;border:0;
+  counter-increment:drive;
+  display:grid;
+  grid-template-columns:3rem 1fr;
+  gap:clamp(1rem,3vw,1.75rem);
+  align-items:start;
+  padding:clamp(1.5rem,4vw,2.15rem) 0;
+  border-bottom:1px solid var(--line);
+  background:transparent;margin:0;
+}
+@media(min-width:820px){
+  .drive-steps li{
+    grid-template-columns:4rem minmax(14rem,28%) 1fr;
+    gap:clamp(1.5rem,4vw,2.5rem);
+    align-items:baseline;
+  }
 }
 .drive-steps li::before{
   content:counter(drive,decimal-leading-zero);font-family:var(--mono);
-  font-size:.76rem;color:var(--blaze);padding-top:.3rem;
+  font-size:.78rem;letter-spacing:.16em;color:var(--blaze);padding-top:.35rem;
 }
-.drive-steps li:last-child{border-bottom:0}
+@media(min-width:820px){
+  .drive-steps li::before{padding-top:.2rem}
+}
+.drive-step-body{
+  display:contents;
+}
 .drive-steps strong{
-  display:block;font-family:var(--display);font-size:clamp(1.15rem,2.5vw,1.35rem);
-  text-transform:uppercase;margin-bottom:.45rem;line-height:1.05;
+  display:block;font-family:var(--display);
+  font-size:clamp(1.35rem,3vw,1.75rem);
+  text-transform:uppercase;margin:0 0 .5rem;line-height:1.05;
+  grid-column:2;
 }
-.drive-steps span{display:block;color:var(--muted);font-size:1rem;line-height:1.55;max-width:none}
+@media(min-width:820px){
+  .drive-steps strong{margin:0;grid-column:auto}
+}
+.drive-steps span{
+  display:block;color:var(--muted);
+  font-size:clamp(1.05rem,2.2vw,1.2rem);line-height:1.55;
+  max-width:none;width:100%;
+  grid-column:2;
+}
+@media(min-width:820px){
+  .drive-steps span{grid-column:auto;padding-top:.15rem}
+}
 
 .getting-there-contact{
   display:grid;grid-template-columns:1fr 1fr;gap:1px;

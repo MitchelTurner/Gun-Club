@@ -1,5 +1,5 @@
 /* KRGC service worker — offline shell for range tools */
-var CACHE = "krgc-v10";
+var CACHE = "krgc-v11";
 var OFFLINE = "/offline.html";
 
 /* App shell — cache-first */
