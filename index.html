@@ -293,51 +293,55 @@
 
       <div class="planwrap rise">
         <div class="scroller">
-          <svg viewBox="0 0 1000 440" role="img" aria-label="Schematic plan of the club: firing line at left, rifle distances to 500 yards, silhouette lanes and trap field.">
-            <line x1="86" y1="30" x2="86" y2="410" stroke="#C6D3CC" stroke-width="3"/>
-            <text x="48" y="230" text-anchor="middle" font-family="DM Mono, monospace" font-size="13" letter-spacing="2" fill="#8FA39A" transform="rotate(-90 48 230)">FIRING LINE</text>
-            <path d="M946 40 L985 100 L985 380 L946 400 Z" fill="#2A3B33"/>
-            <text x="934" y="230" text-anchor="end" font-family="DM Mono, monospace" font-size="13" letter-spacing="2" fill="#8FA39A" transform="rotate(-90 934 230)">IMPACT BERM</text>
+          <svg viewBox="0 0 1000 360" role="img" aria-label="Range layout: firing line on the left, distances out to 500 yards, pistol bays, silhouette lanes, trap field, and impact berm.">
+            <!-- ground -->
+            <rect x="70" y="36" width="860" height="250" rx="10" fill="#121C18"/>
+            <!-- berm -->
+            <path d="M900 36 L960 70 L960 252 L900 286 Z" fill="#24342C"/>
+            <text x="930" y="168" text-anchor="middle" transform="rotate(-90 930 168)" class="plan-axis">Impact berm</text>
+            <!-- firing line -->
+            <rect x="70" y="36" width="14" height="250" fill="#FF6A2B"/>
+            <text x="40" y="168" text-anchor="middle" transform="rotate(-90 40 168)" class="plan-axis plan-axis-hot">Firing line</text>
 
-            <rect class="band" x="86" y="42" width="290" height="80" rx="3"/>
-            <text class="bandlabel" x="100" y="66">PISTOL BAYS</text>
-            <text class="plantext" x="100" y="96">7 to 50 yards · paper and steel</text>
-
-            <rect class="band" x="86" y="140" width="850" height="118" rx="3"/>
-            <text class="bandlabel" x="100" y="164">RIFLE LINE</text>
-            <line x1="86" y1="222" x2="936" y2="222" stroke="#5E7269" stroke-width="1"/>
-
-            <g class="tick" tabindex="0" role="button" aria-label="25 yards" data-note="&lt;b&gt;25 yd&lt;/b&gt; — rimfire zero, and where a new shooter should spend their first box of ammunition."><rect x="146" y="184" width="54" height="62"/><line class="stem" x1="172" y1="202" x2="172" y2="222"/><text class="label" x="172" y="196" text-anchor="middle">25</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="50 yards" data-note="&lt;b&gt;50 yd&lt;/b&gt; — standard rimfire match distance and a common pistol zero."><rect x="218" y="184" width="54" height="62"/><line class="stem" x1="244" y1="202" x2="244" y2="222"/><text class="label" x="244" y="196" text-anchor="middle">50</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="100 yards" data-note="&lt;b&gt;100 yd&lt;/b&gt; — the working zero for most hunting rifles in Southeast."><rect x="318" y="184" width="60" height="62"/><line class="stem" x1="348" y1="202" x2="348" y2="222"/><text class="label" x="348" y="196" text-anchor="middle">100</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="200 yards" data-note="&lt;b&gt;200 yd&lt;/b&gt; — first real wind call. Read the flags before you break the shot."><rect x="458" y="184" width="60" height="62"/><line class="stem" x1="488" y1="202" x2="488" y2="222"/><text class="label" x="488" y="196" text-anchor="middle">200</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="300 yards" data-note="&lt;b&gt;300 yd&lt;/b&gt; — where a spotter and a written come-up chart start earning their keep."><rect x="592" y="184" width="60" height="62"/><line class="stem" x1="622" y1="202" x2="622" y2="222"/><text class="label" x="622" y="196" text-anchor="middle">300</text></g>
-            <g class="tick" tabindex="0" role="button" aria-label="500 yards" data-note="&lt;b&gt;500 yd&lt;/b&gt; — the long line. Steel only, and check the flag before anyone walks out."><rect x="872" y="184" width="66" height="62"/><line class="stem" x1="904" y1="202" x2="904" y2="222"/><text class="label" x="904" y="196" text-anchor="middle">500</text></g>
-            <text x="100" y="248" font-family="DM Mono, monospace" font-size="12" letter-spacing="1" fill="#5E7269">YARDS</text>
-
-            <rect class="band" x="86" y="276" width="560" height="80" rx="3"/>
-            <text class="bandlabel" x="100" y="300">SILHOUETTE LANES</text>
-            <text class="plantext" x="100" y="330">Rifle &amp; pistol</text>
-            <g class="planfig">
-              <g transform="translate(250,326)"><path d="M0 0v-14h4l2-6h5l1 6h4V0z"/><text x="8" y="16" font-family="DM Mono, monospace" font-size="11" fill="#8FA39A" text-anchor="middle">40m</text></g>
-              <g transform="translate(350,326)"><path d="M-2 0v-9h-3l-2-7h20l3 7h-3v9z"/><text x="6" y="16" font-family="DM Mono, monospace" font-size="11" fill="#8FA39A" text-anchor="middle">60m</text></g>
-              <g transform="translate(452,326)"><path d="M0 0v-12l-6-9h6l2-5h4l2 5 6-3-4 8v16z"/><text x="4" y="16" font-family="DM Mono, monospace" font-size="11" fill="#8FA39A" text-anchor="middle">77m</text></g>
-              <g transform="translate(552,326)"><path d="M-4 0v-11h-4l-3-9h6a5 5 0 1 1 6 3h10l3 6v11z"/><text x="4" y="16" font-family="DM Mono, monospace" font-size="11" fill="#8FA39A" text-anchor="middle">100m</text></g>
+            <!-- distance rail -->
+            <line x1="110" y1="150" x2="900" y2="150" class="plan-rail"/>
+            <g class="tick" tabindex="0" role="button" aria-label="25 yards" data-note="&lt;b&gt;25 yd&lt;/b&gt; — rimfire zero, and where a new shooter should spend their first box of ammunition.">
+              <rect x="138" y="118" width="44" height="64"/><line class="stem" x1="160" y1="134" x2="160" y2="150"/><text class="label" x="160" y="128" text-anchor="middle">25</text>
             </g>
-
-            <rect class="band" x="700" y="276" width="236" height="80" rx="3"/>
-            <text class="bandlabel" x="714" y="300">TRAP FIELD</text>
-            <g transform="translate(716,314)">
-              <rect x="0" y="18" width="26" height="12" fill="#C6D3CC"/>
-              <path d="M30 30 A 66 66 0 0 1 150 30" fill="none" stroke="#5E7269" stroke-width="1"/>
-              <circle cx="150" cy="8" r="6" fill="#FF6A2B"/>
-              <text class="plantext" x="0" y="48">Five stations · clays available</text>
+            <g class="tick" tabindex="0" role="button" aria-label="50 yards" data-note="&lt;b&gt;50 yd&lt;/b&gt; — standard rimfire match distance and a common pistol zero.">
+              <rect x="210" y="118" width="44" height="64"/><line class="stem" x1="232" y1="134" x2="232" y2="150"/><text class="label" x="232" y="128" text-anchor="middle">50</text>
             </g>
-            <text class="plantext" x="100" y="394">Muzzleloading shares the rifle bays — coordinate with anyone on the line.</text>
+            <g class="tick" tabindex="0" role="button" aria-label="100 yards" data-note="&lt;b&gt;100 yd&lt;/b&gt; — the working zero for most hunting rifles in Southeast.">
+              <rect x="310" y="118" width="52" height="64"/><line class="stem" x1="336" y1="134" x2="336" y2="150"/><text class="label" x="336" y="128" text-anchor="middle">100</text>
+            </g>
+            <g class="tick" tabindex="0" role="button" aria-label="200 yards" data-note="&lt;b&gt;200 yd&lt;/b&gt; — first real wind call. Read the flags before you break the shot.">
+              <rect x="450" y="118" width="52" height="64"/><line class="stem" x1="476" y1="134" x2="476" y2="150"/><text class="label" x="476" y="128" text-anchor="middle">200</text>
+            </g>
+            <g class="tick" tabindex="0" role="button" aria-label="300 yards" data-note="&lt;b&gt;300 yd&lt;/b&gt; — where a spotter and a written come-up chart start earning their keep.">
+              <rect x="590" y="118" width="52" height="64"/><line class="stem" x1="616" y1="134" x2="616" y2="150"/><text class="label" x="616" y="128" text-anchor="middle">300</text>
+            </g>
+            <g class="tick" tabindex="0" role="button" aria-label="500 yards" data-note="&lt;b&gt;500 yd&lt;/b&gt; — the long line. Steel only, and check the flag before anyone walks out.">
+              <rect x="848" y="118" width="52" height="64"/><line class="stem" x1="874" y1="134" x2="874" y2="150"/><text class="label" x="874" y="128" text-anchor="middle">500</text>
+            </g>
+            <text x="110" y="178" class="plan-caption">Yards downrange · tap a mark</text>
+
+            <!-- zones -->
+            <text x="110" y="68" class="plan-zone">Pistol bays</text>
+            <text x="110" y="90" class="plan-detail">7–50 yd · paper and steel</text>
+
+            <text x="400" y="68" class="plan-zone">Rifle line</text>
+            <text x="400" y="90" class="plan-detail">To 500 yd · paper and steel</text>
+
+            <text x="110" y="230" class="plan-zone">Silhouette</text>
+            <text x="110" y="252" class="plan-detail">40 / 60 / 77 / 100 m · rifle and pistol</text>
+
+            <text x="520" y="230" class="plan-zone">Trap field</text>
+            <text x="520" y="252" class="plan-detail">Five stations · clays on summer Sundays</text>
           </svg>
         </div>
         <p class="hint">Swipe the diagram · tap a distance</p>
         <p id="planNote">Tap or hover a distance marker to see what that line is for.</p>
+        <p class="plan-foot">Muzzleloading shares the rifle bays — coordinate with anyone already on the line.</p>
       </div>
     </div>
   </section>

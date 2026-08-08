@@ -221,25 +221,28 @@ a{color:inherit}
 .err[data-show="true"]{display:block}
 
 /* ---------- range plan ---------- */
-.planwrap{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:clamp(.9rem,3vw,1.6rem)}
+.planwrap{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:clamp(1.1rem,3vw,1.85rem)}
 .scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.scroller svg{display:block;min-width:640px;width:100%;height:auto}
-.hint{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:.75rem 0 0}
+.scroller svg{display:block;min-width:680px;width:100%;height:auto}
+.hint{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:.9rem 0 0}
 @media(min-width:760px){.hint{display:none}}
-#planNote{font-family:var(--mono);font-size:.85rem;line-height:1.5;margin:1rem 0 0;padding-top:1rem;border-top:1px solid var(--line);min-height:3.6em;color:var(--muted)}
+#planNote{font-family:var(--mono);font-size:.88rem;line-height:1.55;margin:1.15rem 0 0;padding-top:1.15rem;border-top:1px solid var(--line);min-height:3.4em;color:var(--muted)}
 #planNote b{color:var(--blaze);font-weight:500}
+.plan-foot{margin:0.85rem 0 0;font-size:.92rem;color:var(--muted);max-width:62ch}
 .tick{cursor:pointer}
 .tick rect{fill:transparent}
 .tick .stem{stroke:#8FA39A;stroke-width:2}
-.tick .label{font-family:"DM Mono",monospace;font-size:16px;fill:#C6D3CC}
-.tick:hover .stem,.tick[data-active="true"] .stem{stroke:#FF6A2B;stroke-width:4}
+.tick .label{font-family:var(--mono);font-size:15px;fill:#E8EDE9;letter-spacing:.04em}
+.tick:hover .stem,.tick[data-active="true"] .stem{stroke:#FF6A2B;stroke-width:3}
 .tick:hover .label,.tick[data-active="true"] .label{fill:#FF6A2B}
 .tick:focus{outline:none}
-.tick:focus-visible rect{stroke:#FF6A2B;stroke-width:2;fill:rgba(255,106,43,.08)}
-.band{fill:none;stroke:#5E7269;stroke-width:1;stroke-dasharray:4 5}
-.bandlabel{font-family:"DM Mono",monospace;font-size:14px;letter-spacing:.14em;fill:#8FA39A}
-.planfig{fill:#C6D3CC}
-.plantext{font-family:"Public Sans",sans-serif;font-size:15px;fill:#8FA39A}
+.tick:focus-visible rect{stroke:#FF6A2B;stroke-width:2;fill:rgba(255,106,43,.08);rx:4}
+.plan-rail{stroke:#3A4A42;stroke-width:2}
+.plan-axis{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;fill:#8FA39A}
+.plan-axis-hot{fill:#FF6A2B}
+.plan-zone{font-family:var(--display);font-size:22px;letter-spacing:.02em;fill:#E8EDE9;text-transform:uppercase}
+.plan-detail{font-family:var(--body);font-size:14px;fill:#9AACA2}
+.plan-caption{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:#5E7269}
 
 /* ---------- accordion ---------- */
 .acc{border-top:1px solid var(--line)}
