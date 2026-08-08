@@ -818,11 +818,25 @@
       mapsGoogle: (lat != null && lng != null)
         ? "https://www.google.com/maps?q=" + lat + "," + lng
         : "",
+      mapsDirections: (lat != null && lng != null)
+        ? "https://www.google.com/maps/dir/?api=1&destination=" + lat + "," + lng
+        : "",
       mapsApple: (lat != null && lng != null)
         ? "https://maps.apple.com/?ll=" + lat + "," + lng + "&q=" + encodeURIComponent(name)
         : "",
+      mapsAppleDir: (lat != null && lng != null)
+        ? "https://maps.apple.com/?daddr=" + lat + "," + lng + "&dirflg=d&q=" + encodeURIComponent(name)
+        : "",
+      mapsEmbed: (lat != null && lng != null)
+        ? "https://www.google.com/maps?q=" + lat + "," + lng + "&z=13&output=embed"
+        : "",
       geoHref: (lat != null && lng != null) ? "geo:" + lat + "," + lng : ""
     };
+
+    var mapFrame = document.getElementById("rangeMap");
+    if(mapFrame && derived.mapsEmbed){
+      mapFrame.setAttribute("src", derived.mapsEmbed);
+    }
 
     $$("[data-site]").forEach(function(el){
       var key = el.getAttribute("data-site");
