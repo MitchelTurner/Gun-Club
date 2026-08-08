@@ -221,28 +221,43 @@ a{color:inherit}
 .err[data-show="true"]{display:block}
 
 /* ---------- range plan ---------- */
-.planwrap{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:clamp(1.1rem,3vw,1.85rem)}
+.planwrap{
+  --plan-field-a:#15241E;
+  --plan-field-b:#1A2B24;
+  --plan-field-c:#20352C;
+  --plan-berm-a:#3A4F44;
+  --plan-berm-b:#2A3B33;
+  border:1px solid var(--line-strong);
+  border-radius:var(--r);
+  background:
+    radial-gradient(120% 80% at 0% 50%, rgba(255,106,43,.08), transparent 42%),
+    linear-gradient(180deg, var(--surface-2), var(--surface));
+  padding:clamp(1.1rem,3vw,1.85rem);
+}
 .scroller{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.scroller svg{display:block;min-width:680px;width:100%;height:auto}
+.scroller svg,.plan-svg{display:block;min-width:680px;width:100%;height:auto}
 .hint{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:.9rem 0 0}
 @media(min-width:760px){.hint{display:none}}
 #planNote{font-family:var(--mono);font-size:.88rem;line-height:1.55;margin:1.15rem 0 0;padding-top:1.15rem;border-top:1px solid var(--line);min-height:3.4em;color:var(--muted)}
 #planNote b{color:var(--blaze);font-weight:500}
 .plan-foot{margin:0.85rem 0 0;font-size:.92rem;color:var(--muted);max-width:62ch}
+.plan-field-edge{fill:none;stroke:rgba(232,237,233,.14);stroke-width:1}
+.plan-hotline{fill:var(--blaze)}
+.plan-hotline-soft{fill:rgba(255,106,43,.18)}
 .tick{cursor:pointer}
 .tick rect{fill:transparent}
-.tick .stem{stroke:#8FA39A;stroke-width:2}
-.tick .label{font-family:var(--mono);font-size:15px;fill:#E8EDE9;letter-spacing:.04em}
-.tick:hover .stem,.tick[data-active="true"] .stem{stroke:#FF6A2B;stroke-width:3}
-.tick:hover .label,.tick[data-active="true"] .label{fill:#FF6A2B}
+.tick .stem{stroke:rgba(232,237,233,.42);stroke-width:2}
+.tick .label{font-family:var(--mono);font-size:15px;fill:var(--fog);letter-spacing:.04em}
+.tick:hover .stem,.tick[data-active="true"] .stem{stroke:var(--blaze);stroke-width:3}
+.tick:hover .label,.tick[data-active="true"] .label{fill:var(--blaze)}
 .tick:focus{outline:none}
-.tick:focus-visible rect{stroke:#FF6A2B;stroke-width:2;fill:rgba(255,106,43,.08);rx:4}
-.plan-rail{stroke:#3A4A42;stroke-width:2}
-.plan-axis{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;fill:#8FA39A}
-.plan-axis-hot{fill:#FF6A2B}
-.plan-zone{font-family:var(--display);font-size:22px;letter-spacing:.02em;fill:#E8EDE9;text-transform:uppercase}
-.plan-detail{font-family:var(--body);font-size:14px;fill:#9AACA2}
-.plan-caption{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:#5E7269}
+.tick:focus-visible rect{stroke:var(--blaze);stroke-width:2;fill:var(--blaze-soft);rx:4}
+.plan-rail{stroke:rgba(232,237,233,.28);stroke-width:2}
+.plan-axis{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;fill:var(--muted)}
+.plan-axis-hot{fill:var(--blaze)}
+.plan-zone{font-family:var(--display);font-size:22px;letter-spacing:.02em;fill:var(--fog);text-transform:uppercase}
+.plan-detail{font-family:var(--body);font-size:14px;fill:rgba(232,237,233,.62)}
+.plan-caption{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;fill:rgba(227,188,102,.72)}
 
 /* ---------- accordion ---------- */
 .acc{border-top:1px solid var(--line)}
